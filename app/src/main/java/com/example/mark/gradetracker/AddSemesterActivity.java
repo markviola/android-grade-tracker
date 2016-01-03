@@ -1,6 +1,9 @@
 package com.example.mark.gradetracker;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -26,6 +30,7 @@ public class AddSemesterActivity extends AppCompatActivity {
 
     //Initializing relevant activity widgets
     EditText semesterNameEditText;
+    TextView selectSemesterTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +38,15 @@ public class AddSemesterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_semester);
 
         semesterNameEditText = (EditText) findViewById(R.id.semesterNameEditText);
+        selectSemesterTitle = (TextView) findViewById(R.id.selectSemesterTitle);
+
+        //Change the header font to Montserrat-Bold
+        Typeface font = Typeface.createFromAsset(getAssets(), "Montserrat-Bold.ttf");
+        selectSemesterTitle.setTypeface(font);
 
         Intent intent = getIntent();
 
+        //Retrieve courses information
         if (intent.getSerializableExtra("courses") == null){
             courses = new ArrayList<>();
             Log.i(TAG, "courses == null");
@@ -44,10 +55,12 @@ public class AddSemesterActivity extends AppCompatActivity {
             Log.i(TAG, "courses != null");
         }
 
-        SemesterManager semesterManager = SemesterManager.getInstance();
-        Semester newSem = semesterManager.getSemesters().get(0);
+        //Retrieve semester name information
+        if (!(intent.getSerializableExtra("newSemesterName") == null)){
+            semesterNameEditText.setText((String)intent.getSerializableExtra("newSemesterName"));
+        }
 
-        ListAdapter coursesAdapter = new AddCourseListAdapter(this, newSem.getCourses());
+        ListAdapter coursesAdapter = new AddCourseListAdapter(this, courses);
         ListView coursesListView = (ListView) findViewById(R.id.newCoursesList);
         coursesListView.setAdapter(coursesAdapter);
 
@@ -62,27 +75,64 @@ public class AddSemesterActivity extends AppCompatActivity {
 
     }
 
-
     /**
      * Take the user to AddCourseActivity to allow them to add a course to the new semester
      * @param view The current view of the app
      */
     public void addCourseButtonClicked(View view){
-        Intent newIntent = new Intent(this, AddCourseActivity.class);
+        Intent intent = new Intent(this, AddCourseActivity.class);
 
-        newIntent.putExtra("newSemesterName", semesterNameEditText.getText().toString());
-        newIntent.putExtra("courses", courses);
+        intent.putExtra("newSemesterName", semesterNameEditText.getText().toString());
+        intent.putExtra("courses", courses);
 
-        startActivity(newIntent);
+        startActivity(intent);
     }
 
     /**
      * Deletes the specifically selected course from the current list of courses to add
      * @param view The current view of the app
      */
-    public void deleteButtonPressed(View view){
+    public void deleteButtonClicked(View view){
         int position = (Integer) view.getTag();
         Log.i(TAG, "position: " + position);
+        //Add popup to prompt user if the really want to delete
+
+        deletePopUp(position);
+    }
+
+    /**
+     * Method that makes a popup to confirm the deletion of a course
+     * @param position The position of the course in the ArrayList
+     */
+    private void deletePopUp(final int position) {
+        final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
+        myAlert.setMessage("Delete Course?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteCourse(position);
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                 }).create();
+        myAlert.show();
+    }
+
+    /**
+     * Delete the course from the current ArrayList of newly added courses
+     * @param position The position of the course in the ArrayList
+     */
+    private void deleteCourse(int position){
+        courses.remove(position);
+        Intent intent = new Intent(this, AddSemesterActivity.class);
+        intent.putExtra("newSemesterName", semesterNameEditText.getText().toString());
+        intent.putExtra("courses", courses);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
+
+        startActivity(intent);
     }
 
     public void addSemesterButtonClicked(View view){
@@ -93,9 +143,35 @@ public class AddSemesterActivity extends AppCompatActivity {
             semesterManager.addSemester(newSemester);
         } else {
             //Don't add anything
+            //Prompt the user asking if there needs to
         }
 
         Intent intent = new Intent(this, SelectSemesterActivity.class);
         startActivity(intent);
+    }
+
+    /**
+     * Method that makes a popup to confirm the deletion of a course
+     * @param position The position of the course in the ArrayList
+     */
+    private void noSemesterNamePopUp(final int position) {
+        final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
+        myAlert.setMessage("Delete Course?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteCourse(position);
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        }).create();
+        myAlert.show();
+    }
+
+    public void settingsButtonClicked(View view){
+
     }
 }

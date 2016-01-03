@@ -1,6 +1,7 @@
 package com.example.mark.gradetracker;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,8 +9,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import adapters.CourseListAdapter;
+import data.Course;
 import data.Semester;
 import managers.SemesterManager;
 
@@ -17,13 +20,24 @@ public class SelectCourseActivity extends AppCompatActivity {
 
     private String TAG = "customFilter";
 
+    TextView selectCourseTitle;
+
+    String semesterName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_course_list);
 
+        selectCourseTitle = (TextView) findViewById(R.id.selectCourseTitle);
+
+        //Change the header font to Montserrat-Bold
+        Typeface font = Typeface.createFromAsset(getAssets(), "Montserrat-Bold.ttf");
+        selectCourseTitle.setTypeface(font);
+
         Intent intent = getIntent();
-        String semesterName = (String) intent.getSerializableExtra("semester");
+
+        semesterName = (String) intent.getSerializableExtra("semesterName");
         SemesterManager semesterManager = SemesterManager.getInstance();
         Semester semester = semesterManager.getSemester(semesterName);
 
@@ -35,9 +49,17 @@ public class SelectCourseActivity extends AppCompatActivity {
                 new AdapterView.OnItemClickListener(){
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        String course = String.valueOf(parent.getItemAtPosition(position));
+                        Course course = (Course) parent.getItemAtPosition(position);
+                        goToCourseInfo(course);
                     }
                 }
         );
+    }
+
+    private void goToCourseInfo(Course course){
+        Intent intent = new Intent(this, CourseInfoActivity.class);
+        intent.putExtra("semesterName", semesterName);
+        intent.putExtra("selectedCourse", course);
+        startActivity(intent);
     }
 }

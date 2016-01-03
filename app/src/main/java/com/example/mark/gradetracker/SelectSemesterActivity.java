@@ -1,12 +1,14 @@
 package com.example.mark.gradetracker;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import adapters.SemesterListAdapter;
 import data.Semester;
@@ -16,10 +18,18 @@ public class SelectSemesterActivity extends AppCompatActivity {
 
     private String TAG = "customFilter";
 
+    TextView selectSemesterTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_semester_list);
+
+        selectSemesterTitle = (TextView) findViewById(R.id.selectSemesterTitle);
+
+        //Change the header font to Montserrat-Bold
+        Typeface font = Typeface.createFromAsset(getAssets(), "Montserrat-Bold.ttf");
+        selectSemesterTitle.setTypeface(font);
 
         SemesterManager semesterManager = SemesterManager.getInstance();
 
@@ -40,12 +50,13 @@ public class SelectSemesterActivity extends AppCompatActivity {
 
     private void goToCourses(Semester semester){
         Intent intent = new Intent(this, SelectCourseActivity.class);
-        intent.putExtra("semester", semester.getName());
+        intent.putExtra("semesterName", semester.getName());
         startActivity(intent);
     }
 
     public void settingsClicked(View view){
-
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 
 }

@@ -3,7 +3,6 @@ package com.example.mark.gradetracker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -11,9 +10,8 @@ import java.util.ArrayList;
 
 import data.Course;
 import data.DBManager;
-import data.GradeSection;
-import data.GradeSectionEven;
-import data.GradeSectionMark;
+import data.GradeSectionAllMarks;
+import data.Mark;
 import data.Semester;
 import managers.SemesterManager;
 
@@ -48,11 +46,11 @@ public class MainMenuActivity extends AppCompatActivity {
         settingsButton = (Button) findViewById(R.id.settingsButton);
 
         // TEST CODE BELOW //
-        GradeSectionEven cscb07Assignments = new GradeSectionEven("Assignments", 0.4);
-        cscb07Assignments.addMark(new GradeSectionMark("Assignment1", 90.00));
-        cscb07Assignments.addMark(new GradeSectionMark("Assignment2", 88.00));
-        GradeSectionEven cscb36Assignments = new GradeSectionEven("Assignments", 0.3);
-        cscb36Assignments.addMark(new GradeSectionMark("Assignment1", 85.00));
+        GradeSectionAllMarks cscb07Assignments = new GradeSectionAllMarks("Assignments", 0.4);
+        cscb07Assignments.addMark(new Mark("Assignment1", 90.00));
+        cscb07Assignments.addMark(new Mark("Assignment2", 88.00));
+        GradeSectionAllMarks cscb36Assignments = new GradeSectionAllMarks("Assignments", 0.3);
+        cscb36Assignments.addMark(new Mark("Assignment1", 85.00));
 
         CSCB07.addGradeSection(cscb07Assignments);
         CSCB36.addGradeSection(cscb36Assignments);

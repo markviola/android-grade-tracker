@@ -9,13 +9,11 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import data.Semester;
-
 public class DBManager extends SQLiteOpenHelper{
 
     private static final String TAG = "customFilter";
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "SemesterDatabase.db";
 
     //Information for Player table
@@ -116,31 +114,24 @@ public class DBManager extends SQLiteOpenHelper{
         ArrayList<Course> reCourses = new ArrayList<>();
         String[] strCourses = dbStr.split("@@@@@");
 
-        //Log.i(TAG, "!!!!!!!!!!!!! FIRST FOR LOOP !!!!!!!!!!!!!");
         for(String courseStr: strCourses){
-            //Log.i(TAG, "Courses: " + courseStr);
             String[] gradeSecStr = courseStr.split("@@@@");
-            //Log.i(TAG, gradeSecStr[0]);
             Course newCourse = new Course(gradeSecStr[0]);
 
-            //Log.i(TAG, "!!!!!!!!!!!!! SECOND FOR LOOP !!!!!!!!!!!!!");
             for(int i=1; i<gradeSecStr.length; i++){
-                //Log.i(TAG, "GradeSection: " + gradeSecStr[i]);
                 String[] gradeSecMarksStr = gradeSecStr[i].split("####");
 
                 for(int k=0; k <gradeSecMarksStr.length; k++){
                     String[] gradeSecMarkStr = gradeSecMarksStr[k].split("###");
-                    //Log.i(TAG, gradeSecMarkStr[0] + ", " + gradeSecMarkStr[1]);
-                    GradeSection newGradeSec = new GradeSectionEven(gradeSecMarkStr[0],
+                    GradeSection newGradeSec = new GradeSectionAllMarks(gradeSecMarkStr[0],
                             Double.parseDouble(gradeSecMarkStr[1]));
 
-                    //Log.i(TAG, "!!!!!!!!!!!!! THIRD FOR LOOP !!!!!!!!!!!!!");
                     for (int j=2; j<gradeSecMarkStr.length; j++){
-                        //Log.i(TAG, "GradeSectionMark: " + gradeSecMarkStr[j]);
                         String[] gradeSecMarkDataStr = gradeSecMarkStr[j].split("##");
-                        //Log.i(TAG, gradeSecMarkDataStr[0] + ", " + gradeSecMarkDataStr[1]);
-                        GradeSectionMark newGradeSecMark = new GradeSectionMark(gradeSecMarkDataStr[0],
-                                Double.parseDouble(gradeSecMarkDataStr[1]));
+                        Mark newGradeSecMark = new Mark(gradeSecMarkDataStr[0],
+                                Double.parseDouble(gradeSecMarkDataStr[1])
+                                //,Double.parseDouble(gradeSecMarkDataStr[2]) //For if grades have individual weights
+                        );
                         newGradeSec.addMark(newGradeSecMark);
                     }
 

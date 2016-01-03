@@ -43,7 +43,32 @@
         <activity
             android:name=".AddCourseActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".AddGradeSectionActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".AddSingleMarkPopUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.CustomPopUpTheme" >
+        </activity>
+        <activity
+            android:name=".AddMarkOptionsPopUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.CustomPopUpTheme" >
+        </activity>
+        <activity
+            android:name=".CourseInfoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
 

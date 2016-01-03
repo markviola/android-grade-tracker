@@ -10,10 +10,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/select_course_title"
         android:textSize="30dp"
-        android:id="@+id/selectSemesterTitle"
+        android:id="@+id/selectCourseTitle"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="#6699ff"
+        android:background="#ff9933"
         android:gravity="center"/>
 
     <ListView
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/coursesListView"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/selectSemesterTitle"
+        android:layout_below="@id/selectCourseTitle"
         android:layout_above="@id/settingsButton"/>
 
     <Button

@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mark.gradetracker.AddSemesterActivity">
+    tools:context="com.example.mark.gradetracker.AddSemesterActivity"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <TextView
         android:layout_width="fill_parent"
@@ -13,7 +15,7 @@
         android:id="@+id/selectSemesterTitle"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="#6699ff"
+        android:background="#ff9933"
         android:gravity="center"/>
 
     <TextView
@@ -76,11 +78,14 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/list_border"
         android:id="@+id/newCoursesList"
         android:layout_below="@+id/coursesNameText"
         android:layout_above="@id/addSemesterButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"/>
 
     <Button
         android:layout_width="fill_parent"
@@ -90,7 +95,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="#ff6666"
-        android:onClick="settingsClicked" />
+        android:onClick="settingsButtonClicked" />
 
 
 </RelativeLayout>

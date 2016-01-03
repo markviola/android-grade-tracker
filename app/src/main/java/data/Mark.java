@@ -3,12 +3,13 @@ package data;
 
 import java.io.Serializable;
 
-public class GradeSectionMark implements Serializable{
+public class Mark implements Serializable{
 
     private String _name;
     private double _mark;
+    //private double _weight;
 
-    public GradeSectionMark(String name, double mark){
+    public Mark(String name, double mark){
         this._name = name;
         this._mark = mark;
     }
@@ -20,6 +21,10 @@ public class GradeSectionMark implements Serializable{
     public double getMark(){
         return this._mark;
     }
+
+//    public double getWeight(){
+//        return this._weight;
+//    }
 
     public void setMark(double newMark){
         this._mark = newMark;

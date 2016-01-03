@@ -2,36 +2,47 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mark.gradetracker.SelectSemesterActivity">
+    tools:context="com.example.mark.gradetracker.CourseInfoActivity">
 
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="60dp"
+        android:layout_height="45dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/select_semester_title"
+        android:text="@string/course_info_course_name"
         android:textSize="30dp"
-        android:id="@+id/selectSemesterTitle"
+        android:id="@+id/courseNameText"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="#ff9933"
         android:gravity="center"/>
 
-    <ListView
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:text="@string/course_info_course_code"
+        android:textSize="15dp"
+        android:id="@+id/courseCodeText"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/courseNameText"
+        android:background="#ff9933"
+        android:gravity="center"/>
+
+    <ExpandableListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/semesterListView"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/selectSemesterTitle"
-        android:layout_above="@id/settingsButton"/>
+        android:id="@+id/gradeSectionList"
+        android:layout_below="@+id/courseCodeText"
+        android:layout_above="@+id/settingsButton"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/select_semester_settings_button"
+        android:text="@string/course_info_settings_button"
         android:id="@+id/settingsButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="#ff6666"
-        android:onClick="settingsClicked" />
+        android:onClick="settingsButtonClicked" />
 
 </RelativeLayout>
