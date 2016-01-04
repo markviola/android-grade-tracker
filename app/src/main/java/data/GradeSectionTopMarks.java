@@ -13,4 +13,9 @@ public class GradeSectionTopMarks extends GradeSection {
         super(sectionName, weight);
         this._numMarks = numMarks;
     }
+
+    @Override
+    public double getSectionGrade() {
+        return 0;
+    }
 }

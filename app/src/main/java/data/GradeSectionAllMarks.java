@@ -15,4 +15,13 @@ public class GradeSectionAllMarks extends GradeSection{
 //        this._numMarks = numMarks;
 //        this._markWeight = markWeight;
     }
+
+    @Override
+    public double getSectionGrade() {
+        double marksTotal = 0;
+        for(Mark mark: _marks){
+            marksTotal += mark.getMark();
+        }
+        return marksTotal/_marks.size();
+    }
 }

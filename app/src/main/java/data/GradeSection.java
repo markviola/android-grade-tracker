@@ -8,7 +8,7 @@ public abstract class GradeSection implements Serializable{
 
     private String _sectionName;
     private double _weight;
-    private ArrayList<Mark> _marks;
+    protected ArrayList<Mark> _marks;
 
     public GradeSection(String sectionName, double weight){
         this._sectionName = sectionName;
@@ -18,6 +18,14 @@ public abstract class GradeSection implements Serializable{
 
     public void addMark(Mark mark){
         this._marks.add(mark);
+    }
+
+    public void deleteMark(Mark markToDelete){
+        for(Mark mark: _marks){
+            if(markToDelete.toString().equals(mark.toString())){
+                this._marks.remove(mark);
+            }
+        }
     }
 
     public ArrayList<Mark> getMarks(){
@@ -45,6 +53,6 @@ public abstract class GradeSection implements Serializable{
     }
 
     //public abstract double getWeight();
-    //public abstract double getSectionGrade();
+    public abstract double getSectionGrade();
 
 }

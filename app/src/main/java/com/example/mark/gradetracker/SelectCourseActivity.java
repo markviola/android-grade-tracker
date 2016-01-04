@@ -1,7 +1,10 @@
 package com.example.mark.gradetracker;
 
+import android.annotation.TargetApi;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,7 +49,7 @@ public class SelectCourseActivity extends AppCompatActivity {
         coursesListView.setAdapter(coursesAdapter);
 
         coursesListView.setOnItemClickListener(
-                new AdapterView.OnItemClickListener(){
+                new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Course course = (Course) parent.getItemAtPosition(position);
@@ -56,10 +59,14 @@ public class SelectCourseActivity extends AppCompatActivity {
         );
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void goToCourseInfo(Course course){
         Intent intent = new Intent(this, CourseInfoActivity.class);
         intent.putExtra("semesterName", semesterName);
         intent.putExtra("selectedCourse", course);
-        startActivity(intent);
+        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
+                R.anim.animation, R.anim.animation2).toBundle();
+        startActivity(intent, bndlanimation);
     }
+
 }

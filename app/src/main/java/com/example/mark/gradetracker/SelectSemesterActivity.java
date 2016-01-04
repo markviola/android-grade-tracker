@@ -1,7 +1,10 @@
 package com.example.mark.gradetracker;
 
+import android.annotation.TargetApi;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -48,14 +51,23 @@ public class SelectSemesterActivity extends AppCompatActivity {
         );
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void goToCourses(Semester semester){
         Intent intent = new Intent(this, SelectCourseActivity.class);
         intent.putExtra("semesterName", semester.getName());
-        startActivity(intent);
+        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
+                R.anim.animation, R.anim.animation2).toBundle();
+        startActivity(intent, bndlanimation);
+
     }
 
     public void settingsClicked(View view){
         Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainMenuActivity.class);
         startActivity(intent);
     }
 

@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/list_border">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:text="New Text"
-        android:id="@+id/courseCode"
-        android:textSize="20dp"
-        android:layout_margin="7dp"
-        android:gravity="center"/>
+        android:id="@+id/courseNameAndCode"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:text="New Text"
-        android:id="@+id/currentGrade"
+        android:id="@+id/courseCurrentGrade"
         android:textSize="20dp"
-        android:layout_margin="7dp"
-        android:layout_marginRight="25dp"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:layout_below="@+id/courseNameAndCode"
+        android:layout_marginLeft="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="New Text"
+        android:id="@+id/inProgressIndicator"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_alignTop="@+id/courseCurrentGrade"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="15dp"/>
 
 
-</LinearLayout>
+</RelativeLayout>

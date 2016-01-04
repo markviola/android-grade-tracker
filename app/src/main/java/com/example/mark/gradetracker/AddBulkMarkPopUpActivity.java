@@ -1,10 +1,13 @@
 package com.example.mark.gradetracker;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -12,7 +15,11 @@ import data.Course;
 import data.GradeSection;
 import data.Mark;
 
-public class AddMarkOptionsPopUpActivity extends AppCompatActivity {
+public class AddBulkMarkPopUpActivity extends AppCompatActivity {
+
+    private String TAG = "customFilter";
+
+    TextView addMarksTitle;
 
     ArrayList<Course> courses;
     ArrayList<GradeSection> gradeSections;
@@ -21,10 +28,17 @@ public class AddMarkOptionsPopUpActivity extends AppCompatActivity {
     String newCourseName;
     String gradeSectionName;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_mark_options_pop_up);
+        setContentView(R.layout.activity_add_bulk_mark_pop_up);
+
+        addMarksTitle = (TextView) findViewById(R.id.addMarksTitle);
+
+        //Change the header font to Montserrat-Bold
+        Typeface font = Typeface.createFromAsset(getAssets(), "Montserrat-Bold.ttf");
+        addMarksTitle.setTypeface(font);
 
         Intent intent = getIntent();
         newSemesterName = (String) intent.getSerializableExtra("newSemesterName");
@@ -40,28 +54,10 @@ public class AddMarkOptionsPopUpActivity extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (0.7*width),(int) (0.5*height));
+        getWindow().setLayout((int) (0.8*width),(int) (0.5*height));
     }
 
-    public void singleAddButtonClicked(View view){
-        Intent intent = new Intent(this, AddSingleMarkPopUpActivity.class);
-        intent.putExtra("newSemesterName", newSemesterName);
-        intent.putExtra("courses", courses);
-        intent.putExtra("newCourseName", newCourseName);
-        intent.putExtra("gradeSections", gradeSections);
-        intent.putExtra("gradeSectionName", gradeSectionName);
-        intent.putExtra("marks", marks);
-        startActivity(intent);
-    }
+    public void addMarksButtonClicked(View view){
 
-    public void bulkAddButtonClicked(View view){
-        Intent intent = new Intent(this, AddBulkMarkPopUpActivity.class);
-        intent.putExtra("newSemesterName", newSemesterName);
-        intent.putExtra("courses", courses);
-        intent.putExtra("newCourseName", newCourseName);
-        intent.putExtra("gradeSections", gradeSections);
-        intent.putExtra("gradeSectionName", gradeSectionName);
-        intent.putExtra("marks", marks);
-        startActivity(intent);
     }
 }

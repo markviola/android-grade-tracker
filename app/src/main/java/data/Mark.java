@@ -6,7 +6,7 @@ import java.io.Serializable;
 public class Mark implements Serializable{
 
     private String _name;
-    private double _mark;
+    private Double _mark;
     //private double _weight;
 
     public Mark(String name, double mark){
@@ -18,7 +18,7 @@ public class Mark implements Serializable{
         return this._name;
     }
 
-    public double getMark(){
+    public Double getMark(){
         return this._mark;
     }
 
@@ -26,7 +26,7 @@ public class Mark implements Serializable{
 //        return this._weight;
 //    }
 
-    public void setMark(double newMark){
+    public void setMark(Double newMark){
         this._mark = newMark;
     }
 

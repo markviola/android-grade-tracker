@@ -9,11 +9,13 @@ public class Course implements Serializable{
     private String _name;
     private String _code;
     private ArrayList<GradeSection> _grades;
+    private boolean _inProgress;
 
     public Course(String name){
         this._name = name;
         this._code = "N/A";
         this._grades = new ArrayList<>();
+        this._inProgress = true;
     }
 
     public void setGrade(ArrayList<GradeSection> grade) {
@@ -32,6 +34,14 @@ public class Course implements Serializable{
         return this._code;
     }
 
+    public boolean getInProgress(){
+        return this._inProgress;
+    }
+
+    public void setInProgress(boolean inProgress){
+        this._inProgress = inProgress;
+    }
+
     public void setCode(String newCode){
         this._code = newCode;
     }
@@ -42,6 +52,17 @@ public class Course implements Serializable{
 
     public void addGradeSection(GradeSection newGrade){
         this._grades.add(newGrade);
+    }
+
+    public double getCurrentGrade(){
+        double totalWeightedGrades = 0.0;
+        double totalWeights = 0.0;
+        for(GradeSection gradeSection: _grades){
+            totalWeightedGrades += gradeSection.getSectionGrade() * gradeSection.getWeight();
+            totalWeights += gradeSection.getWeight();
+        }
+
+        return totalWeightedGrades/totalWeights;
     }
 
     public String toString(){

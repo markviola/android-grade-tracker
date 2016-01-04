@@ -56,6 +56,13 @@
     <string name="add_mark_pop_up_weight_text">Weight: </string>
     <string name="add_mark_pop_up_confirmation_button">Add Mark</string>
 
+    <!-- AddBulkMarkPopUpActivity strings -->
+    <string name="add_bulk_mark_pop_up_title">Add Marks</string>
+    <string name="add_bulk_mark_pop_up_name_template_text">Name Template: </string>
+    <string name="add_bulk_mark_pop_up_name_template_ending_text">#1</string>
+    <string name="add_bulk_mark_pop_up_generate_button">Generate</string>
+    <string name="add_bulk_mark_pop_up_confirmation_button">Add Marks</string>
+
     <!-- AddMarkOptionsPopUpActivity strings -->
     <string name="add_mark_options_pop_up_single_add">Single Add</string>
     <string name="add_mark_options_pop_up_bulk_add">Bulk Add</string>
@@ -63,6 +70,7 @@
     <!-- CourseInfoActivity strings -->
     <string name="course_info_course_name">Course Name</string>
     <string name="course_info_course_code">Course Code</string>
+    <string name="course_info_course_current_grade">Current Grade: </string>
     <string name="course_info_settings_button">Settings</string>
 
     <!-- custom_add_course_list_row strings -->

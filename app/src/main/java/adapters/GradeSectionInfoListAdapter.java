@@ -70,21 +70,26 @@ public class GradeSectionInfoListAdapter extends BaseExpandableListAdapter{
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        GradeSection title = (GradeSection) this.getGroup(groupPosition);
+        GradeSection gradeSection = (GradeSection) this.getGroup(groupPosition);
         if(convertView == null){
             LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.custom_course_info_list_row_heading, null);
         }
         TextView gradeSectionName = (TextView) convertView.findViewById(R.id.gradeSectionName);
+        TextView currentGradeText = (TextView) convertView.findViewById(R.id.currentGradeText);
+
         gradeSectionName.setTypeface(null, Typeface.BOLD);
-        gradeSectionName.setText(title.getSectionName());
+        gradeSectionName.setText(gradeSection.getSectionName());
+
+        currentGradeText.setTypeface(null, Typeface.BOLD);
+        currentGradeText.setText(gradeSection.getSectionGrade()+"%");
 
         return convertView;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        Mark title = (Mark) this.getChild(groupPosition, childPosition);
+        Mark mark = (Mark) this.getChild(groupPosition, childPosition);
 
         if(convertView == null){
             LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -92,7 +97,14 @@ public class GradeSectionInfoListAdapter extends BaseExpandableListAdapter{
         }
 
         TextView markName = (TextView) convertView.findViewById(R.id.markName);
-        markName.setText(title.getName());
+        TextView currentGradeText = (TextView) convertView.findViewById(R.id.currentGradeText);
+
+        markName.setText(mark.getName());
+        if(mark.getMark() != null){
+            currentGradeText.setText(mark.getMark()+"%");
+        } else {
+            currentGradeText.setText("N/A");
+        }
 
         return convertView;
     }

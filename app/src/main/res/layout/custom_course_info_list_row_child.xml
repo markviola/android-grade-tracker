@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="42dp"
         android:text="Grade Section Name"
-        android:textSize="16dp"
+        android:textSize="18dp"
         android:id="@+id/markName"
         android:gravity="center_vertical"
         android:paddingLeft="15dp"
@@ -15,9 +15,14 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="42dp"
         android:text="100%"
-        android:textSize="16dp"
-        android:id="@+id/currentGradeText" />
+        android:textSize="18dp"
+        android:id="@+id/currentGradeText"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center_vertical"
+        android:layout_marginRight="15dp"/>
 
-</LinearLayout>
+</RelativeLayout>

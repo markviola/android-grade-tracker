@@ -174,4 +174,41 @@ public class AddSemesterActivity extends AppCompatActivity {
     public void settingsButtonClicked(View view){
 
     }
+
+    /**
+     * Method runs when the user clicks the back button. Prompts the user in whether or not they
+     * want to cancel the current 'add semester' session and go to the main menu.
+     */
+    public void onBackPressed() {
+        returnToMainMenuPopUp();
+    }
+
+    /**
+     * Method that makes a popup to confirm that the user wants to go back to the main menu and
+     * lose all information from the new semester
+     */
+    private void returnToMainMenuPopUp() {
+        final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
+        myAlert.setMessage("Go back to the main menu? New semester will not be added")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        goToMainMenu();
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create();
+        myAlert.show();
+    }
+
+    /**
+     * Take the user to the main menu
+     */
+    private void goToMainMenu(){
+        Intent intent = new Intent(this, MainMenuActivity.class);
+        startActivity(intent);
+    }
 }

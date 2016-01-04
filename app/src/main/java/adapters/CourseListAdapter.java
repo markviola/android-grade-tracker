@@ -1,6 +1,8 @@
 package adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,11 +31,21 @@ public class CourseListAdapter extends ArrayAdapter<Course>{
         View courseView = courseInflater.inflate(R.layout.custom_course_list_row, parent, false);
 
         Course courseItem = getItem(position);
-        TextView courseCode = (TextView) courseView.findViewById(R.id.courseCode);
-        TextView currentGrade = (TextView) courseView.findViewById(R.id.currentGrade);
+        TextView courseNameAndCode = (TextView) courseView.findViewById(R.id.courseNameAndCode);
+        TextView courseCurrentGrade = (TextView) courseView.findViewById(R.id.courseCurrentGrade);
+        TextView inProgressIndicator = (TextView) courseView.findViewById(R.id.inProgressIndicator);
 
-        courseCode.setText(courseItem.getName());
-        currentGrade.setText(" | Current Grade: " + "00.00");
+        courseCurrentGrade.setTypeface(null, Typeface.BOLD);
+        courseNameAndCode.setText(courseItem.getName() + " (" + courseItem.getCode() + ")");
+        courseCurrentGrade.setText("Current Grade: " + courseItem.getCurrentGrade());
+
+        if(courseItem.getInProgress()){
+            inProgressIndicator.setTextColor(Color.parseColor("#ffd633"));
+            inProgressIndicator.setText("In Progress");
+        } else {
+            inProgressIndicator.setTextColor(Color.parseColor("#47d147"));
+            inProgressIndicator.setText("Finished!");
+        }
 
         return courseView;
     }

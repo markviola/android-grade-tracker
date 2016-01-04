@@ -37,6 +37,10 @@ public class AddSingleMarkPopUpActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_single_mark_pop_up);
 
+        setup();
+    }
+
+    private void setup(){
         markNameEditText = (EditText) findViewById(R.id.markNameEditText);
         markGradeEditText = (EditText) findViewById(R.id.markGradeEditText);
         addMarkTitle = (TextView) findViewById(R.id.addMarkTitle);
@@ -87,21 +91,15 @@ public class AddSingleMarkPopUpActivity extends Activity {
     }
 
     private boolean isValidValue(String str){
-        if(isNumeric(str)){
+        try {
             double d = Double.parseDouble(str);
             if(d >= 0 ){
                 return true;
             }
+        } catch(NumberFormatException nfe){
+            return false;
         }
         return false;
     }
 
-    private boolean isNumeric(String str) {
-        try {
-            double d = Double.parseDouble(str);
-        } catch(NumberFormatException nfe){
-            return false;
-        }
-        return true;
-    }
 }

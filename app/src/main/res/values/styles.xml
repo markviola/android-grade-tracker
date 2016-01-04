@@ -21,4 +21,13 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!-- Orange Status Bar Theme -->
+    <style name="OrangeTop" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#ff9933</item>
+        <item name="colorPrimaryDark">#ff9933</item>
+        <item name="colorAccent">#ff9933</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 </resources>

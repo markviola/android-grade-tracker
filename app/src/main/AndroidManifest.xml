@@ -28,12 +28,12 @@
             android:name=".SelectCourseActivity"
             android:label="@string/title_activity_courses"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/OrangeTop" >
         </activity>
         <activity
             android:name=".SelectSemesterActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/OrangeTop" >
         </activity>
         <activity
             android:name=".AddSemesterActivity"
@@ -68,7 +68,12 @@
         <activity
             android:name=".CourseInfoActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/OrangeTop" >
+        </activity>
+        <activity
+            android:name=".AddBulkMarkPopUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.CustomPopUpTheme">
         </activity>
     </application>
 

@@ -25,13 +25,26 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/courseNameText"
         android:background="#ff9933"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:layout_marginTop="-10dp"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:text="@string/course_info_course_current_grade"
+        android:textSize="20dp"
+        android:id="@+id/currentGrade"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/courseCodeText"
+        android:background="#ff9933"
+        android:gravity="center"
+        android:layout_marginTop="-10dp"/>
 
     <ExpandableListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/gradeSectionList"
-        android:layout_below="@+id/courseCodeText"
+        android:layout_below="@+id/currentGrade"
         android:layout_above="@+id/settingsButton"
         android:layout_centerHorizontal="true" />
 

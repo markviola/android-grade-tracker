@@ -1,10 +1,12 @@
 package com.example.mark.gradetracker;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,7 @@ public class MainMenuActivity extends AppCompatActivity {
     Button selectSemesterButton;
     Button addSemesterButton;
     Button settingsButton;
+    TextView mainMenuTitleText;
 
     // TEST CODE BELOW //
     Course CSCB07 = new Course("CSCB07");
@@ -44,6 +47,11 @@ public class MainMenuActivity extends AppCompatActivity {
         selectSemesterButton = (Button) findViewById(R.id.selectSemesterButton);
         addSemesterButton = (Button) findViewById(R.id.addSemesterButton);
         settingsButton = (Button) findViewById(R.id.settingsButton);
+        mainMenuTitleText = (TextView) findViewById(R.id.mainMenuTitleText);
+
+        //Change the header font to Montserrat-Bold
+        Typeface font = Typeface.createFromAsset(getAssets(), "Montserrat-Bold.ttf");
+        mainMenuTitleText.setTypeface(font);
 
         // TEST CODE BELOW //
         GradeSectionAllMarks cscb07Assignments = new GradeSectionAllMarks("Assignments", 0.4);
