@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:text="Name Template #_"
+        android:id="@+id/newMarkName"
+        android:gravity="center"
+        android:layout_weight="2"/>
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:id="@+id/newMarkGrade"
+        android:gravity="center"
+        android:textSize="16dp"
+        android:layout_weight=".8"
+        android:inputType="number"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:text="%"
+        android:id="@+id/newMarkNameEnding"
+        android:gravity="center_vertical"
+        android:layout_weight="0.7"/>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:text="@string/custom_add_course_list_row_delete_button"
+        android:id="@+id/deleteButton"
+        android:background="#ff6666"
+        android:onClick="deleteButtonClicked"
+        android:layout_weight="0.9"/>
+
+</LinearLayout>

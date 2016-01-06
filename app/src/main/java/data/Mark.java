@@ -9,7 +9,7 @@ public class Mark implements Serializable{
     private Double _mark;
     //private double _weight;
 
-    public Mark(String name, double mark){
+    public Mark(String name, Double mark){
         this._name = name;
         this._mark = mark;
     }

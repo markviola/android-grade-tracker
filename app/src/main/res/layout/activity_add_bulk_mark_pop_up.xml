@@ -2,7 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mark.gradetracker.AddBulkMarkPopUpActivity">
+    tools:context="com.example.mark.gradetracker.AddBulkMarkPopUpActivity"
+    android:background="@drawable/list_border"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <TextView
         android:layout_width="fill_parent"
@@ -20,8 +23,88 @@
         android:layout_height="wrap_content"
         android:text="@string/add_bulk_mark_pop_up_confirmation_button"
         android:id="@+id/button"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"/>
+        android:layout_below="@+id/addMarkTitle"
+        android:layout_marginTop="460dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="@string/add_bulk_mark_pop_up_name_template_text"
+        android:textSize="16dp"
+        android:id="@+id/markNameTemplateText"
+        android:layout_below="@+id/addMarksTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"/>
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:id="@+id/markNameTemplateEditText"
+        android:layout_below="@+id/addMarksTitle"
+        android:layout_toRightOf="@id/markNameTemplateText"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:inputType="text"/>
+
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:text="@string/add_bulk_mark_pop_up_name_template_ending_text"
+        android:textSize="16dp"
+        android:id="@+id/markNameTemplateTextEnd"
+        android:layout_below="@+id/addMarksTitle"
+        android:layout_toRightOf="@id/markNameTemplateEditText"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:background="#cccccc"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="@string/add_bulk_mark_pop_up_name_num_marks"
+        android:textSize="16dp"
+        android:id="@+id/numMarksText"
+        android:layout_below="@+id/markNameTemplateText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"/>
+
+    <Spinner
+        android:layout_width="50dp"
+        android:layout_height="39dp"
+        android:text="@string/add_bulk_mark_pop_up_name_num_marks"
+        android:textSize="16dp"
+        android:id="@+id/numMarksSpinner"
+        android:layout_below="@+id/markNameTemplateText"
+        android:layout_toRightOf="@+id/numMarksText"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_bulk_mark_pop_up_generate_button"
+        android:id="@+id/generateMarksButton"
+        android:layout_below="@+id/numMarksText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:onClick="generateMarksButtonClicked"/>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:id="@+id/newMarksList"
+        android:layout_below="@+id/generateMarksButton"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/list_border"
+        android:descendantFocusability="beforeDescendants"/>
 
 </RelativeLayout>

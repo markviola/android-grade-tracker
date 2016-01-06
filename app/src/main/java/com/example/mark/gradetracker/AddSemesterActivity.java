@@ -1,9 +1,12 @@
 package com.example.mark.gradetracker;
 
+import android.annotation.TargetApi;
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -79,13 +82,15 @@ public class AddSemesterActivity extends AppCompatActivity {
      * Take the user to AddCourseActivity to allow them to add a course to the new semester
      * @param view The current view of the app
      */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void addCourseButtonClicked(View view){
         Intent intent = new Intent(this, AddCourseActivity.class);
 
         intent.putExtra("newSemesterName", semesterNameEditText.getText().toString());
         intent.putExtra("courses", courses);
-
-        startActivity(intent);
+        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
+                R.anim.animation, R.anim.animation2).toBundle();
+        startActivity(intent, bndlanimation);
     }
 
     /**

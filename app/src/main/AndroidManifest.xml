@@ -38,12 +38,12 @@
         <activity
             android:name=".AddSemesterActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/OrangeTop" >
         </activity>
         <activity
             android:name=".AddCourseActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/OrangeTop" >
         </activity>
         <activity
             android:name=".SettingsActivity"
@@ -53,7 +53,7 @@
         <activity
             android:name=".AddGradeSectionActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/OrangeTop" >
         </activity>
         <activity
             android:name=".AddSingleMarkPopUpActivity"
@@ -73,7 +73,8 @@
         <activity
             android:name=".AddBulkMarkPopUpActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.CustomPopUpTheme">
+            android:theme="@style/AppTheme.CustomPopUpTheme"
+            android:windowSoftInputMode="adjustPan" >
         </activity>
     </application>
 
