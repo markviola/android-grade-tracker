@@ -30,7 +30,8 @@
     <!-- AddCourseActivity strings -->
     <string name="add_course_title">Add a Course</string>
     <string name="add_course_settings_button">Settings</string>
-    <string name="add_course_name_text">Name: </string>
+    <string name="add_course_name_text">Course Name: </string>
+    <string name="add_course_code_text">Course Code: </string>
     <string name="add_course_grade_sections_text">Grade Sections: </string>
     <string name="add_course_add_grade_section_button">+</string>
     <string name="add_course_confirmation_button">Add Course</string>

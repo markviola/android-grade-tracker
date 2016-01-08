@@ -11,9 +11,10 @@ import java.util.ArrayList;
 
 public class DBManager extends SQLiteOpenHelper{
 
+    private static DBManager instance;
     private static final String TAG = "customFilter";
 
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 6;
     private static final String DATABASE_NAME = "SemesterDatabase.db";
 
     //Information for Player table
@@ -25,6 +26,13 @@ public class DBManager extends SQLiteOpenHelper{
 
     public DBManager(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+    }
+
+    public static DBManager getInstance(Context context){
+        if (instance == null) {
+            instance = new DBManager(context,null,null,1);
+        }
+        return instance;
     }
 
     @Override
@@ -116,9 +124,9 @@ public class DBManager extends SQLiteOpenHelper{
 
         for(String courseStr: strCourses){
             String[] gradeSecStr = courseStr.split("@@@@");
-            Course newCourse = new Course(gradeSecStr[0]);
+            Course newCourse = new Course(gradeSecStr[0],gradeSecStr[1]);
 
-            for(int i=1; i<gradeSecStr.length; i++){
+            for(int i=2; i<gradeSecStr.length; i++){
                 String[] gradeSecMarksStr = gradeSecStr[i].split("####");
 
                 for(int k=0; k <gradeSecMarksStr.length; k++){
@@ -128,10 +136,19 @@ public class DBManager extends SQLiteOpenHelper{
 
                     for (int j=2; j<gradeSecMarkStr.length; j++){
                         String[] gradeSecMarkDataStr = gradeSecMarkStr[j].split("##");
-                        Mark newGradeSecMark = new Mark(gradeSecMarkDataStr[0],
-                                Double.parseDouble(gradeSecMarkDataStr[1])
-                                //,Double.parseDouble(gradeSecMarkDataStr[2]) //For if grades have individual weights
-                        );
+                        Mark newGradeSecMark;
+                        if(!gradeSecMarkDataStr[1].equals("null")){
+                            newGradeSecMark = new Mark(gradeSecMarkDataStr[0],
+                                    Double.parseDouble(gradeSecMarkDataStr[1])
+                                    //,Double.parseDouble(gradeSecMarkDataStr[2]) //For if grades have individual weights
+                            );
+                        } else {
+                            newGradeSecMark = new Mark(gradeSecMarkDataStr[0],
+                                    null
+                                    //,Double.parseDouble(gradeSecMarkDataStr[2]) //For if grades have individual weights
+                            );
+                        }
+
                         newGradeSec.addMark(newGradeSecMark);
                     }
 
@@ -143,6 +160,17 @@ public class DBManager extends SQLiteOpenHelper{
         }
 
         return new Semester(semesterName, reCourses);
+    }
+
+    public ArrayList<Semester> getAllSemesters(){
+        ArrayList<Semester> allSemesters = new ArrayList<>();
+        ArrayList<String> allSemesterNames = getAllSemesterNames();
+
+        for(String semesterName: allSemesterNames){
+            allSemesters.add(getSemesterStrToObj(semesterName));
+        }
+
+        return allSemesters;
     }
 
 }

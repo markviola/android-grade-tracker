@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.mark.gradetracker.popups.EditGradeSectionOptionsActivity">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:text=""
+        android:id="@+id/gradeSectionTitleText"
+        android:textSize="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1.75"
+        android:background="@drawable/list_border_orange"
+        android:gravity="center"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:text="Edit Grade Section"
+        android:id="@+id/editGradeSectionButton"
+        android:textSize="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:onClick="editGradeSectionButtonClicked"
+        android:background="@drawable/list_border"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:text="Delete Grade Section"
+        android:id="@+id/deleteGradeSectionButton"
+        android:textSize="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:onClick="deleteGradeSectionButtonClicked"
+        android:background="@drawable/list_border"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:text="Add Mark"
+        android:id="@+id/addMarkButton"
+        android:textSize="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:onClick="addMarkButtonClicked"
+        android:background="@drawable/list_border"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:text="Cancel"
+        android:id="@+id/cancelButton"
+        android:textSize="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:background="@drawable/list_border_red"
+        android:onClick="cancelButtonClicked"/>
+</LinearLayout>

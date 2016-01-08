@@ -55,16 +55,17 @@ public class AddBulkMarksListAdapter extends ArrayAdapter<Mark>{
             holder.newMarkName = (TextView) marksView.findViewById(R.id.newMarkName);
             holder.newMarkGrade = (EditText) marksView.findViewById(R.id.newMarkGrade);
             holder.deleteButton = (Button) marksView.findViewById(R.id.deleteButton);
+
+            //Allows you to determine which position in the list, the delete button is on by calling
+            //getTag() in the corresponding onClick method
+            holder.deleteButton.setTag(position);
+
             marksView.setTag(holder);
         } else {
             holder = (ViewHolder) marksView.getTag();
         }
 
         Mark newMarkItem = newMarks.get(position);
-
-        //Allows you to determine which position in the list, the delete button is on by calling
-        //getTag() in the corresponding onClick method
-        //deleteButton.setTag(position);
 
         holder.newMarkName.setText(newMarkItem.getName());
         if(newMarks.get(position).getMark() != null){
@@ -75,9 +76,7 @@ public class AddBulkMarksListAdapter extends ArrayAdapter<Mark>{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //setting data to array, when changed
-                //newMarkItem.setMark(Double.parseDouble(s.toString()));
-                //newMarks.get(position).setMark(Double.parseDouble(s.toString()));
+
             }
 
             @Override
@@ -88,7 +87,11 @@ public class AddBulkMarksListAdapter extends ArrayAdapter<Mark>{
 
             @Override
             public void afterTextChanged(Editable s) {
-                newMarks.get(position).setMark(Double.parseDouble(s.toString()));
+                if(s.toString().equals("")){
+                    newMarks.get(position).setMark(null);
+                }else{
+                    newMarks.get(position).setMark(Double.parseDouble(s.toString()));
+                }
             }
         });
 

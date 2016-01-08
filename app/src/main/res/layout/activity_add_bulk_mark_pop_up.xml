@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mark.gradetracker.AddBulkMarkPopUpActivity"
+    tools:context=".popups.AddBulkMarkPopUpActivity"
     android:background="@drawable/list_border"
     android:focusable="true"
     android:focusableInTouchMode="true">
@@ -25,7 +25,8 @@
         android:id="@+id/button"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/addMarkTitle"
-        android:layout_marginTop="460dp"/>
+        android:layout_marginTop="460dp"
+        android:onClick="addMarksButtonClicked"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -49,7 +50,7 @@
         android:layout_toRightOf="@id/markNameTemplateText"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:inputType="text"/>
+        android:inputType="textCapSentences"/>
 
     <TextView
         android:layout_width="30dp"

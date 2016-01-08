@@ -1,4 +1,4 @@
-package com.example.mark.gradetracker;
+package com.example.mark.gradetracker.navigation;
 
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
@@ -12,6 +12,9 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.mark.gradetracker.R;
+import com.example.mark.gradetracker.editting.SettingsActivity;
 
 import adapters.SemesterListAdapter;
 import data.Semester;
@@ -34,7 +37,7 @@ public class SelectSemesterActivity extends AppCompatActivity {
         Typeface font = Typeface.createFromAsset(getAssets(), "Montserrat-Bold.ttf");
         selectSemesterTitle.setTypeface(font);
 
-        SemesterManager semesterManager = SemesterManager.getInstance();
+        SemesterManager semesterManager = SemesterManager.getInstance(this);
 
         ListAdapter semesterAdapter = new SemesterListAdapter(this, semesterManager.getSemesters());
         ListView coursesListView = (ListView) findViewById(R.id.semesterListView);
@@ -66,8 +69,12 @@ public class SelectSemesterActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void onBackPressed() {
         Intent intent = new Intent(this, MainMenuActivity.class);
+        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
+                R.anim.right_to_left_transition, R.anim.right_to_left_transition_2).toBundle();
+        startActivity(intent, bndlanimation);
         startActivity(intent);
     }
 

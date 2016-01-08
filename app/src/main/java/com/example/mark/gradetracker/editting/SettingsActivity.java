@@ -1,7 +1,9 @@
-package com.example.mark.gradetracker;
+package com.example.mark.gradetracker.editting;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.mark.gradetracker.R;
 
 public class SettingsActivity extends AppCompatActivity {
 

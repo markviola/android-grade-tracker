@@ -32,7 +32,7 @@ public class SemesterListAdapter extends ArrayAdapter<Semester>{
 
         semesterName.setText(semesterItem.getName());
         numCourses.setText("|  " + String.valueOf(semesterItem.numCourses()) + " Courses  |");
-        SessionalGPA.setText("SGPA: ");
+        SessionalGPA.setText(String.format("SGPA: %.2f", semesterItem.getSGPA()));
 
         return courseView;
     }

@@ -35,9 +35,15 @@ public class CourseListAdapter extends ArrayAdapter<Course>{
         TextView courseCurrentGrade = (TextView) courseView.findViewById(R.id.courseCurrentGrade);
         TextView inProgressIndicator = (TextView) courseView.findViewById(R.id.inProgressIndicator);
 
-        courseCurrentGrade.setTypeface(null, Typeface.BOLD);
+        Double currentGrade = courseItem.getCurrentGrade();
+
+        courseNameAndCode.setTypeface(null, Typeface.BOLD);
         courseNameAndCode.setText(courseItem.getName() + " (" + courseItem.getCode() + ")");
-        courseCurrentGrade.setText("Current Grade: " + courseItem.getCurrentGrade());
+        if(currentGrade == -1){
+            courseCurrentGrade.setText("Current Grade: N/A");
+        } else{
+            courseCurrentGrade.setText(String.format("Current Grade: %.2f%%", currentGrade));
+        }
 
         if(courseItem.getInProgress()){
             inProgressIndicator.setTextColor(Color.parseColor("#ffd633"));

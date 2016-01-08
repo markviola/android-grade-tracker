@@ -46,4 +46,5 @@ public class AddGradeSectionListAdapter extends ArrayAdapter<GradeSection>{
 
         return courseView;
     }
+
 }

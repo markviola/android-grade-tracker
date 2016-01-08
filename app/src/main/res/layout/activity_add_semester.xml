@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mark.gradetracker.AddSemesterActivity"
+    tools:context=".adding.AddSemesterActivity"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
@@ -40,7 +40,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="100dp"
-        android:inputType="text"/>
+        android:inputType="textCapSentences"
+        android:gravity="center"/>
 
     <TextView
         android:layout_width="100dp"

@@ -1,32 +1,41 @@
 package managers;
 
 
+import android.content.Context;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import data.DBManager;
 import data.Semester;
 
 public class SemesterManager implements Serializable{
 
     private static SemesterManager instance;
     private ArrayList<Semester> _semesters;
+    DBManager dbManager;
 
-
-    public SemesterManager(){
+    public SemesterManager(Context context){
         this._semesters = new ArrayList<>();
+        dbManager = DBManager.getInstance(context);
     }
 
-    public void addSemester(Semester semester){
-        this._semesters.add(semester);
+    public boolean addSemester(Semester semester){
+        if(!inSemesterManager(semester.getName())){
+            this._semesters.add(semester);
+            dbManager.addSemester(semester);
+            return true;
+        }
+        return false;
     }
 
     public ArrayList<Semester> getSemesters(){
         return this._semesters;
     }
 
-    public static SemesterManager getInstance() {
+    public static SemesterManager getInstance(Context context) {
         if (instance == null) {
-            instance = new SemesterManager();
+            instance = new SemesterManager(context);
         }
         return instance;
     }
@@ -43,6 +52,11 @@ public class SemesterManager implements Serializable{
             }
         }
         return null;
+    }
+
+
+    public void setSemesters(ArrayList<Semester> newSemesters){
+        this._semesters = newSemesters;
     }
 
     /**

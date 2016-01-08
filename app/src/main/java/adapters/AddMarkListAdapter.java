@@ -34,12 +34,19 @@ public class AddMarkListAdapter extends ArrayAdapter<Mark>{
         Mark markItem = getItem(position);
         gradeName = (TextView) courseView.findViewById(R.id.gradeName);
         deleteButton = (Button) courseView.findViewById(R.id.deleteButton);
+        deleteButton.setTag(position);
 
         //Allows you to determine which position in the list, the delete button is on by calling
         //getTag() in the corresponding onClick method
         deleteButton.setTag(position);
 
-        gradeName.setText(markItem.getName() + " | Grade: " + markItem.getMark() + "%");
+        String displayMarkText;
+        if(markItem.getMark() == null){
+            displayMarkText = "N/A";
+        }else {
+            displayMarkText = markItem.getMark().toString() + "%";
+        }
+        gradeName.setText(markItem.getName() + " | Grade: " + displayMarkText);
 
         return courseView;
     }

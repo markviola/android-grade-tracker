@@ -1,4 +1,4 @@
-package com.example.mark.gradetracker;
+package com.example.mark.gradetracker.navigation;
 
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
@@ -7,12 +7,13 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.mark.gradetracker.R;
 
 import adapters.CourseListAdapter;
 import data.Course;
@@ -41,7 +42,7 @@ public class SelectCourseActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         semesterName = (String) intent.getSerializableExtra("semesterName");
-        SemesterManager semesterManager = SemesterManager.getInstance();
+        SemesterManager semesterManager = SemesterManager.getInstance(this);
         Semester semester = semesterManager.getSemester(semesterName);
 
         ListAdapter coursesAdapter = new CourseListAdapter(this, semester.getCourses());
@@ -66,6 +67,14 @@ public class SelectCourseActivity extends AppCompatActivity {
         intent.putExtra("selectedCourse", course);
         Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
                 R.anim.animation, R.anim.animation2).toBundle();
+        startActivity(intent, bndlanimation);
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public void onBackPressed(){
+        Intent intent = new Intent(this, SelectSemesterActivity.class);
+        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
+                R.anim.right_to_left_transition, R.anim.right_to_left_transition_2).toBundle();
         startActivity(intent, bndlanimation);
     }
 

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mark.gradetracker.AddCourseActivity"
+    tools:context=".adding.AddCourseActivity"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
@@ -22,25 +22,51 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="@string/add_course_name_text"
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:id="@+id/courseNameText"
         android:layout_below="@+id/addCourseTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="15dp"
         android:layout_marginLeft="15dp"/>
 
     <EditText
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:id="@+id/courseNameEditText"
         android:layout_below="@+id/addCourseTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="100dp"
-        android:inputType="text"/>
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="120dp"
+        android:inputType="textCapSentences"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="@string/add_course_code_text"
+        android:textSize="15dp"
+        android:id="@+id/courseCodeText"
+        android:layout_below="@+id/courseNameText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"/>
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:id="@+id/courseCodeEditText"
+        android:layout_below="@+id/courseNameText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="120dp"
+        android:inputType="textCapCharacters"
+        android:gravity="center"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -48,7 +74,7 @@
         android:text="@string/add_course_grade_sections_text"
         android:textSize="20dp"
         android:id="@+id/gradeSectionsNameText"
-        android:layout_below="@+id/courseNameText"
+        android:layout_below="@+id/courseCodeText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="40dp"

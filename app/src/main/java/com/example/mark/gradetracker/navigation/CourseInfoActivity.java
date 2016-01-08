@@ -1,8 +1,11 @@
-package com.example.mark.gradetracker;
+package com.example.mark.gradetracker.navigation;
 
+import android.annotation.TargetApi;
+import android.app.ActivityOptions;
 import android.app.ExpandableListActivity;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +13,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+
+import com.example.mark.gradetracker.R;
+import com.example.mark.gradetracker.popups.EditGradeSectionOptionsActivity;
+import com.example.mark.gradetracker.popups.EditMarkOptionsPopUpActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,7 +62,11 @@ public class CourseInfoActivity extends AppCompatActivity {
         currentGrade.setTypeface(null, Typeface.BOLD);
         courseNameText.setText(selectedCourse.getName());
         courseCodeText.setText("Course Code: " + selectedCourse.getCode());
-        currentGrade.setText("Current Grade: " + selectedCourse.getCurrentGrade());
+        if(selectedCourse.getCurrentGrade() == -1){//Change -1 into a constant and put in  Constants.java
+            currentGrade.setText("Current Grade: N/A");
+        } else{
+            currentGrade.setText(String.format("Current Grade: %.2f%%", selectedCourse.getCurrentGrade()));
+        }
 
         //Generate a HashMap for the ExpandableListView
         HashMap<String, List<Mark>> childList = new HashMap<>();
@@ -102,7 +113,12 @@ public class CourseInfoActivity extends AppCompatActivity {
      * @param groupPosition The position of the grade section in the expandableListView
      */
     public void onGroupLongClick(int groupPosition){
-        Log.i(TAG, "Long Click in GROUP");
+        Intent intent = new Intent(this, EditGradeSectionOptionsActivity.class);
+        intent.putExtra("semesterName", semesterName);
+        intent.putExtra("currentCourse", selectedCourse);
+        intent.putExtra("selectedGradeSection", selectedCourse.getGrade().get(groupPosition));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
+        startActivity(intent);
     }
 
     /**
@@ -111,6 +127,22 @@ public class CourseInfoActivity extends AppCompatActivity {
      * @param childPosition The position of the mark in the expandableListView
      */
     public void onChildLongClick(int groupPosition, int childPosition){
-        Log.i(TAG, "Long Click in CHILD");
+        Intent intent = new Intent(this, EditMarkOptionsPopUpActivity.class);
+        intent.putExtra("semesterName", semesterName);
+        intent.putExtra("currentCourse", selectedCourse);
+        intent.putExtra("selectedGradeSection", selectedCourse.getGrade().get(groupPosition));
+        intent.putExtra("selectedMark", selectedCourse.getGrade().get(groupPosition).getMarks().get(childPosition));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
+        startActivity(intent);
     }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public void onBackPressed(){
+        Intent intent = new Intent(this, SelectCourseActivity.class);
+        intent.putExtra("semesterName", semesterName);
+        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
+                R.anim.right_to_left_transition, R.anim.right_to_left_transition_2).toBundle();
+        startActivity(intent, bndlanimation);
+    }
+
 }

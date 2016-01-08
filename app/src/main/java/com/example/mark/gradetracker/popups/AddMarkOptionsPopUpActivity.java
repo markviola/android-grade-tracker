@@ -1,10 +1,12 @@
-package com.example.mark.gradetracker;
+package com.example.mark.gradetracker.popups;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+
+import com.example.mark.gradetracker.R;
 
 import java.util.ArrayList;
 
@@ -19,7 +21,9 @@ public class AddMarkOptionsPopUpActivity extends AppCompatActivity {
     ArrayList<Mark> marks;
     String newSemesterName;
     String newCourseName;
+    String newCourseCode;
     String gradeSectionName;
+    String gradeSectionWeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +34,10 @@ public class AddMarkOptionsPopUpActivity extends AppCompatActivity {
         newSemesterName = (String) intent.getSerializableExtra("newSemesterName");
         courses = (ArrayList<Course>) intent.getSerializableExtra("courses");
         newCourseName = (String) intent.getSerializableExtra("newCourseName");
+        newCourseCode = (String) intent.getSerializableExtra("newCourseCode");
         gradeSections = (ArrayList<GradeSection>) intent.getSerializableExtra("gradeSections");
         gradeSectionName = (String) intent.getSerializableExtra("gradeSectionName");
+        gradeSectionWeight = (String) intent.getSerializableExtra("gradeSectionWeight");
         marks = (ArrayList<Mark>) intent.getSerializableExtra("marks");
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -48,8 +54,10 @@ public class AddMarkOptionsPopUpActivity extends AppCompatActivity {
         intent.putExtra("newSemesterName", newSemesterName);
         intent.putExtra("courses", courses);
         intent.putExtra("newCourseName", newCourseName);
+        intent.putExtra("newCourseCode", newCourseCode);
         intent.putExtra("gradeSections", gradeSections);
         intent.putExtra("gradeSectionName", gradeSectionName);
+        intent.putExtra("gradeSectionWeight", gradeSectionWeight);
         intent.putExtra("marks", marks);
         startActivity(intent);
     }
@@ -59,8 +67,10 @@ public class AddMarkOptionsPopUpActivity extends AppCompatActivity {
         intent.putExtra("newSemesterName", newSemesterName);
         intent.putExtra("courses", courses);
         intent.putExtra("newCourseName", newCourseName);
+        intent.putExtra("newCourseCode", newCourseCode);
         intent.putExtra("gradeSections", gradeSections);
         intent.putExtra("gradeSectionName", gradeSectionName);
+        intent.putExtra("gradeSectionWeight", gradeSectionWeight);
         intent.putExtra("marks", marks);
         startActivity(intent);
     }

@@ -1,19 +1,30 @@
 package data;
 
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Course implements Serializable{
+
+    private String TAG = "customFilter";
 
     private String _name;
     private String _code;
     private ArrayList<GradeSection> _grades;
     private boolean _inProgress;
 
-    public Course(String name){
+    public Course(String name, String code){
         this._name = name;
-        this._code = "N/A";
+
+        if(code != null){
+            this._code = code;
+        } else {
+            this._code = "N/A";
+        }
+
         this._grades = new ArrayList<>();
         this._inProgress = true;
     }
@@ -54,19 +65,63 @@ public class Course implements Serializable{
         this._grades.add(newGrade);
     }
 
-    public double getCurrentGrade(){
-        double totalWeightedGrades = 0.0;
-        double totalWeights = 0.0;
+    public GradeSection getGradeSectionByName(String gradeSectionName){
         for(GradeSection gradeSection: _grades){
-            totalWeightedGrades += gradeSection.getSectionGrade() * gradeSection.getWeight();
-            totalWeights += gradeSection.getWeight();
+            if(gradeSection.getSectionName().equals(gradeSectionName)){
+                return gradeSection;
+            }
         }
+        return null;
+    }
 
-        return totalWeightedGrades/totalWeights;
+    public void deleteGradeSectionByName(String gradeSectionName){
+        Iterator<GradeSection> gradeSectionIterator = _grades.iterator();
+
+        while(gradeSectionIterator.hasNext()){
+            GradeSection gradeSection = gradeSectionIterator.next();
+            if(gradeSection.getSectionName().equals(gradeSectionName)){
+                _grades.remove(gradeSection);
+                break;
+            }
+        }
+    }
+
+    public void deleteMarkByName(String gradeSectionName, String markName){
+        Iterator<GradeSection> gradeSectionIterator = _grades.iterator();
+
+        while(gradeSectionIterator.hasNext()){
+            GradeSection gradeSection = gradeSectionIterator.next();
+            if(gradeSection.getSectionName().equals(gradeSectionName)){
+                Iterator<Mark> markIterator = gradeSection.getMarks().iterator();
+                while (markIterator.hasNext()){
+                    Mark mark = markIterator.next();
+                    if(mark.getName().equals(markName)){
+                        gradeSection.getMarks().remove(mark);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    public double getCurrentGrade(){
+        if(_grades.size() == 0){
+            return -1;
+        } else {
+            double totalWeightedGrades = 0.0;
+            double totalWeights = 0.0;
+            for(GradeSection gradeSection: _grades){
+                totalWeightedGrades += gradeSection.getSectionGrade() * gradeSection.getWeight();
+                totalWeights += gradeSection.getWeight();
+            }
+
+            return totalWeightedGrades/totalWeights;
+        }
     }
 
     public String toString(){
-        String retString = getName();
+        String retString = getName()+"@@@@" +getCode();
         for(GradeSection grade: _grades){
             retString += "@@@@" + grade.toString();
         }

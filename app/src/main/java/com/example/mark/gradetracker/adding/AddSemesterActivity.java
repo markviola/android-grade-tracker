@@ -1,4 +1,4 @@
-package com.example.mark.gradetracker;
+package com.example.mark.gradetracker.adding;
 
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
@@ -16,6 +16,11 @@ import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.mark.gradetracker.R;
+import com.example.mark.gradetracker.navigation.MainMenuActivity;
+import com.example.mark.gradetracker.navigation.SelectSemesterActivity;
 
 import java.util.ArrayList;
 
@@ -52,10 +57,8 @@ public class AddSemesterActivity extends AppCompatActivity {
         //Retrieve courses information
         if (intent.getSerializableExtra("courses") == null){
             courses = new ArrayList<>();
-            Log.i(TAG, "courses == null");
         } else {
             courses = (ArrayList<Course>) intent.getSerializableExtra("courses");
-            Log.i(TAG, "courses != null");
         }
 
         //Retrieve semester name information
@@ -144,8 +147,12 @@ public class AddSemesterActivity extends AppCompatActivity {
 
         if (!semesterNameEditText.getText().toString().equals("")){
             Semester newSemester = new Semester(semesterNameEditText.getText().toString(), courses);
-            SemesterManager semesterManager = SemesterManager.getInstance();
-            semesterManager.addSemester(newSemester);
+            SemesterManager semesterManager = SemesterManager.getInstance(this);
+
+            if(!semesterManager.addSemester(newSemester)){
+                Toast.makeText(this, "The semester name is already being used!", Toast.LENGTH_LONG).show();
+            }
+
         } else {
             //Don't add anything
             //Prompt the user asking if there needs to

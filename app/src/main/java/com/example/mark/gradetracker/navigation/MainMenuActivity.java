@@ -1,4 +1,4 @@
-package com.example.mark.gradetracker;
+package com.example.mark.gradetracker.navigation;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -7,6 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.mark.gradetracker.adding.AddSemesterActivity;
+import com.example.mark.gradetracker.R;
+import com.example.mark.gradetracker.navigation.SelectSemesterActivity;
 
 import java.util.ArrayList;
 
@@ -27,14 +31,14 @@ public class MainMenuActivity extends AppCompatActivity {
     TextView mainMenuTitleText;
 
     // TEST CODE BELOW //
-    Course CSCB07 = new Course("CSCB07");
-    Course CSCB36 = new Course("CSCB36");
+    Course CSCB07 = new Course("CSCB07", null);
+    Course CSCB36 = new Course("CSCB36", null);
 //    Course MATB24 = new Course("MATB24");
 //    Course MATB41 = new Course("MATB41");
 //    Course STAB52 = new Course("STAB52");
 
     ArrayList<Course> courses = new ArrayList<>();
-    SemesterManager semesterManager = SemesterManager.getInstance();
+    SemesterManager semesterManager = SemesterManager.getInstance(this);
 
     DBManager dbManager;
     // TEST CODE ABOVE //
@@ -65,17 +69,16 @@ public class MainMenuActivity extends AppCompatActivity {
 
         courses.add(CSCB07);
         courses.add(CSCB36);
-//        courses.add(MATB24);
-//        courses.add(MATB41);
-//        courses.add(STAB52);
 
         Semester testSem = new Semester("Fall 2015", courses);
 
-        dbManager = new DBManager(this, null, null, 1);
+        dbManager = DBManager.getInstance(this);
         //dbManager.addSemester(testSem);
 
-        Semester reSem = dbManager.getSemesterStrToObj("Fall 2015");
-        semesterManager.addSemester(reSem);
+
+//        Semester reSem = dbManager.getSemesterStrToObj("Fall 2015");
+//        semesterManager.addSemester(reSem);
+        semesterManager.setSemesters(dbManager.getAllSemesters());
 
         // TEST CODE ABOVE //
 

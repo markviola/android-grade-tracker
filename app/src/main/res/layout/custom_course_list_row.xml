@@ -11,7 +11,7 @@
         android:layout_height="40dp"
         android:text="New Text"
         android:id="@+id/courseNameAndCode"
-        android:textSize="30dp"
+        android:textSize="23dp"
         android:gravity="center"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mark.gradetracker" >
+    package="com.example.mark.gradetracker">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -12,12 +12,12 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".navigation.MainMenuActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,57 +25,53 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SelectCourseActivity"
+            android:name=".navigation.SelectCourseActivity"
             android:label="@string/title_activity_courses"
             android:screenOrientation="portrait"
-            android:theme="@style/OrangeTop" >
-        </activity>
+            android:theme="@style/OrangeTop" />
         <activity
-            android:name=".SelectSemesterActivity"
+            android:name=".navigation.SelectSemesterActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/OrangeTop" >
-        </activity>
+            android:theme="@style/OrangeTop" />
         <activity
-            android:name=".AddSemesterActivity"
+            android:name=".adding.AddSemesterActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/OrangeTop" >
-        </activity>
+            android:theme="@style/OrangeTop" />
         <activity
-            android:name=".AddCourseActivity"
+            android:name=".adding.AddCourseActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/OrangeTop" >
-        </activity>
+            android:theme="@style/OrangeTop" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".editting.SettingsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AddGradeSectionActivity"
+            android:name=".adding.AddGradeSectionActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/OrangeTop" >
-        </activity>
+            android:theme="@style/OrangeTop" />
         <activity
-            android:name=".AddSingleMarkPopUpActivity"
+            android:name=".popups.AddSingleMarkPopUpActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.CustomPopUpTheme" >
-        </activity>
+            android:theme="@style/AppTheme.CustomPopUpTheme" />
         <activity
-            android:name=".AddMarkOptionsPopUpActivity"
+            android:name=".popups.AddMarkOptionsPopUpActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.CustomPopUpTheme" >
-        </activity>
+            android:theme="@style/AppTheme.CustomPopUpTheme" />
         <activity
-            android:name=".CourseInfoActivity"
+            android:name=".navigation.CourseInfoActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/OrangeTop" >
-        </activity>
+            android:theme="@style/OrangeTop" />
         <activity
-            android:name=".AddBulkMarkPopUpActivity"
+            android:name=".popups.AddBulkMarkPopUpActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.CustomPopUpTheme"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".popups.EditGradeSectionOptionsActivity"
+            android:theme="@style/AppTheme.CustomPopUpTheme" />
+        <activity
+            android:name=".popups.EditMarkOptionsPopUpActivity"
+            android:theme="@style/AppTheme.CustomPopUpTheme" ></activity>
     </application>
 
 </manifest>

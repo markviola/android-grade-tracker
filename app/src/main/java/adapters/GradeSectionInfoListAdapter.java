@@ -82,7 +82,7 @@ public class GradeSectionInfoListAdapter extends BaseExpandableListAdapter{
         gradeSectionName.setText(gradeSection.getSectionName());
 
         currentGradeText.setTypeface(null, Typeface.BOLD);
-        currentGradeText.setText(gradeSection.getSectionGrade()+"%");
+        currentGradeText.setText(String.format("%.2f%%", gradeSection.getSectionGrade()));
 
         return convertView;
     }
@@ -101,7 +101,7 @@ public class GradeSectionInfoListAdapter extends BaseExpandableListAdapter{
 
         markName.setText(mark.getName());
         if(mark.getMark() != null){
-            currentGradeText.setText(mark.getMark()+"%");
+            currentGradeText.setText(String.format("%.2f%%",mark.getMark()));
         } else {
             currentGradeText.setText("N/A");
         }

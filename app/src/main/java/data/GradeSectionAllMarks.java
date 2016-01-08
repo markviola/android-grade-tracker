@@ -19,9 +19,13 @@ public class GradeSectionAllMarks extends GradeSection{
     @Override
     public double getSectionGrade() {
         double marksTotal = 0;
+        int numApplicableMarks = 0;
         for(Mark mark: _marks){
-            marksTotal += mark.getMark();
+            if(mark.getMark() != null){
+                marksTotal += mark.getMark();
+                numApplicableMarks++;
+            }
         }
-        return marksTotal/_marks.size();
+        return marksTotal/numApplicableMarks;
     }
 }
