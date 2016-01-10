@@ -18,6 +18,10 @@ public class Mark implements Serializable{
         return this._name;
     }
 
+    public void setName(String newName){
+        this._name = newName;
+    }
+
     public Double getMark(){
         return this._mark;
     }

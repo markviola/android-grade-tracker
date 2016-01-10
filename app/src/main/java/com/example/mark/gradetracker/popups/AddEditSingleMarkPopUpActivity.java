@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,17 +19,23 @@ import com.example.mark.gradetracker.navigation.CourseInfoActivity;
 import java.util.ArrayList;
 
 import data.Course;
+import data.DBManager;
 import data.GradeSection;
 import data.Mark;
+import data.Semester;
+import managers.SemesterManager;
 
 
-public class AddSingleMarkPopUpActivity extends Activity {
+public class AddEditSingleMarkPopUpActivity extends Activity {
 
     private String TAG = "customFilter";
 
     EditText markNameEditText;
     EditText markGradeEditText;
     TextView addMarkTitle;
+    Button addMarkButton;
+
+    String previousActivity;
 
     ArrayList<Course> courses;
     ArrayList<GradeSection> gradeSections;
@@ -43,6 +50,8 @@ public class AddSingleMarkPopUpActivity extends Activity {
     Course currentCourse;
     GradeSection selectedGradeSection;
 
+    Mark selectedMark;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -56,6 +65,7 @@ public class AddSingleMarkPopUpActivity extends Activity {
         markNameEditText = (EditText) findViewById(R.id.markNameEditText);
         markGradeEditText = (EditText) findViewById(R.id.markGradeEditText);
         addMarkTitle = (TextView) findViewById(R.id.addMarkTitle);
+        addMarkButton = (Button) findViewById(R.id.addMarkButton);
 
         //Change the header font to Montserrat-Bold
         Typeface font = Typeface.createFromAsset(getAssets(), "Montserrat-Bold.ttf");
@@ -63,7 +73,20 @@ public class AddSingleMarkPopUpActivity extends Activity {
 
         Intent intent = getIntent();
 
-        if(intent.getSerializableExtra("currentCourse") == null){
+        previousActivity = (String) intent.getSerializableExtra("previousActivity");
+
+        if(previousActivity.equals("EditMarkOptionsPopUpActivity")){
+            semesterName = (String) intent.getSerializableExtra("semesterName");
+            currentCourse = (Course) intent.getSerializableExtra("currentCourse");
+            selectedGradeSection = (GradeSection) intent.getSerializableExtra("selectedGradeSection");
+            selectedMark = (Mark) intent.getSerializableExtra("selectedMark");
+
+            addMarkTitle.setText("Edit Mark");
+            markNameEditText.setText(selectedMark.getName());
+            markGradeEditText.setText(String.format("%.2f", selectedMark.getMark()));
+            addMarkButton.setText("Edit Mark");
+
+        }else if(previousActivity.equals("AddMarkOptionsPopUpActivity")){
             newSemesterName = (String) intent.getSerializableExtra("newSemesterName");
             courses = (ArrayList<Course>) intent.getSerializableExtra("courses");
             newCourseName = (String) intent.getSerializableExtra("newCourseName");
@@ -72,7 +95,7 @@ public class AddSingleMarkPopUpActivity extends Activity {
             gradeSectionName = (String) intent.getSerializableExtra("gradeSectionName");
             gradeSectionWeight = (String) intent.getSerializableExtra("gradeSectionWeight");
             marks = (ArrayList<Mark>) intent.getSerializableExtra("marks");
-        } else {
+        } else if (previousActivity.equals("EditGradeSectionOptionsPopUpActivity")){
             semesterName = (String) intent.getSerializableExtra("semesterName");
             currentCourse = (Course) intent.getSerializableExtra("currentCourse");
             selectedGradeSection = (GradeSection) intent.getSerializableExtra("selectedGradeSection");
@@ -96,8 +119,27 @@ public class AddSingleMarkPopUpActivity extends Activity {
                     //,Double.parseDouble(markWeightEditText.getText().toString())
             );
 
-            //Check if adding a mark from the "AddGradeSectionActivity" or "CourseInfoActivity"
-            if(currentCourse == null){
+            if(previousActivity.equals("EditMarkOptionsPopUpActivity")){
+
+                DBManager dbManager = DBManager.getInstance(this);
+                SemesterManager semesterManager = SemesterManager.getInstance(this);
+
+                Semester semester = semesterManager.getSemester(semesterName);
+                Course course = semester.getCourseByName(currentCourse.getName());
+                GradeSection gradeSection = course.getGradeSectionByName(selectedGradeSection.getSectionName());
+                Mark mark = gradeSection.getMarkByName(selectedMark.getName());
+                mark.setName(markNameEditText.getText().toString());
+                mark.setMark(Double.parseDouble(markGradeEditText.getText().toString()));
+
+                dbManager.updateSemesterInfo(semesterName, semester.getCoursesStr());
+
+                Intent intent = new Intent(this, CourseInfoActivity.class);
+                intent.putExtra("semesterName", semesterName);
+                intent.putExtra("selectedCourse", course);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
+                startActivity(intent);
+
+            }else if(previousActivity.equals("AddMarkOptionsPopUpActivity")){
 
                 marks.add(newMark);
                 Intent intent = new Intent(this, AddGradeSectionActivity.class);
@@ -109,15 +151,24 @@ public class AddSingleMarkPopUpActivity extends Activity {
                 intent.putExtra("gradeSectionName", gradeSectionName);
                 intent.putExtra("gradeSectionWeight", gradeSectionWeight);
                 intent.putExtra("marks", marks);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
                 startActivity(intent);
-            } else {
-                GradeSection gradeSection = currentCourse.getGradeSectionByName(selectedGradeSection.getSectionName());
+            } else if (previousActivity.equals("EditGradeSectionOptionsPopUpActivity")){
+
+                DBManager dbManager = DBManager.getInstance(this);
+                SemesterManager semesterManager = SemesterManager.getInstance(this);
+
+                Semester semester = semesterManager.getSemester(semesterName);
+                Course course = semester.getCourseByName(currentCourse.getName());
+                GradeSection gradeSection = course.getGradeSectionByName(selectedGradeSection.getSectionName());
                 gradeSection.addMark(newMark);
+
+                dbManager.updateSemesterInfo(semesterName, semester.getCoursesStr());
+
                 Intent intent = new Intent(this, CourseInfoActivity.class);
                 intent.putExtra("semesterName", semesterName);
-                intent.putExtra("selectedCourse", currentCourse);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
+                intent.putExtra("selectedCourse", course);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
                 startActivity(intent);
 
             }

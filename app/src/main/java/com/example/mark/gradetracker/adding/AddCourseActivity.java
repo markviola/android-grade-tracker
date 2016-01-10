@@ -98,7 +98,7 @@ public class AddCourseActivity extends AppCompatActivity {
         intent.putExtra("newCourseCode", courseCodeEditText.getText().toString());
         intent.putExtra("gradeSections", gradeSections);
         Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
-                R.anim.animation, R.anim.animation2).toBundle();
+                R.anim.left_to_right_transition, R.anim.left_to_right_transition_2).toBundle();
         startActivity(intent, bndlanimation);
     }
 
@@ -144,7 +144,7 @@ public class AddCourseActivity extends AppCompatActivity {
         intent.putExtra("newCourseName", courseNameEditText.getText().toString());
         intent.putExtra("newCourseCode", courseCodeEditText.getText().toString());
         intent.putExtra("gradeSections", gradeSections);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
 
         startActivity(intent);
     }

@@ -54,4 +54,22 @@ public class Semester implements Serializable{
         }
         return totalGPAValue/_courses.size();
     }
+
+    public Course getCourseByName(String courseName){
+        for(Course course: _courses){
+            if(course.getName().equals(courseName)){
+                return course;
+            }
+        }
+        return null;
+    }
+
+    public void deleteCourseByName(String courseName){
+        for(Course course: _courses){
+            if(course.getName().equals(courseName)){
+                _courses.remove(course);
+                break;
+            }
+        }
+    }
 }

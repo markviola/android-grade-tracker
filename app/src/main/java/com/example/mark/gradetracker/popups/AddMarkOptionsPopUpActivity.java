@@ -50,7 +50,7 @@ public class AddMarkOptionsPopUpActivity extends AppCompatActivity {
     }
 
     public void singleAddButtonClicked(View view){
-        Intent intent = new Intent(this, AddSingleMarkPopUpActivity.class);
+        Intent intent = new Intent(this, AddEditSingleMarkPopUpActivity.class);
         intent.putExtra("newSemesterName", newSemesterName);
         intent.putExtra("courses", courses);
         intent.putExtra("newCourseName", newCourseName);
@@ -59,6 +59,7 @@ public class AddMarkOptionsPopUpActivity extends AppCompatActivity {
         intent.putExtra("gradeSectionName", gradeSectionName);
         intent.putExtra("gradeSectionWeight", gradeSectionWeight);
         intent.putExtra("marks", marks);
+        intent.putExtra("previousActivity", "AddMarkOptionsPopUpActivity");
         startActivity(intent);
     }
 

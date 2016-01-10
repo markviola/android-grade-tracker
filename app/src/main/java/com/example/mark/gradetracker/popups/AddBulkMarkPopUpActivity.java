@@ -182,7 +182,7 @@ public class AddBulkMarkPopUpActivity extends AppCompatActivity {
         intent.putExtra("marks", marks);
         intent.putExtra("markNameTemplate", markNameTemplateEditText.getText().toString());
         intent.putExtra("newMarks", newMarks);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
 
         startActivity(intent);
     }

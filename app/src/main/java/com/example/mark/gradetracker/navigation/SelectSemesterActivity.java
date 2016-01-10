@@ -14,9 +14,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.mark.gradetracker.R;
+import com.example.mark.gradetracker.adding.AddSemesterActivity;
 import com.example.mark.gradetracker.editting.SettingsActivity;
 
 import adapters.SemesterListAdapter;
+import data.DBManager;
 import data.Semester;
 import managers.SemesterManager;
 
@@ -37,18 +39,32 @@ public class SelectSemesterActivity extends AppCompatActivity {
         Typeface font = Typeface.createFromAsset(getAssets(), "Montserrat-Bold.ttf");
         selectSemesterTitle.setTypeface(font);
 
+        //Retrieve all data from the database
+        DBManager dbManager = DBManager.getInstance(this);
         SemesterManager semesterManager = SemesterManager.getInstance(this);
+        semesterManager.setSemesters(dbManager.getAllSemesters());
 
+        //Set the corresponding list adapter
         ListAdapter semesterAdapter = new SemesterListAdapter(this, semesterManager.getSemesters());
-        ListView coursesListView = (ListView) findViewById(R.id.semesterListView);
-        coursesListView.setAdapter(semesterAdapter);
+        ListView semesterListView = (ListView) findViewById(R.id.semesterListView);
+        semesterListView.setAdapter(semesterAdapter);
 
-        coursesListView.setOnItemClickListener(
+        //Executes when the user does a short click on a semester item in the list
+        semesterListView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Semester semester = (Semester) parent.getItemAtPosition(position);
                         goToCourses(semester);
+                    }
+                }
+        );
+
+        //Executes when the user does a long click on a semester item in the list
+        semesterListView.setOnItemLongClickListener(
+                new AdapterView.OnItemLongClickListener() {
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                        return true;
                     }
                 }
         );
@@ -59,9 +75,14 @@ public class SelectSemesterActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SelectCourseActivity.class);
         intent.putExtra("semesterName", semester.getName());
         Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
-                R.anim.animation, R.anim.animation2).toBundle();
+                R.anim.left_to_right_transition, R.anim.left_to_right_transition_2).toBundle();
         startActivity(intent, bndlanimation);
 
+    }
+
+    public void addSemesterButtonClicked(View view){
+        Intent intent = new Intent(this, AddSemesterActivity.class);
+        startActivity(intent);
     }
 
     public void settingsClicked(View view){

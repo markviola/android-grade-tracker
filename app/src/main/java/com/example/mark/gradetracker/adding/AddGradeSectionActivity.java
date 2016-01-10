@@ -231,7 +231,7 @@ public class AddGradeSectionActivity extends AppCompatActivity {
         intent.putExtra("gradeSectionName", gradeSectionNameEditText.getText().toString());
         intent.putExtra("gradeSectionWeight", gradeSectionWeightEditText.getText().toString());
         intent.putExtra("marks", marks);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
 
         startActivity(intent);
     }

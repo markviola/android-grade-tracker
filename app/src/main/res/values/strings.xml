@@ -13,6 +13,7 @@
 
     <!-- SelectSemesterActivity strings -->
     <string name="select_semester_title">Select Semester</string>
+    <string name="select_semester_add_semester_button">Add Semester</string>
     <string name="select_semester_settings_button">Settings</string>
 
     <!-- AddSemesterActivity strings -->
@@ -49,7 +50,7 @@
     <string name="add_grade_section_high_marks_text_2">Marks</string>
     <string name="add_grade_section_confirmation_button">Add Grade Section</string>
 
-    <!-- AddSingleMarkPopUpActivity strings -->
+    <!-- AddEditSingleMarkPopUpActivity strings -->
     <string name="add_mark_pop_up_title">Add a Mark</string>
     <string name="add_mark_pop_up_name_text">Name: </string>
     <string name="add_mark_pop_up_grade_text">Grade: </string>

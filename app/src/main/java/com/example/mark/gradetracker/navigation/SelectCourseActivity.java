@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.mark.gradetracker.R;
+import com.example.mark.gradetracker.popups.EditCourseOptionsPopUpActivity;
 
 import adapters.CourseListAdapter;
 import data.Course;
@@ -49,12 +50,24 @@ public class SelectCourseActivity extends AppCompatActivity {
         ListView coursesListView = (ListView) findViewById(R.id.coursesListView);
         coursesListView.setAdapter(coursesAdapter);
 
+        //Executes when the user does a short click on a course item in the list
         coursesListView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Course course = (Course) parent.getItemAtPosition(position);
                         goToCourseInfo(course);
+                    }
+                }
+        );
+
+        //Executes when the user does a long click on a course item in the list
+        coursesListView.setOnItemLongClickListener(
+                new AdapterView.OnItemLongClickListener() {
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                        Course course = (Course) parent.getItemAtPosition(position);
+                        goToCourseOptions(course);
+                        return true;
                     }
                 }
         );
@@ -66,8 +79,15 @@ public class SelectCourseActivity extends AppCompatActivity {
         intent.putExtra("semesterName", semesterName);
         intent.putExtra("selectedCourse", course);
         Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
-                R.anim.animation, R.anim.animation2).toBundle();
+                R.anim.left_to_right_transition, R.anim.left_to_right_transition_2).toBundle();
         startActivity(intent, bndlanimation);
+    }
+
+    private void goToCourseOptions(Course course){
+        Intent intent = new Intent(this, EditCourseOptionsPopUpActivity.class);
+        intent.putExtra("semesterName", semesterName);
+        intent.putExtra("selectedCourse", course);
+        startActivity(intent);
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)

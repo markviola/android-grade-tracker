@@ -11,9 +11,12 @@ import com.example.mark.gradetracker.R;
 import com.example.mark.gradetracker.navigation.CourseInfoActivity;
 
 import data.Course;
+import data.DBManager;
 import data.GradeSection;
+import data.Semester;
+import managers.SemesterManager;
 
-public class EditGradeSectionOptionsActivity extends AppCompatActivity {
+public class EditGradeSectionOptionsPopUpActivity extends AppCompatActivity {
 
     private String TAG = "customFilter";
 
@@ -59,22 +62,30 @@ public class EditGradeSectionOptionsActivity extends AppCompatActivity {
     public void deleteGradeSectionButtonClicked(View view){
         //Add confirmation popup
 
-        currentCourse.deleteGradeSectionByName(selectedGradeSection.getSectionName());
+        DBManager dbManager = DBManager.getInstance(this);
+        SemesterManager semesterManager = SemesterManager.getInstance(this);
+
+        Semester semester = semesterManager.getSemester(semesterName);
+        Course course = semester.getCourseByName(currentCourse.getName());
+        course.deleteGradeSectionByName(selectedGradeSection.getSectionName());
+
+        dbManager.updateSemesterInfo(semesterName, semester.getCoursesStr());
 
         Intent intent = new Intent(this, CourseInfoActivity.class);
         intent.putExtra("semesterName", semesterName);
-        intent.putExtra("selectedCourse", currentCourse);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
+        intent.putExtra("selectedCourse", course);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
         startActivity(intent);
     }
 
     public void addMarkButtonClicked(View view){
         //Take user to AddMarkActivity.class
-        Intent intent = new Intent(this, AddSingleMarkPopUpActivity.class);
+        Intent intent = new Intent(this, AddEditSingleMarkPopUpActivity.class);
         intent.putExtra("semesterName", semesterName);
         intent.putExtra("currentCourse", currentCourse);
         intent.putExtra("selectedGradeSection", selectedGradeSection);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
+        intent.putExtra("previousActivity", "EditGradeSectionOptionsPopUpActivity");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
         startActivity(intent);
     }
 

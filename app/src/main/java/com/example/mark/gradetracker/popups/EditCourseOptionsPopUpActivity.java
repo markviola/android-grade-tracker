@@ -9,40 +9,35 @@ import android.widget.TextView;
 
 import com.example.mark.gradetracker.R;
 import com.example.mark.gradetracker.navigation.CourseInfoActivity;
+import com.example.mark.gradetracker.navigation.SelectCourseActivity;
 
 import data.Course;
 import data.DBManager;
-import data.GradeSection;
-import data.Mark;
 import data.Semester;
 import managers.SemesterManager;
 
-public class EditMarkOptionsPopUpActivity extends AppCompatActivity {
+public class EditCourseOptionsPopUpActivity extends AppCompatActivity {
 
     private String TAG = "customFilter";
 
-    TextView markTitleText;
+    TextView courseTitleText;
 
     String semesterName;
-    Course currentCourse;
-    GradeSection selectedGradeSection;
-    Mark selectedMark;
+    Course selectedCourse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_mark_options_pop_up);
+        setContentView(R.layout.activity_edit_course_options_pop_up);
 
-        markTitleText = (TextView) findViewById(R.id.markTitleText);
+        courseTitleText = (TextView) findViewById(R.id.courseTitleText);
 
         Intent intent = getIntent();
 
         semesterName = (String) intent.getSerializableExtra("semesterName");
-        currentCourse = (Course) intent.getSerializableExtra("currentCourse");
-        selectedGradeSection = (GradeSection) intent.getSerializableExtra("selectedGradeSection");
-        selectedMark = (Mark) intent.getSerializableExtra("selectedMark");
+        selectedCourse = (Course) intent.getSerializableExtra("selectedCourse");
 
-        markTitleText.setText(String.format("\"%s\"\nMark", selectedMark.getName()));
+        courseTitleText.setText(String.format("\"%s\"\nCourse", selectedCourse.getName()));
 
         changeActivitySize();
     }
@@ -57,38 +52,33 @@ public class EditMarkOptionsPopUpActivity extends AppCompatActivity {
         getWindow().setLayout((int) (0.7 * width), (int) (0.35 * height));
     }
 
-    public void editMarkButtonClicked(View view){
-        Intent intent = new Intent(this, AddEditSingleMarkPopUpActivity.class);
+    public void editCourseButtonClicked(View view){
+        Intent intent = new Intent(this, EditCoursePopUpActivity.class);
         intent.putExtra("semesterName", semesterName);
-        intent.putExtra("currentCourse", currentCourse);
-        intent.putExtra("selectedGradeSection", selectedGradeSection);
-        intent.putExtra("selectedMark", selectedMark);
-        intent.putExtra("previousActivity", "EditMarkOptionsPopUpActivity");
+        intent.putExtra("selectedCourse", selectedCourse);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
         startActivity(intent);
+
     }
 
-    public void deleteMarkButtonClicked(View view){
-        //Add confirmation popup
+    public void deleteCourseButtonClicked(View view){
 
         DBManager dbManager = DBManager.getInstance(this);
         SemesterManager semesterManager = SemesterManager.getInstance(this);
 
         Semester semester = semesterManager.getSemester(semesterName);
-        Course course = semester.getCourseByName(currentCourse.getName());
-        course.deleteMarkByName(selectedGradeSection.getSectionName(), selectedMark.getName());
+        semester.deleteCourseByName(selectedCourse.getName());
 
         dbManager.updateSemesterInfo(semesterName, semester.getCoursesStr());
 
-        Intent intent = new Intent(this, CourseInfoActivity.class);
+        Intent intent = new Intent(this, SelectCourseActivity.class);
         intent.putExtra("semesterName", semesterName);
-        intent.putExtra("selectedCourse", course);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
         startActivity(intent);
-
     }
 
     public void cancelButtonClicked(View view){
         this.finish();
     }
+
 }

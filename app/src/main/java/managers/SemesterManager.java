@@ -20,10 +20,10 @@ public class SemesterManager implements Serializable{
         dbManager = DBManager.getInstance(context);
     }
 
-    public boolean addSemester(Semester semester){
-        if(!inSemesterManager(semester.getName())){
-            this._semesters.add(semester);
-            dbManager.addSemester(semester);
+    public boolean addSemester(Semester newSemester){
+        if(!inSemesterManager(newSemester.getName())){
+            this._semesters.add(newSemester);
+            dbManager.addSemester(newSemester);
             return true;
         }
         return false;

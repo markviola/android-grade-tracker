@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mark.gradetracker.popups.EditGradeSectionOptionsPopUpActivity">
+    tools:context="com.example.mark.gradetracker.popups.EditCourseOptionsPopUpActivity">
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:text=""
-        android:id="@+id/gradeSectionTitleText"
+        android:id="@+id/courseTitleText"
         android:textSize="20dp"
         android:layout_gravity="center_horizontal"
         android:layout_weight="1.75"
@@ -20,35 +19,25 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:text="Edit Grade Section"
-        android:id="@+id/editGradeSectionButton"
+        android:text="Edit Course"
+        android:id="@+id/editCourseButton"
         android:textSize="20dp"
         android:layout_gravity="center_horizontal"
         android:layout_weight="1"
-        android:onClick="editGradeSectionButtonClicked"
+        android:onClick="editCourseButtonClicked"
         android:background="@drawable/list_border"/>
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:text="Delete Grade Section"
-        android:id="@+id/deleteGradeSectionButton"
+        android:text="Delete Course"
+        android:id="@+id/deleteCourseButton"
         android:textSize="20dp"
         android:layout_gravity="center_horizontal"
         android:layout_weight="1"
-        android:onClick="deleteGradeSectionButtonClicked"
+        android:onClick="deleteCourseButtonClicked"
         android:background="@drawable/list_border"/>
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:text="Add Mark"
-        android:id="@+id/addMarkButton"
-        android:textSize="20dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="1"
-        android:onClick="addMarkButtonClicked"
-        android:background="@drawable/list_border"/>
 
     <Button
         android:layout_width="fill_parent"
@@ -60,4 +49,5 @@
         android:layout_weight="1"
         android:background="@drawable/list_border_red"
         android:onClick="cancelButtonClicked"/>
+
 </LinearLayout>

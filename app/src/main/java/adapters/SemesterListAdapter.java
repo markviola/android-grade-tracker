@@ -31,7 +31,11 @@ public class SemesterListAdapter extends ArrayAdapter<Semester>{
         TextView SessionalGPA = (TextView) courseView.findViewById(R.id.SessionalGPA);
 
         semesterName.setText(semesterItem.getName());
-        numCourses.setText("|  " + String.valueOf(semesterItem.numCourses()) + " Courses  |");
+        if(semesterItem.numCourses() == 1){
+            numCourses.setText("|  1 Course  |");
+        } else {
+            numCourses.setText(String.format("|  %d Courses  |", semesterItem.numCourses()));
+        }
         SessionalGPA.setText(String.format("SGPA: %.2f", semesterItem.getSGPA()));
 
         return courseView;

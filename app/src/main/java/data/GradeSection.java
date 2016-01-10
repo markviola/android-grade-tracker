@@ -1,10 +1,14 @@
 package data;
 
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public abstract class GradeSection implements Serializable{
+
+    private String TAG = "customFilter";
 
     private String _sectionName;
     private double _weight;
@@ -41,6 +45,15 @@ public abstract class GradeSection implements Serializable{
 
     }
 
+    public Mark getMarkByName(String markName){
+        for(Mark mark: _marks){
+            if(mark.getName().equals(markName)){
+                return mark;
+            }
+        }
+        return null;
+    }
+
     public String toString(){
         String retString = getSectionName() + "###" + getWeight();
 
@@ -54,5 +67,6 @@ public abstract class GradeSection implements Serializable{
 
     //public abstract double getWeight();
     public abstract double getSectionGrade();
+
 
 }

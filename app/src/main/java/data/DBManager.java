@@ -20,7 +20,7 @@ public class DBManager extends SQLiteOpenHelper{
     //Information for Player table
     public static final String TABLE_SEMESTERS = "_semesters";
     public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_SEMESTER = "_semesterName";
+    public static final String COLUMN_SEMESTER_NAMES = "_semesterName";
     public static final String COLUMN_COURSES = "_courses";
 
 
@@ -37,12 +37,11 @@ public class DBManager extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.i(TAG, "In onCreate DBManager");
 
         //Create Grades table
         String playerQuery = "CREATE TABLE " + TABLE_SEMESTERS + "(" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_SEMESTER + " TEXT, " +
+                COLUMN_SEMESTER_NAMES + " TEXT, " +
                 COLUMN_COURSES + " TEXT " +
                 ");";
         db.execSQL(playerQuery);
@@ -67,12 +66,19 @@ public class DBManager extends SQLiteOpenHelper{
     //Add semester to the database
     public void addSemester(Semester semester){
         ContentValues values = new ContentValues();
-        values.put(COLUMN_SEMESTER, semester.getName());
+        values.put(COLUMN_SEMESTER_NAMES, semester.getName());
         values.put(COLUMN_COURSES, semester.getCoursesStr());
 
         SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLE_SEMESTERS, null, values);
         db.close();
+    }
+
+    public void updateSemesterInfo(String semesterName, String newInfo){
+        String query = "UPDATE " + TABLE_SEMESTERS + " SET "+ COLUMN_COURSES + " = \'" + newInfo +
+                "\' WHERE "+ COLUMN_SEMESTER_NAMES +" = \'" + semesterName + "\'";
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(query);
     }
 
     //Get the courses corresponding to a particular semester
@@ -84,8 +90,7 @@ public class DBManager extends SQLiteOpenHelper{
         cur.moveToFirst();
 
         while (!cur.isAfterLast()) {
-            Log.i(TAG,cur.getString(cur.getColumnIndex(COLUMN_SEMESTER)));
-            if (cur.getString(cur.getColumnIndex(COLUMN_SEMESTER)).equals(semesterName)) {
+            if (cur.getString(cur.getColumnIndex(COLUMN_SEMESTER_NAMES)).equals(semesterName)) {
                 String courses = cur.getString(cur.getColumnIndex(COLUMN_COURSES));
                 db.close();
                 cur.close();
@@ -108,7 +113,7 @@ public class DBManager extends SQLiteOpenHelper{
         cur.moveToFirst();
 
         while (!cur.isAfterLast()) {
-            semesterNames.add(cur.getString(cur.getColumnIndex(COLUMN_SEMESTER)));
+            semesterNames.add(cur.getString(cur.getColumnIndex(COLUMN_SEMESTER_NAMES)));
             cur.moveToNext();
         }
         db.close();
@@ -122,41 +127,40 @@ public class DBManager extends SQLiteOpenHelper{
         ArrayList<Course> reCourses = new ArrayList<>();
         String[] strCourses = dbStr.split("@@@@@");
 
-        for(String courseStr: strCourses){
-            String[] gradeSecStr = courseStr.split("@@@@");
-            Course newCourse = new Course(gradeSecStr[0],gradeSecStr[1]);
+        if(!dbStr.equals("")){
+            for(String courseStr: strCourses){
+                String[] gradeSecStr = courseStr.split("@@@@");
+                Course newCourse = new Course(gradeSecStr[0],gradeSecStr[1]);
 
-            for(int i=2; i<gradeSecStr.length; i++){
-                String[] gradeSecMarksStr = gradeSecStr[i].split("####");
+                for(int i=2; i<gradeSecStr.length; i++){
+                    String[] gradeSecMarksStr = gradeSecStr[i].split("####");
 
-                for(int k=0; k <gradeSecMarksStr.length; k++){
-                    String[] gradeSecMarkStr = gradeSecMarksStr[k].split("###");
-                    GradeSection newGradeSec = new GradeSectionAllMarks(gradeSecMarkStr[0],
-                            Double.parseDouble(gradeSecMarkStr[1]));
+                    for(int k=0; k <gradeSecMarksStr.length; k++){
+                        String[] gradeSecMarkStr = gradeSecMarksStr[k].split("###");
+                        GradeSection newGradeSec = new GradeSectionAllMarks(gradeSecMarkStr[0],
+                                Double.parseDouble(gradeSecMarkStr[1]));
 
-                    for (int j=2; j<gradeSecMarkStr.length; j++){
-                        String[] gradeSecMarkDataStr = gradeSecMarkStr[j].split("##");
-                        Mark newGradeSecMark;
-                        if(!gradeSecMarkDataStr[1].equals("null")){
-                            newGradeSecMark = new Mark(gradeSecMarkDataStr[0],
-                                    Double.parseDouble(gradeSecMarkDataStr[1])
-                                    //,Double.parseDouble(gradeSecMarkDataStr[2]) //For if grades have individual weights
-                            );
-                        } else {
-                            newGradeSecMark = new Mark(gradeSecMarkDataStr[0],
-                                    null
-                                    //,Double.parseDouble(gradeSecMarkDataStr[2]) //For if grades have individual weights
-                            );
+                        for (int j=2; j<gradeSecMarkStr.length; j++){
+                            String[] gradeSecMarkDataStr = gradeSecMarkStr[j].split("##");
+                            Mark newGradeSecMark;
+                            if(!gradeSecMarkDataStr[1].equals("null")){
+                                newGradeSecMark = new Mark(gradeSecMarkDataStr[0],
+                                        Double.parseDouble(gradeSecMarkDataStr[1])
+                                        //,Double.parseDouble(gradeSecMarkDataStr[2]) //For if grades have individual weights
+                                );
+                            } else {
+                                newGradeSecMark = new Mark(gradeSecMarkDataStr[0],
+                                        null
+                                        //,Double.parseDouble(gradeSecMarkDataStr[2]) //For if grades have individual weights
+                                );
+                            }
+                            newGradeSec.addMark(newGradeSecMark);
                         }
-
-                        newGradeSec.addMark(newGradeSecMark);
+                        newCourse.addGradeSection(newGradeSec);
                     }
-
-                    newCourse.addGradeSection(newGradeSec);
                 }
-
+                reCourses.add(newCourse);
             }
-            reCourses.add(newCourse);
         }
 
         return new Semester(semesterName, reCourses);

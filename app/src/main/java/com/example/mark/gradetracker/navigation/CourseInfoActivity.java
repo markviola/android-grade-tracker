@@ -2,23 +2,20 @@ package com.example.mark.gradetracker.navigation;
 
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
-import android.app.ExpandableListActivity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.example.mark.gradetracker.R;
-import com.example.mark.gradetracker.popups.EditGradeSectionOptionsActivity;
+import com.example.mark.gradetracker.popups.EditGradeSectionOptionsPopUpActivity;
 import com.example.mark.gradetracker.popups.EditMarkOptionsPopUpActivity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -113,11 +110,11 @@ public class CourseInfoActivity extends AppCompatActivity {
      * @param groupPosition The position of the grade section in the expandableListView
      */
     public void onGroupLongClick(int groupPosition){
-        Intent intent = new Intent(this, EditGradeSectionOptionsActivity.class);
+        Intent intent = new Intent(this, EditGradeSectionOptionsPopUpActivity.class);
         intent.putExtra("semesterName", semesterName);
         intent.putExtra("currentCourse", selectedCourse);
         intent.putExtra("selectedGradeSection", selectedCourse.getGrade().get(groupPosition));
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
         startActivity(intent);
     }
 
@@ -132,7 +129,7 @@ public class CourseInfoActivity extends AppCompatActivity {
         intent.putExtra("currentCourse", selectedCourse);
         intent.putExtra("selectedGradeSection", selectedCourse.getGrade().get(groupPosition));
         intent.putExtra("selectedMark", selectedCourse.getGrade().get(groupPosition).getMarks().get(childPosition));
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
         startActivity(intent);
     }
 

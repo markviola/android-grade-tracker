@@ -22,7 +22,18 @@
         android:id="@+id/semesterListView"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/selectSemesterTitle"
-        android:layout_above="@id/settingsButton"/>
+        android:layout_above="@id/addSemesterButton"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:text="@string/select_semester_add_semester_button"
+        android:id="@+id/addSemesterButton"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/settingsButton"
+        android:background="#c2d6d6"
+        android:onClick="addSemesterButtonClicked" />
 
     <Button
         android:layout_width="fill_parent"
@@ -33,5 +44,6 @@
         android:layout_centerHorizontal="true"
         android:background="#ff6666"
         android:onClick="settingsClicked" />
+
 
 </RelativeLayout>

@@ -19,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mark.gradetracker.R;
-import com.example.mark.gradetracker.navigation.MainMenuActivity;
 import com.example.mark.gradetracker.navigation.SelectSemesterActivity;
 
 import java.util.ArrayList;
@@ -92,7 +91,7 @@ public class AddSemesterActivity extends AppCompatActivity {
         intent.putExtra("newSemesterName", semesterNameEditText.getText().toString());
         intent.putExtra("courses", courses);
         Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
-                R.anim.animation, R.anim.animation2).toBundle();
+                R.anim.left_to_right_transition, R.anim.left_to_right_transition_2).toBundle();
         startActivity(intent, bndlanimation);
     }
 
@@ -138,7 +137,7 @@ public class AddSemesterActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddSemesterActivity.class);
         intent.putExtra("newSemesterName", semesterNameEditText.getText().toString());
         intent.putExtra("courses", courses);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
 
         startActivity(intent);
     }
@@ -192,20 +191,20 @@ public class AddSemesterActivity extends AppCompatActivity {
      * want to cancel the current 'add semester' session and go to the main menu.
      */
     public void onBackPressed() {
-        returnToMainMenuPopUp();
+        returnToSelectSemesterPopUp();
     }
 
     /**
      * Method that makes a popup to confirm that the user wants to go back to the main menu and
      * lose all information from the new semester
      */
-    private void returnToMainMenuPopUp() {
+    private void returnToSelectSemesterPopUp() {
         final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
         myAlert.setMessage("Go back to the main menu? New semester will not be added")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        goToMainMenu();
+                        goToSelectSemester();
                     }
                 }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
@@ -217,10 +216,10 @@ public class AddSemesterActivity extends AppCompatActivity {
     }
 
     /**
-     * Take the user to the main menu
+     * Take the user to the SelectSemesterActivity activity
      */
-    private void goToMainMenu(){
-        Intent intent = new Intent(this, MainMenuActivity.class);
+    private void goToSelectSemester(){
+        Intent intent = new Intent(this, SelectSemesterActivity.class);
         startActivity(intent);
     }
 }
