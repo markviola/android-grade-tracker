@@ -36,6 +36,10 @@ public abstract class GradeSection implements Serializable{
         return this._marks;
     }
 
+    public int numMarks(){
+        return this._marks.size();
+    }
+
     public String getSectionName(){
         return this._sectionName;
     }

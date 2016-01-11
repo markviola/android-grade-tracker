@@ -33,6 +33,10 @@ public class Semester implements Serializable{
         this._courses = courses;
     }
 
+    public void addCourse(Course newCourse){
+        this._courses.add(newCourse);
+    }
+
     public String getCoursesStr(){
         String courses = "";
 
@@ -49,10 +53,21 @@ public class Semester implements Serializable{
 
     public double getSGPA(){
         Double totalGPAValue = 0.0;
+        int numValidCourses = 0;
         for(Course course: _courses){
-            totalGPAValue += _gpaChart.getGPAValue(course.getCurrentGrade());
+            if(course.getCurrentGrade() != -1){ //There is some valid mark inputted
+                totalGPAValue += _gpaChart.getGPAValue(course.getCurrentGrade());
+                numValidCourses++;
+            }
         }
-        return totalGPAValue/_courses.size();
+
+        //Check for the case when there is one course in a semester without any marks
+        if(numValidCourses == 0){
+            return -1;
+        } else {
+            return totalGPAValue/numValidCourses;
+        }
+
     }
 
     public Course getCourseByName(String courseName){

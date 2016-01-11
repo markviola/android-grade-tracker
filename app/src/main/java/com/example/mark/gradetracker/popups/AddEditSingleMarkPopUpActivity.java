@@ -45,6 +45,7 @@ public class AddEditSingleMarkPopUpActivity extends Activity {
     String newCourseCode;
     String gradeSectionName;
     String gradeSectionWeight;
+    boolean fromSelectCourseActivity;
 
     String semesterName;
     Course currentCourse;
@@ -95,6 +96,7 @@ public class AddEditSingleMarkPopUpActivity extends Activity {
             gradeSectionName = (String) intent.getSerializableExtra("gradeSectionName");
             gradeSectionWeight = (String) intent.getSerializableExtra("gradeSectionWeight");
             marks = (ArrayList<Mark>) intent.getSerializableExtra("marks");
+            fromSelectCourseActivity = (boolean) intent.getSerializableExtra("fromSelectCourseActivity");
         } else if (previousActivity.equals("EditGradeSectionOptionsPopUpActivity")){
             semesterName = (String) intent.getSerializableExtra("semesterName");
             currentCourse = (Course) intent.getSerializableExtra("currentCourse");
@@ -151,6 +153,7 @@ public class AddEditSingleMarkPopUpActivity extends Activity {
                 intent.putExtra("gradeSectionName", gradeSectionName);
                 intent.putExtra("gradeSectionWeight", gradeSectionWeight);
                 intent.putExtra("marks", marks);
+                intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
                 startActivity(intent);
             } else if (previousActivity.equals("EditGradeSectionOptionsPopUpActivity")){

@@ -24,6 +24,7 @@ public class AddMarkOptionsPopUpActivity extends AppCompatActivity {
     String newCourseCode;
     String gradeSectionName;
     String gradeSectionWeight;
+    boolean fromSelectCourseActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class AddMarkOptionsPopUpActivity extends AppCompatActivity {
         gradeSectionName = (String) intent.getSerializableExtra("gradeSectionName");
         gradeSectionWeight = (String) intent.getSerializableExtra("gradeSectionWeight");
         marks = (ArrayList<Mark>) intent.getSerializableExtra("marks");
+        fromSelectCourseActivity = (boolean) intent.getSerializableExtra("fromSelectCourseActivity");
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -60,6 +62,7 @@ public class AddMarkOptionsPopUpActivity extends AppCompatActivity {
         intent.putExtra("gradeSectionWeight", gradeSectionWeight);
         intent.putExtra("marks", marks);
         intent.putExtra("previousActivity", "AddMarkOptionsPopUpActivity");
+        intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
         startActivity(intent);
     }
 
@@ -73,6 +76,7 @@ public class AddMarkOptionsPopUpActivity extends AppCompatActivity {
         intent.putExtra("gradeSectionName", gradeSectionName);
         intent.putExtra("gradeSectionWeight", gradeSectionWeight);
         intent.putExtra("marks", marks);
+        intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
         startActivity(intent);
     }
 }

@@ -28,4 +28,5 @@ public class GradeSectionAllMarks extends GradeSection{
         }
         return marksTotal/numApplicableMarks;
     }
+
 }

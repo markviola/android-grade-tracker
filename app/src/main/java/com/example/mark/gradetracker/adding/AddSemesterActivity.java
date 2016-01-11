@@ -90,6 +90,7 @@ public class AddSemesterActivity extends AppCompatActivity {
 
         intent.putExtra("newSemesterName", semesterNameEditText.getText().toString());
         intent.putExtra("courses", courses);
+        intent.putExtra("fromSelectCourseActivity", false);
         Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
                 R.anim.left_to_right_transition, R.anim.left_to_right_transition_2).toBundle();
         startActivity(intent, bndlanimation);

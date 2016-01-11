@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.mark.gradetracker.R;
+import com.example.mark.gradetracker.adding.AddCourseActivity;
 import com.example.mark.gradetracker.popups.EditCourseOptionsPopUpActivity;
 
 import adapters.CourseListAdapter;
@@ -26,8 +27,11 @@ public class SelectCourseActivity extends AppCompatActivity {
     private String TAG = "customFilter";
 
     TextView selectCourseTitle;
+    TextView noCoursesText;
 
     String semesterName;
+
+    Semester currentSemester;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,7 @@ public class SelectCourseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_course_list);
 
         selectCourseTitle = (TextView) findViewById(R.id.selectCourseTitle);
+        noCoursesText = (TextView) findViewById(R.id.noCoursesText);
 
         //Change the header font to Montserrat-Bold
         Typeface font = Typeface.createFromAsset(getAssets(), "Montserrat-Bold.ttf");
@@ -44,11 +49,15 @@ public class SelectCourseActivity extends AppCompatActivity {
 
         semesterName = (String) intent.getSerializableExtra("semesterName");
         SemesterManager semesterManager = SemesterManager.getInstance(this);
-        Semester semester = semesterManager.getSemester(semesterName);
+        currentSemester = semesterManager.getSemester(semesterName);
 
-        ListAdapter coursesAdapter = new CourseListAdapter(this, semester.getCourses());
+        ListAdapter coursesAdapter = new CourseListAdapter(this, currentSemester.getCourses());
         ListView coursesListView = (ListView) findViewById(R.id.coursesListView);
         coursesListView.setAdapter(coursesAdapter);
+
+        if(currentSemester.numCourses() != 0){
+            noCoursesText.setVisibility(View.GONE);
+        }
 
         //Executes when the user does a short click on a course item in the list
         coursesListView.setOnItemClickListener(
@@ -71,6 +80,16 @@ public class SelectCourseActivity extends AppCompatActivity {
                     }
                 }
         );
+    }
+
+    public void addCourseButtonClicked(View view){
+
+        Intent intent = new Intent(this, AddCourseActivity.class);
+        intent.putExtra("newSemesterName", semesterName);
+        intent.putExtra("courses", currentSemester.getCourses());
+        intent.putExtra("fromSelectCourseActivity", true);
+
+        startActivity(intent);
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)

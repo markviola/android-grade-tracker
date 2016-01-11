@@ -82,7 +82,11 @@ public class GradeSectionInfoListAdapter extends BaseExpandableListAdapter{
         gradeSectionName.setText(gradeSection.getSectionName());
 
         currentGradeText.setTypeface(null, Typeface.BOLD);
-        currentGradeText.setText(String.format("%.2f%%", gradeSection.getSectionGrade()));
+        if(gradeSection.numMarks() > 0){
+            currentGradeText.setText(String.format("%.2f%%", gradeSection.getSectionGrade()));
+        } else {
+            currentGradeText.setText("N/A");
+        }
 
         return convertView;
     }

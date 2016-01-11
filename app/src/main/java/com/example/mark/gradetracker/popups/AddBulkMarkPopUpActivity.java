@@ -43,6 +43,7 @@ public class AddBulkMarkPopUpActivity extends AppCompatActivity {
     String gradeSectionName;
     String gradeSectionWeight;
     ArrayList<Mark> newMarks;
+    boolean fromSelectCourseActivity;
 
 
     @Override
@@ -76,6 +77,7 @@ public class AddBulkMarkPopUpActivity extends AppCompatActivity {
         gradeSectionName = (String) intent.getSerializableExtra("gradeSectionName");
         gradeSectionWeight = (String) intent.getSerializableExtra("gradeSectionWeight");
         marks = (ArrayList<Mark>) intent.getSerializableExtra("marks");
+        fromSelectCourseActivity = (boolean) intent.getSerializableExtra("fromSelectCourseActivity");
 
         if(intent.getSerializableExtra("markNameTemplate") != null){
             markNameTemplateEditText.setText((String) intent.getSerializableExtra("markNameTemplate"));
@@ -130,6 +132,7 @@ public class AddBulkMarkPopUpActivity extends AppCompatActivity {
         intent.putExtra("gradeSectionName", gradeSectionName);
         intent.putExtra("gradeSectionWeight", gradeSectionWeight);
         intent.putExtra("marks", marks);
+        intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
 
         startActivity(intent);
 
@@ -182,6 +185,7 @@ public class AddBulkMarkPopUpActivity extends AppCompatActivity {
         intent.putExtra("marks", marks);
         intent.putExtra("markNameTemplate", markNameTemplateEditText.getText().toString());
         intent.putExtra("newMarks", newMarks);
+        intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
 
         startActivity(intent);

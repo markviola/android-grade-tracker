@@ -57,6 +57,10 @@ public class EditGradeSectionOptionsPopUpActivity extends AppCompatActivity {
 
     public void editGradeSectionButtonClicked(View view){
         //Take user to EditGradeSectionActivity.class
+
+        Intent intent = new Intent(this, EditGradeSectionPopUpActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
+        startActivity(intent);
     }
 
     public void deleteGradeSectionButtonClicked(View view){
@@ -71,10 +75,11 @@ public class EditGradeSectionOptionsPopUpActivity extends AppCompatActivity {
 
         dbManager.updateSemesterInfo(semesterName, semester.getCoursesStr());
 
+
         Intent intent = new Intent(this, CourseInfoActivity.class);
         intent.putExtra("semesterName", semesterName);
         intent.putExtra("selectedCourse", course);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
         startActivity(intent);
     }
 
@@ -85,7 +90,7 @@ public class EditGradeSectionOptionsPopUpActivity extends AppCompatActivity {
         intent.putExtra("currentCourse", currentCourse);
         intent.putExtra("selectedGradeSection", selectedGradeSection);
         intent.putExtra("previousActivity", "EditGradeSectionOptionsPopUpActivity");
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
         startActivity(intent);
     }
 
