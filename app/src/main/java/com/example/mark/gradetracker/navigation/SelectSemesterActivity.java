@@ -19,6 +19,8 @@ import com.example.mark.gradetracker.editting.SettingsActivity;
 import com.example.mark.gradetracker.popups.EditMarkOptionsPopUpActivity;
 import com.example.mark.gradetracker.popups.EditSemesterOptionsPopUpActivity;
 
+import org.w3c.dom.Text;
+
 import adapters.SemesterListAdapter;
 import data.DBManager;
 import data.Semester;
@@ -29,6 +31,7 @@ public class SelectSemesterActivity extends AppCompatActivity {
     private String TAG = "customFilter";
 
     TextView selectSemesterTitle;
+    TextView noSemesterText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,7 @@ public class SelectSemesterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_semester_list);
 
         selectSemesterTitle = (TextView) findViewById(R.id.selectSemesterTitle);
+        noSemesterText = (TextView) findViewById(R.id.noSemestersText);
 
         //Change the header font to Montserrat-Bold
         Typeface font = Typeface.createFromAsset(getAssets(), "Montserrat-Bold.ttf");
@@ -45,6 +49,11 @@ public class SelectSemesterActivity extends AppCompatActivity {
         DBManager dbManager = DBManager.getInstance(this);
         SemesterManager semesterManager = SemesterManager.getInstance(this);
         semesterManager.setSemesters(dbManager.getAllSemesters());
+
+        //Check if noSemesterText should be displayed or not
+        if(dbManager.getAllSemesters().size() > 0){
+            noSemesterText.setVisibility(View.GONE);
+        }
 
         //Set the corresponding list adapter
         ListAdapter semesterAdapter = new SemesterListAdapter(this, semesterManager.getSemesters());

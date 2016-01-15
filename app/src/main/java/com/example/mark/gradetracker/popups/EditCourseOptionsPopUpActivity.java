@@ -62,18 +62,11 @@ public class EditCourseOptionsPopUpActivity extends AppCompatActivity {
     }
 
     public void deleteCourseButtonClicked(View view){
-
-        DBManager dbManager = DBManager.getInstance(this);
-        SemesterManager semesterManager = SemesterManager.getInstance(this);
-
-        Semester semester = semesterManager.getSemester(semesterName);
-        semester.deleteCourseByName(selectedCourse.getName());
-
-        dbManager.updateSemesterInfo(semesterName, semester.getCoursesStr());
-
-        Intent intent = new Intent(this, SelectCourseActivity.class);
+        Intent intent = new Intent(this, CustomAlertPopUp.class);
+        intent.putExtra("previousActivity", "EditCourseOptionsPopUpActivity");
         intent.putExtra("semesterName", semesterName);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
+        intent.putExtra("selectedCourse", selectedCourse);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
         startActivity(intent);
     }
 

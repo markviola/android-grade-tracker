@@ -45,5 +45,14 @@
         android:background="#ff6666"
         android:onClick="settingsClicked" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Semesters"
+        android:textSize="23dp"
+        android:id="@+id/noSemestersText"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>

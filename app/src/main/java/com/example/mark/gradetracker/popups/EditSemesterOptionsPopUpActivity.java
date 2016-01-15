@@ -51,12 +51,18 @@ public class EditSemesterOptionsPopUpActivity extends AppCompatActivity {
     }
 
     public void deleteSemesterButtonClicked(View view){
-        DBManager dbManager = DBManager.getInstance(this);
-        dbManager.deleteSemester(semesterName);
-
-        Intent intent = new Intent(this, SelectSemesterActivity.class);
+        Intent intent = new Intent(this, CustomAlertPopUp.class);
+        intent.putExtra("previousActivity", "EditSemesterOptionsPopUpActivity");
+        intent.putExtra("semesterName", semesterName);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
         startActivity(intent);
+
+//        DBManager dbManager = DBManager.getInstance(this);
+//        dbManager.deleteSemester(semesterName);
+//
+//        Intent intent = new Intent(this, SelectSemesterActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
+//        startActivity(intent);
     }
 
     public void cancelButtonClicked(View view){

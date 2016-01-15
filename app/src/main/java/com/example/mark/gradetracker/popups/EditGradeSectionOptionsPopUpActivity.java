@@ -67,21 +67,11 @@ public class EditGradeSectionOptionsPopUpActivity extends AppCompatActivity {
     }
 
     public void deleteGradeSectionButtonClicked(View view){
-        //Add confirmation popup
-
-        DBManager dbManager = DBManager.getInstance(this);
-        SemesterManager semesterManager = SemesterManager.getInstance(this);
-
-        Semester semester = semesterManager.getSemester(semesterName);
-        Course course = semester.getCourseByName(currentCourse.getName());
-        course.deleteGradeSectionByName(selectedGradeSection.getSectionName());
-
-        dbManager.updateSemesterInfo(semesterName, semester.getCoursesStr());
-
-
-        Intent intent = new Intent(this, CourseInfoActivity.class);
+        Intent intent = new Intent(this, CustomAlertPopUp.class);
+        intent.putExtra("previousActivity", "EditGradeSectionOptionsPopUpActivity");
         intent.putExtra("semesterName", semesterName);
-        intent.putExtra("selectedCourse", course);
+        intent.putExtra("selectedCourse", currentCourse);
+        intent.putExtra("selectedGradeSection", selectedGradeSection);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
         startActivity(intent);
     }

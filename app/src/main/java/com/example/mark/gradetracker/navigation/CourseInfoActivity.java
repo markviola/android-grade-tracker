@@ -33,6 +33,7 @@ public class CourseInfoActivity extends AppCompatActivity {
     Course selectedCourse;
 
     //Declare relevant activity widgets
+    TextView noGradesText;
     TextView courseNameText;
     TextView courseCodeText;
     TextView currentGrade;
@@ -45,6 +46,7 @@ public class CourseInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_course_info);
 
         //Initialize relevant activity widgets
+        noGradesText = (TextView) findViewById(R.id.noGradesText);
         courseNameText = (TextView) findViewById(R.id.courseNameText);
         courseCodeText = (TextView) findViewById(R.id.courseCodeText);
         currentGrade = (TextView) findViewById(R.id.currentGrade);
@@ -54,6 +56,11 @@ public class CourseInfoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         semesterName = (String) intent.getSerializableExtra("semesterName");
         selectedCourse = (Course) intent.getSerializableExtra("selectedCourse");
+
+        //Check if noGradesText should be displayed or not
+        if(selectedCourse.getGrade().size() > 0){
+            noGradesText.setVisibility(View.GONE);
+        }
 
         //Set static text in activity
         courseNameText.setTypeface(null, Typeface.BOLD);
@@ -123,7 +130,7 @@ public class CourseInfoActivity extends AppCompatActivity {
         intent.putExtra("semesterName", semesterName);
         intent.putExtra("currentCourse", selectedCourse);
         intent.putExtra("selectedGradeSection", selectedCourse.getGrade().get(groupPosition));
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
         startActivity(intent);
     }
 
