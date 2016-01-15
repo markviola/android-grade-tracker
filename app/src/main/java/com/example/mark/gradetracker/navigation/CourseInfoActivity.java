@@ -13,6 +13,7 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.example.mark.gradetracker.R;
+import com.example.mark.gradetracker.adding.AddGradeSectionActivity;
 import com.example.mark.gradetracker.popups.EditGradeSectionOptionsPopUpActivity;
 import com.example.mark.gradetracker.popups.EditMarkOptionsPopUpActivity;
 
@@ -99,6 +100,14 @@ public class CourseInfoActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void addSectionButtonClicked(View view){
+        Intent intent = new Intent(this, AddGradeSectionActivity.class);
+        intent.putExtra("newSemesterName", semesterName);
+        intent.putExtra("selectedCourse", selectedCourse);
+        intent.putExtra("fromCourseInfoActivity", true);
+        startActivity(intent);
     }
 
     public void settingsButtonClicked(View view){

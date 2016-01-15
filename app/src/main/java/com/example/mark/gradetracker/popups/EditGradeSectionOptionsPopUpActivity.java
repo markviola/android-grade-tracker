@@ -59,6 +59,9 @@ public class EditGradeSectionOptionsPopUpActivity extends AppCompatActivity {
         //Take user to EditGradeSectionActivity.class
 
         Intent intent = new Intent(this, EditGradeSectionPopUpActivity.class);
+        intent.putExtra("semesterName", semesterName);
+        intent.putExtra("selectedCourse", currentCourse);
+        intent.putExtra("selectedGradeSection", selectedGradeSection);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
         startActivity(intent);
     }

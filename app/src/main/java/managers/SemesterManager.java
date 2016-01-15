@@ -73,4 +73,15 @@ public class SemesterManager implements Serializable{
 
         return false;
     }
+
+    public void removeSemesterByName(String semesterName){
+        if(inSemesterManager(semesterName)){
+            for(Semester semester: _semesters){
+                if(semester.getName().equals(semesterName)){
+                    _semesters.remove(semester);
+                    break;
+                }
+            }
+        }
+    }
 }

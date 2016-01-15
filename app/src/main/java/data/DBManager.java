@@ -74,6 +74,12 @@ public class DBManager extends SQLiteOpenHelper{
         db.close();
     }
 
+    public void deleteSemester(String semesterName){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_SEMESTERS + " WHERE " + COLUMN_SEMESTER_NAMES + "=\"" + semesterName + "\";");
+
+    }
+
     public void updateSemesterInfo(String semesterName, String newInfo){
         String query = "UPDATE " + TABLE_SEMESTERS + " SET "+ COLUMN_COURSES + " = \'" + newInfo +
                 "\' WHERE "+ COLUMN_SEMESTER_NAMES +" = \'" + semesterName + "\'";

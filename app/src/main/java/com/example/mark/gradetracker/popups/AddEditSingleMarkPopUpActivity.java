@@ -46,6 +46,8 @@ public class AddEditSingleMarkPopUpActivity extends Activity {
     String gradeSectionName;
     String gradeSectionWeight;
     boolean fromSelectCourseActivity;
+    boolean fromCourseInfoActivity;
+    Course selectedCourse;
 
     String semesterName;
     Course currentCourse;
@@ -97,6 +99,9 @@ public class AddEditSingleMarkPopUpActivity extends Activity {
             gradeSectionWeight = (String) intent.getSerializableExtra("gradeSectionWeight");
             marks = (ArrayList<Mark>) intent.getSerializableExtra("marks");
             fromSelectCourseActivity = (boolean) intent.getSerializableExtra("fromSelectCourseActivity");
+            fromCourseInfoActivity = (boolean) intent.getSerializableExtra("fromCourseInfoActivity");
+            selectedCourse = (Course) intent.getSerializableExtra("selectedCourse");
+
         } else if (previousActivity.equals("EditGradeSectionOptionsPopUpActivity")){
             semesterName = (String) intent.getSerializableExtra("semesterName");
             currentCourse = (Course) intent.getSerializableExtra("currentCourse");
@@ -141,8 +146,7 @@ public class AddEditSingleMarkPopUpActivity extends Activity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
                 startActivity(intent);
 
-            }else if(previousActivity.equals("AddMarkOptionsPopUpActivity")){
-
+            }else if (previousActivity.equals("AddMarkOptionsPopUpActivity")){
                 marks.add(newMark);
                 Intent intent = new Intent(this, AddGradeSectionActivity.class);
                 intent.putExtra("newSemesterName", newSemesterName);
@@ -154,6 +158,8 @@ public class AddEditSingleMarkPopUpActivity extends Activity {
                 intent.putExtra("gradeSectionWeight", gradeSectionWeight);
                 intent.putExtra("marks", marks);
                 intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
+                intent.putExtra("fromCourseInfoActivity", fromCourseInfoActivity);
+                intent.putExtra("selectedCourse", selectedCourse);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
                 startActivity(intent);
             } else if (previousActivity.equals("EditGradeSectionOptionsPopUpActivity")){

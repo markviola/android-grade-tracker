@@ -44,9 +44,17 @@ public abstract class GradeSection implements Serializable{
         return this._sectionName;
     }
 
+    public void setSectionName(String newSectionName){
+        this._sectionName = newSectionName;
+    }
+
     public double getWeight(){
         return this._weight;
 
+    }
+
+    public void setWeight(double newWeight){
+        this._weight = newWeight;
     }
 
     public Mark getMarkByName(String markName){

@@ -44,6 +44,8 @@ public class AddBulkMarkPopUpActivity extends AppCompatActivity {
     String gradeSectionWeight;
     ArrayList<Mark> newMarks;
     boolean fromSelectCourseActivity;
+    boolean fromCourseInfoActivity;
+    Course selectedCourse;
 
 
     @Override

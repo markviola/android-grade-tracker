@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
@@ -19,16 +20,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mark.gradetracker.R;
+import com.example.mark.gradetracker.navigation.CourseInfoActivity;
 import com.example.mark.gradetracker.popups.AddMarkOptionsPopUpActivity;
 
 import java.util.ArrayList;
 
 import adapters.AddMarkListAdapter;
 import data.Course;
+import data.DBManager;
 import data.GradeSection;
 import data.GradeSectionAllMarks;
 import data.GradeSectionTopMarks;
 import data.Mark;
+import data.Semester;
+import managers.SemesterManager;
 
 public class AddGradeSectionActivity extends AppCompatActivity {
 
@@ -49,6 +54,8 @@ public class AddGradeSectionActivity extends AppCompatActivity {
     String newCourseName;
     String newCourseCode;
     boolean fromSelectCourseActivity;
+    boolean fromCourseInfoActivity;
+    Course selectedCourse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,12 +80,21 @@ public class AddGradeSectionActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        newSemesterName = (String) intent.getSerializableExtra("newSemesterName");
-        courses = (ArrayList<Course>) intent.getSerializableExtra("courses");
-        newCourseName = (String) intent.getSerializableExtra("newCourseName");
-        newCourseCode = (String) intent.getSerializableExtra("newCourseCode");
-        gradeSections = (ArrayList<GradeSection>) intent.getSerializableExtra("gradeSections");
-        fromSelectCourseActivity = (boolean) intent.getSerializableExtra("fromSelectCourseActivity");
+        if(intent.getSerializableExtra("fromCourseInfoActivity") != null &&
+                (boolean) intent.getSerializableExtra("fromCourseInfoActivity")){
+            newSemesterName = (String) intent.getSerializableExtra("newSemesterName");
+            selectedCourse = (Course) intent.getSerializableExtra("selectedCourse");
+            fromSelectCourseActivity = false;
+            fromCourseInfoActivity = true;
+        } else {
+            newSemesterName = (String) intent.getSerializableExtra("newSemesterName");
+            courses = (ArrayList<Course>) intent.getSerializableExtra("courses");
+            newCourseName = (String) intent.getSerializableExtra("newCourseName");
+            newCourseCode = (String) intent.getSerializableExtra("newCourseCode");
+            gradeSections = (ArrayList<GradeSection>) intent.getSerializableExtra("gradeSections");
+            fromSelectCourseActivity = (boolean) intent.getSerializableExtra("fromSelectCourseActivity");
+            fromCourseInfoActivity = false;
+        }
 
         if(intent.getSerializableExtra("marks") == null){
             marks = new ArrayList<>();
@@ -118,6 +134,8 @@ public class AddGradeSectionActivity extends AppCompatActivity {
         intent.putExtra("gradeSectionName", gradeSectionNameEditText.getText().toString());
         intent.putExtra("gradeSectionWeight", gradeSectionWeightEditText.getText().toString());
         intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
+        intent.putExtra("fromCourseInfoActivity", fromCourseInfoActivity);
+        intent.putExtra("selectedCourse", selectedCourse);
         intent.putExtra("marks", marks);
         startActivity(intent);
 
@@ -140,18 +158,15 @@ public class AddGradeSectionActivity extends AppCompatActivity {
                         newGradeSection.addMark(marks.get(i));
                     }
 
-                    gradeSections.add(newGradeSection);
+                    if (fromCourseInfoActivity){
+                        goToCourseInfo(newGradeSection);
+                    } else{
+                        gradeSections.add(newGradeSection);
+                        goToAddCourse(false);
+                    }
 
-                    Intent intent = new Intent(this, AddCourseActivity.class);
-                    intent.putExtra("newSemesterName", newSemesterName);
-                    intent.putExtra("courses", courses);
-                    intent.putExtra("newCourseName", newCourseName);
-                    intent.putExtra("newCourseCode", newCourseCode);
-                    intent.putExtra("gradeSections", gradeSections);
-                    intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
-                    startActivity(intent);
                 } else {
-                    Toast.makeText(this, "Enter a valid number of grades", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Enter a valid number of marks", Toast.LENGTH_LONG).show();
                 }
             } else {
                 GradeSection newGradeSection = new GradeSectionAllMarks(
@@ -160,16 +175,13 @@ public class AddGradeSectionActivity extends AppCompatActivity {
                 for(int i =0; i<marks.size(); i++){
                     newGradeSection.addMark(marks.get(i));
                 }
-                gradeSections.add(newGradeSection);
 
-                Intent intent = new Intent(this, AddCourseActivity.class);
-                intent.putExtra("newSemesterName", newSemesterName);
-                intent.putExtra("courses", courses);
-                intent.putExtra("newCourseName", newCourseName);
-                intent.putExtra("newCourseCode", newCourseCode);
-                intent.putExtra("gradeSections", gradeSections);
-                intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
-                startActivity(intent);
+                if(fromCourseInfoActivity){
+                    goToCourseInfo(newGradeSection);
+                } else {
+                    gradeSections.add(newGradeSection);
+                    goToAddCourse(false);
+                }
             }
         }
 
@@ -239,6 +251,7 @@ public class AddGradeSectionActivity extends AppCompatActivity {
         intent.putExtra("gradeSectionWeight", gradeSectionWeightEditText.getText().toString());
         intent.putExtra("marks", marks);
         intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
+        intent.putExtra("fromCourseInfoActivity", fromCourseInfoActivity);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
 
         startActivity(intent);
@@ -262,7 +275,7 @@ public class AddGradeSectionActivity extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        goToAddCourse();
+                        goToAddCourse(true);
                     }
                 }).setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
@@ -277,7 +290,7 @@ public class AddGradeSectionActivity extends AppCompatActivity {
      * Take the user to the AddSemesterActivity screen
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    private void goToAddCourse(){
+    private void goToAddCourse(boolean showTransitionAnimation){
         Intent intent = new Intent(this, AddCourseActivity.class);
 
         intent.putExtra("newSemesterName", newSemesterName);
@@ -286,9 +299,29 @@ public class AddGradeSectionActivity extends AppCompatActivity {
         intent.putExtra("newCourseCode", newCourseCode);
         intent.putExtra("gradeSections", gradeSections);
         intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
-        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
-                R.anim.right_to_left_transition, R.anim.right_to_left_transition_2).toBundle();
-        startActivity(intent, bndlanimation);
+        if(showTransitionAnimation){
+            Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
+                    R.anim.right_to_left_transition, R.anim.right_to_left_transition_2).toBundle();
+            startActivity(intent, bndlanimation);
+        } else {
+            startActivity(intent);
+        }
+    }
+
+    private void goToCourseInfo(GradeSection newGradeSection){
+        DBManager dbManager = DBManager.getInstance(this);
+        SemesterManager semesterManager = SemesterManager.getInstance(this);
+
+        Semester semester = semesterManager.getSemester(newSemesterName);
+        Course course  = semester.getCourseByName(selectedCourse.getName());
+        course.addGradeSection(newGradeSection);
+
+        dbManager.updateSemesterInfo(newSemesterName, semester.getCoursesStr());
+
+        Intent intent = new Intent(this, CourseInfoActivity.class);
+        intent.putExtra("semesterName", newSemesterName);
+        intent.putExtra("selectedCourse", course);
+        startActivity(intent);
     }
 
     private boolean isValidInteger(String str){

@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.example.mark.gradetracker.R;
 import com.example.mark.gradetracker.adding.AddSemesterActivity;
 import com.example.mark.gradetracker.editting.SettingsActivity;
+import com.example.mark.gradetracker.popups.EditMarkOptionsPopUpActivity;
+import com.example.mark.gradetracker.popups.EditSemesterOptionsPopUpActivity;
 
 import adapters.SemesterListAdapter;
 import data.DBManager;
@@ -64,6 +66,8 @@ public class SelectSemesterActivity extends AppCompatActivity {
         semesterListView.setOnItemLongClickListener(
                 new AdapterView.OnItemLongClickListener() {
                     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                        Semester semester = (Semester) parent.getItemAtPosition(position);
+                        goToEditSemesterOptions(semester.getName());
                         return true;
                     }
                 }
@@ -77,7 +81,12 @@ public class SelectSemesterActivity extends AppCompatActivity {
         Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
                 R.anim.left_to_right_transition, R.anim.left_to_right_transition_2).toBundle();
         startActivity(intent, bndlanimation);
+    }
 
+    private void goToEditSemesterOptions(String semesterName){
+        Intent intent = new Intent(this, EditSemesterOptionsPopUpActivity.class);
+        intent.putExtra("semesterName", semesterName);
+        startActivity(intent);
     }
 
     public void addSemesterButtonClicked(View view){

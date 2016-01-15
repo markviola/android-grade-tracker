@@ -25,6 +25,8 @@ public class AddMarkOptionsPopUpActivity extends AppCompatActivity {
     String gradeSectionName;
     String gradeSectionWeight;
     boolean fromSelectCourseActivity;
+    boolean fromCourseInfoActivity;
+    Course selectedCourse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +34,28 @@ public class AddMarkOptionsPopUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_mark_options_pop_up);
 
         Intent intent = getIntent();
-        newSemesterName = (String) intent.getSerializableExtra("newSemesterName");
-        courses = (ArrayList<Course>) intent.getSerializableExtra("courses");
-        newCourseName = (String) intent.getSerializableExtra("newCourseName");
-        newCourseCode = (String) intent.getSerializableExtra("newCourseCode");
-        gradeSections = (ArrayList<GradeSection>) intent.getSerializableExtra("gradeSections");
-        gradeSectionName = (String) intent.getSerializableExtra("gradeSectionName");
-        gradeSectionWeight = (String) intent.getSerializableExtra("gradeSectionWeight");
-        marks = (ArrayList<Mark>) intent.getSerializableExtra("marks");
-        fromSelectCourseActivity = (boolean) intent.getSerializableExtra("fromSelectCourseActivity");
+
+        fromCourseInfoActivity = (boolean) intent.getSerializableExtra("fromCourseInfoActivity");
+
+        if(fromCourseInfoActivity){
+            newSemesterName = (String) intent.getSerializableExtra("newSemesterName");
+            selectedCourse = (Course) intent.getSerializableExtra("selectedCourse");
+            gradeSectionName = (String) intent.getSerializableExtra("gradeSectionName");
+            gradeSectionWeight = (String) intent.getSerializableExtra("gradeSectionWeight");
+            marks = (ArrayList<Mark>) intent.getSerializableExtra("marks");
+            fromSelectCourseActivity = (boolean) intent.getSerializableExtra("fromSelectCourseActivity");
+        } else{
+            newSemesterName = (String) intent.getSerializableExtra("newSemesterName");
+            courses = (ArrayList<Course>) intent.getSerializableExtra("courses");
+            newCourseName = (String) intent.getSerializableExtra("newCourseName");
+            newCourseCode = (String) intent.getSerializableExtra("newCourseCode");
+            gradeSections = (ArrayList<GradeSection>) intent.getSerializableExtra("gradeSections");
+            gradeSectionName = (String) intent.getSerializableExtra("gradeSectionName");
+            gradeSectionWeight = (String) intent.getSerializableExtra("gradeSectionWeight");
+            marks = (ArrayList<Mark>) intent.getSerializableExtra("marks");
+            fromSelectCourseActivity = (boolean) intent.getSerializableExtra("fromSelectCourseActivity");
+        }
+
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -48,11 +63,12 @@ public class AddMarkOptionsPopUpActivity extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (0.7*width),(int) (0.5*height));
+        getWindow().setLayout((int) (0.7 * width), (int) (0.5 * height));
     }
 
     public void singleAddButtonClicked(View view){
         Intent intent = new Intent(this, AddEditSingleMarkPopUpActivity.class);
+
         intent.putExtra("newSemesterName", newSemesterName);
         intent.putExtra("courses", courses);
         intent.putExtra("newCourseName", newCourseName);
@@ -63,6 +79,9 @@ public class AddMarkOptionsPopUpActivity extends AppCompatActivity {
         intent.putExtra("marks", marks);
         intent.putExtra("previousActivity", "AddMarkOptionsPopUpActivity");
         intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
+        intent.putExtra("fromCourseInfoActivity", fromCourseInfoActivity);
+        intent.putExtra("selectedCourse", selectedCourse);
+
         startActivity(intent);
     }
 
@@ -77,6 +96,8 @@ public class AddMarkOptionsPopUpActivity extends AppCompatActivity {
         intent.putExtra("gradeSectionWeight", gradeSectionWeight);
         intent.putExtra("marks", marks);
         intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
+        intent.putExtra("fromCourseInfoActivity", fromCourseInfoActivity);
+        intent.putExtra("selectedCourse", selectedCourse);
         startActivity(intent);
     }
 }

@@ -93,18 +93,16 @@
         android:layout_marginLeft="15dp"/>
 
     <Button
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/add_grade_section_add_grade_button"
-        android:textColor="#FFFFFF"
         android:id="@+id/addNewMark"
         android:layout_alignTop="@+id/gradesNameText"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="3dp"
-        android:onClick="addMarkButtonClicked"
-        android:background="#009900"/>
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="-10dp"
+        android:onClick="addMarkButtonClicked"/>
 
     <Button
         android:layout_width="wrap_content"

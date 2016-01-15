@@ -56,7 +56,7 @@ public class EditCourseOptionsPopUpActivity extends AppCompatActivity {
         Intent intent = new Intent(this, EditCoursePopUpActivity.class);
         intent.putExtra("semesterName", semesterName);
         intent.putExtra("selectedCourse", selectedCourse);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
         startActivity(intent);
 
     }

@@ -30,7 +30,7 @@ public class GPAChart {
     public Double getGPAValue(Double mark){
         for(String rangeStr: _gpaConversions.keySet()){
             String[] rangeStrArray = rangeStr.split("-");
-            if((mark>=Double.parseDouble(rangeStrArray[0]))&&(mark<=Double.parseDouble(rangeStrArray[1]))){
+            if((mark>=Double.parseDouble(rangeStrArray[0])-0.5)&&(mark<=Double.parseDouble(rangeStrArray[1])+0.5)){
                 return _gpaConversions.get(rangeStr);
             }
         }

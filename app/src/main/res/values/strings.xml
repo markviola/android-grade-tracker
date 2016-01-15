@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Grade Tracker</string>
+    <string name="app_name">Report Card</string>
     <string name="action_settings">Settings</string>
 
     <!-- Activity titles -->
@@ -58,6 +58,24 @@
     <string name="add_mark_pop_up_grade_percent_sign_text">%</string>
     <string name="add_mark_pop_up_weight_text">Weight: </string>
     <string name="add_mark_pop_up_confirmation_button">Add Mark</string>
+
+    <!-- EditSemesterPopUpActivity strings -->
+    <string name="edit_semester_section_pop_up_title">Edit Semester</string>
+    <string name="edit_semester_section_pop_up_name">Semester Name:</string>
+    <string name="edit_semester_section_pop_up_confirmation_button">Edit Semester</string>
+
+    <!-- EditCoursePopUpActivity strings -->
+    <string name="edit_course_section_pop_up_title">Edit Course</string>
+    <string name="edit_course_section_pop_up_name">Course Name:</string>
+    <string name="edit_course_section_pop_up_course_code">Course Code:</string>
+    <string name="edit_course_section_pop_up_confirmation_button">Edit Course</string>
+
+    <!-- EditGradeSectionPopUpActivity strings -->
+    <string name="edit_grade_section_pop_up_title">Edit Grade Section</string>
+    <string name="edit_grade_section_pop_up_name">Section Name:</string>
+    <string name="edit_grade_section_pop_up_weight">Section Weight:</string>
+    <string name="edit_grade_section_pop_up_confirmation_button">Edit Section</string>
+
 
     <!-- AddBulkMarkPopUpActivity strings -->
     <string name="add_bulk_mark_pop_up_title">Add Marks</string>

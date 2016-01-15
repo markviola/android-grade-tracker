@@ -45,8 +45,19 @@
         android:layout_height="wrap_content"
         android:id="@+id/gradeSectionList"
         android:layout_below="@+id/currentGrade"
-        android:layout_above="@+id/settingsButton"
+        android:layout_above="@+id/addSectionButton"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:text="Add Grade Section"
+        android:id="@+id/addSectionButton"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/settingsButton"
+        android:background="#c2d6d6"
+        android:onClick="addSectionButtonClicked" />
 
     <Button
         android:layout_width="fill_parent"
