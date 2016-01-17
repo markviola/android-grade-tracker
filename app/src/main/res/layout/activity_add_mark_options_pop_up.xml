@@ -13,7 +13,8 @@
         android:text="@string/add_mark_options_pop_up_single_add"
         android:id="@+id/singleAddButton"
         android:layout_gravity="bottom"
-        android:onClick="singleAddButtonClicked"/>
+        android:onClick="singleAddButtonClicked"
+        android:background="@drawable/list_border"/>
 
     <Button
         android:layout_width="fill_parent"
@@ -22,7 +23,8 @@
         android:textSize="30dp"
         android:text="@string/add_mark_options_pop_up_bulk_add"
         android:id="@+id/bulkAddButton"
-        android:onClick="bulkAddButtonClicked"/>
+        android:onClick="bulkAddButtonClicked"
+        android:background="@drawable/list_border"/>
 
 
 </LinearLayout>

@@ -64,28 +64,19 @@ public class EditMarkOptionsPopUpActivity extends AppCompatActivity {
         intent.putExtra("selectedGradeSection", selectedGradeSection);
         intent.putExtra("selectedMark", selectedMark);
         intent.putExtra("previousActivity", "EditMarkOptionsPopUpActivity");
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
         startActivity(intent);
     }
 
     public void deleteMarkButtonClicked(View view){
-        //Add confirmation popup
-
-        DBManager dbManager = DBManager.getInstance(this);
-        SemesterManager semesterManager = SemesterManager.getInstance(this);
-
-        Semester semester = semesterManager.getSemester(semesterName);
-        Course course = semester.getCourseByName(currentCourse.getName());
-        course.deleteMarkByName(selectedGradeSection.getSectionName(), selectedMark.getName());
-
-        dbManager.updateSemesterInfo(semesterName, semester.getCoursesStr());
-
-        Intent intent = new Intent(this, CourseInfoActivity.class);
+        Intent intent = new Intent(this, CustomAlertPopUp.class);
+        intent.putExtra("previousActivity", "EditMarkOptionsPopUpActivity");
         intent.putExtra("semesterName", semesterName);
-        intent.putExtra("selectedCourse", course);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
+        intent.putExtra("selectedCourse", currentCourse);
+        intent.putExtra("selectedGradeSection", selectedGradeSection);
+        intent.putExtra("selectedMark", selectedMark);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
         startActivity(intent);
-
     }
 
     public void cancelButtonClicked(View view){

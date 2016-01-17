@@ -13,7 +13,7 @@
         android:id="@+id/cautionTitleText"
         android:textSize="30dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.75"
+        android:layout_weight="0.8"
         android:background="@drawable/list_border_orange"
         android:gravity="center"/>
 
@@ -35,7 +35,7 @@
         android:id="@+id/continueButton"
         android:textSize="20dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="1"
+        android:layout_weight=".8"
         android:onClick="continueButtonClicked"
         android:background="@drawable/list_border"/>
 
@@ -46,7 +46,7 @@
         android:id="@+id/cancelButton"
         android:textSize="20dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="1"
+        android:layout_weight=".8"
         android:background="@drawable/list_border_red"
         android:onClick="cancelButtonClicked"/>
 

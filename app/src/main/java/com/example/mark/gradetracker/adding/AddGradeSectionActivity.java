@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.mark.gradetracker.R;
 import com.example.mark.gradetracker.navigation.CourseInfoActivity;
 import com.example.mark.gradetracker.popups.AddMarkOptionsPopUpActivity;
+import com.example.mark.gradetracker.popups.CustomAlertPopUp;
 
 import java.util.ArrayList;
 
@@ -88,9 +89,9 @@ public class AddGradeSectionActivity extends AppCompatActivity {
             fromCourseInfoActivity = true;
         } else {
             newSemesterName = (String) intent.getSerializableExtra("newSemesterName");
-            courses = (ArrayList<Course>) intent.getSerializableExtra("courses");
             newCourseName = (String) intent.getSerializableExtra("newCourseName");
             newCourseCode = (String) intent.getSerializableExtra("newCourseCode");
+            courses = (ArrayList<Course>) intent.getSerializableExtra("courses");
             gradeSections = (ArrayList<GradeSection>) intent.getSerializableExtra("gradeSections");
             fromSelectCourseActivity = (boolean) intent.getSerializableExtra("fromSelectCourseActivity");
             fromCourseInfoActivity = false;
@@ -160,7 +161,7 @@ public class AddGradeSectionActivity extends AppCompatActivity {
 
                     if (fromCourseInfoActivity){
                         goToCourseInfo(newGradeSection);
-                    } else{
+                    } else {
                         gradeSections.add(newGradeSection);
                         goToAddCourse(false);
                     }
@@ -219,29 +220,8 @@ public class AddGradeSectionActivity extends AppCompatActivity {
      * @param position The position of the course in the ArrayList
      */
     private void deletePopUp(final int position) {
-        final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
-        myAlert.setMessage("Delete Mark?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        deleteMark(position);
-                    }
-                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        }).create();
-        myAlert.show();
-    }
-
-    /**
-     * Delete the mark from the current ArrayList of newly added marks
-     * @param position The position of the mark in the ArrayList
-     */
-    private void deleteMark(int position){
-        marks.remove(position);
-        Intent intent = new Intent(this, AddGradeSectionActivity.class);
+        Intent intent = new Intent(this, CustomAlertPopUp.class);
+        intent.putExtra("previousActivity", "AddGradeSectionActivityDeleteMark");
         intent.putExtra("newSemesterName", newSemesterName);
         intent.putExtra("courses", courses);
         intent.putExtra("newCourseName", newCourseName);
@@ -252,8 +232,9 @@ public class AddGradeSectionActivity extends AppCompatActivity {
         intent.putExtra("marks", marks);
         intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
         intent.putExtra("fromCourseInfoActivity", fromCourseInfoActivity);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
-
+        intent.putExtra("selectedCourse", selectedCourse);
+        intent.putExtra("position", position);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
         startActivity(intent);
     }
 
@@ -262,28 +243,34 @@ public class AddGradeSectionActivity extends AppCompatActivity {
      * want to cancel the current 'add semester' session and go to the main menu.
      */
     public void onBackPressed() {
-        returnToAddCoursePopUp();
+        returnToActivityPopUp();
     }
 
     /**
      * Method that makes a popup to confirm that the user wants to go back to the main menu and
      * lose all information from the new semester
      */
-    private void returnToAddCoursePopUp() {
-        final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
-        myAlert.setMessage("Go back to the 'Add Course' screen? New grade section will not be added")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        goToAddCourse(true);
-                    }
-                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        }).create();
-        myAlert.show();
+    private void returnToActivityPopUp() {
+
+        if (fromCourseInfoActivity){
+            Intent intent = new Intent(this, CustomAlertPopUp.class);
+            intent.putExtra("previousActivity", "AddGradeSectionActivityBackToCourseInfo");
+            intent.putExtra("semesterName", newSemesterName);
+            intent.putExtra("selectedCourse", selectedCourse);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(this, CustomAlertPopUp.class);
+            intent.putExtra("previousActivity", "AddGradeSectionActivityBackToAddCourse");
+            intent.putExtra("newSemesterName", newSemesterName);
+            intent.putExtra("newCourseName", newCourseName);
+            intent.putExtra("newCourseCode", newCourseCode);
+            intent.putExtra("courses", courses);
+            intent.putExtra("gradeSections", gradeSections);
+            intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
+            startActivity(intent);
+        }
     }
 
     /**
@@ -292,20 +279,13 @@ public class AddGradeSectionActivity extends AppCompatActivity {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void goToAddCourse(boolean showTransitionAnimation){
         Intent intent = new Intent(this, AddCourseActivity.class);
-
         intent.putExtra("newSemesterName", newSemesterName);
         intent.putExtra("courses", courses);
         intent.putExtra("newCourseName", newCourseName);
         intent.putExtra("newCourseCode", newCourseCode);
         intent.putExtra("gradeSections", gradeSections);
         intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
-        if(showTransitionAnimation){
-            Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
-                    R.anim.right_to_left_transition, R.anim.right_to_left_transition_2).toBundle();
-            startActivity(intent, bndlanimation);
-        } else {
-            startActivity(intent);
-        }
+        startActivity(intent);
     }
 
     private void goToCourseInfo(GradeSection newGradeSection){

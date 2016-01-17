@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.mark.gradetracker.R;
 import com.example.mark.gradetracker.navigation.SelectCourseActivity;
+import com.example.mark.gradetracker.popups.CustomAlertPopUp;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,6 @@ public class AddCourseActivity extends AppCompatActivity {
 
     ArrayList<GradeSection> gradeSections;
     ArrayList<Course> courses;
-    //String semesterName;
     String newSemesterName;
     boolean fromSelectCourseActivity;
 
@@ -60,7 +60,12 @@ public class AddCourseActivity extends AppCompatActivity {
         Intent intent = getIntent();
         courses = (ArrayList<Course>) intent.getSerializableExtra("courses");
         newSemesterName = (String) intent.getSerializableExtra("newSemesterName");
-        fromSelectCourseActivity = (boolean) intent.getSerializableExtra("fromSelectCourseActivity");
+
+        if(intent.getSerializableExtra("fromSelectCourseActivity") != null){
+            fromSelectCourseActivity = (boolean) intent.getSerializableExtra("fromSelectCourseActivity");
+        } else {
+            fromSelectCourseActivity = false;
+        }
 
         //Get the already created grade sections for the course the user is currently creating
         if (intent.getSerializableExtra("gradeSections") == null){
@@ -125,37 +130,16 @@ public class AddCourseActivity extends AppCompatActivity {
      * @param position The position of the grade section in the ArrayList
      */
     private void deletePopUp(final int position) {
-        final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
-        myAlert.setMessage("Delete Mark?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        deleteGradeSection(position);
-                    }
-                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        }).create();
-        myAlert.show();
-    }
-
-    /**
-     * Delete the grade section from the current ArrayList of newly added marks
-     * @param position The position of the mark in the ArrayList
-     */
-    private void deleteGradeSection(int position){
-        gradeSections.remove(position);
-        Intent intent = new Intent(this, AddCourseActivity.class);
+        Intent intent = new Intent(this, CustomAlertPopUp.class);
+        intent.putExtra("previousActivity", "AddCourseActivityDeleteGradeSection");
         intent.putExtra("newSemesterName", newSemesterName);
-        intent.putExtra("courses", courses);
         intent.putExtra("newCourseName", courseNameEditText.getText().toString());
         intent.putExtra("newCourseCode", courseCodeEditText.getText().toString());
+        intent.putExtra("courses", courses);
         intent.putExtra("gradeSections", gradeSections);
-        intent.putExtra("fromSelectCourseActivity", false);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
-
+        intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
+        intent.putExtra("position", position);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
         startActivity(intent);
     }
 
@@ -175,24 +159,9 @@ public class AddCourseActivity extends AppCompatActivity {
             }
 
             if(fromSelectCourseActivity){
-                DBManager dbManager = DBManager.getInstance(this);
-                SemesterManager semesterManager = SemesterManager.getInstance(this);
-
-                Semester semester = semesterManager.getSemester(newSemesterName);
-                semester.addCourse(newCourse);
-
-                dbManager.updateSemesterInfo(newSemesterName, semester.getCoursesStr());
-
-                Intent intent = new Intent(this, SelectCourseActivity.class);
-                intent.putExtra("semesterName", newSemesterName);
-                startActivity(intent);
+                addCourseToExistingSemester(newCourse);
             } else {
-                courses.add(newCourse);
-
-                Intent intent = new Intent(this, AddSemesterActivity.class);
-                intent.putExtra("courses", courses);
-                intent.putExtra("newSemesterName", newSemesterName);
-                startActivity(intent);
+                addCourseToNewSemester(newCourse);
             }
 
         } else {
@@ -216,56 +185,40 @@ public class AddCourseActivity extends AppCompatActivity {
         final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
 
         if(fromSelectCourseActivity){
-            myAlert.setMessage("Go back to the 'Select Course' screen? New course will not be added")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            goToSelectCourse();
-                        }
-                    }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            }).create();
-            myAlert.show();
+            Intent intent = new Intent(this, CustomAlertPopUp.class);
+            intent.putExtra("previousActivity", "AddCourseActivityToSelectCourse");
+            intent.putExtra("semesterName", newSemesterName);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
+            startActivity(intent);
         } else {
-            myAlert.setMessage("Go back to the 'Add Semester' screen? New course will not be added")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            goToAddSemester();
-                        }
-                    }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            }).create();
-            myAlert.show();
+            Intent intent = new Intent(this, CustomAlertPopUp.class);
+            intent.putExtra("previousActivity", "AddCourseActivityToAddSemester");
+            intent.putExtra("newSemesterName", newSemesterName);
+            intent.putExtra("courses", courses);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
+            startActivity(intent);
         }
 
     }
 
-    /**
-     * Take the user to the AddSemesterActivity screen
-     */
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    private void goToAddSemester(){
-        Intent intent = new Intent(this, AddSemesterActivity.class);
+    private void addCourseToNewSemester(Course newCourse){
+        courses.add(newCourse);
 
-        intent.putExtra("newSemesterName", newSemesterName);
+        Intent intent = new Intent(this, AddSemesterActivity.class);
         intent.putExtra("courses", courses);
-        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
-                R.anim.right_to_left_transition, R.anim.right_to_left_transition_2).toBundle();
-        startActivity(intent, bndlanimation);
+        intent.putExtra("newSemesterName", newSemesterName);
+        startActivity(intent);
     }
 
-    /**
-     * Take the user to the AddSemesterActivity screen
-     */
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    private void goToSelectCourse(){
+    private void addCourseToExistingSemester(Course newCourse){
+        DBManager dbManager = DBManager.getInstance(this);
+        SemesterManager semesterManager = SemesterManager.getInstance(this);
+
+        Semester semester = semesterManager.getSemester(newSemesterName);
+        semester.addCourse(newCourse);
+
+        dbManager.updateSemesterInfo(newSemesterName, semester.getCoursesStr());
+
         Intent intent = new Intent(this, SelectCourseActivity.class);
         intent.putExtra("semesterName", newSemesterName);
         startActivity(intent);

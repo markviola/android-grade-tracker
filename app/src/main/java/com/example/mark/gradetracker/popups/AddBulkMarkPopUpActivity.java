@@ -1,6 +1,5 @@
 package com.example.mark.gradetracker.popups;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -80,6 +79,8 @@ public class AddBulkMarkPopUpActivity extends AppCompatActivity {
         gradeSectionWeight = (String) intent.getSerializableExtra("gradeSectionWeight");
         marks = (ArrayList<Mark>) intent.getSerializableExtra("marks");
         fromSelectCourseActivity = (boolean) intent.getSerializableExtra("fromSelectCourseActivity");
+        fromCourseInfoActivity = (boolean) intent.getSerializableExtra("fromCourseInfoActivity");
+        selectedCourse = (Course) intent.getSerializableExtra("selectedCourse");
 
         if(intent.getSerializableExtra("markNameTemplate") != null){
             markNameTemplateEditText.setText((String) intent.getSerializableExtra("markNameTemplate"));
@@ -135,7 +136,9 @@ public class AddBulkMarkPopUpActivity extends AppCompatActivity {
         intent.putExtra("gradeSectionWeight", gradeSectionWeight);
         intent.putExtra("marks", marks);
         intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
-
+        intent.putExtra("fromCourseInfoActivity", fromCourseInfoActivity);
+        intent.putExtra("selectedCourse", selectedCourse);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
         startActivity(intent);
 
     }
@@ -154,29 +157,8 @@ public class AddBulkMarkPopUpActivity extends AppCompatActivity {
      * @param position The position of the course in the ArrayList
      */
     private void deletePopUp(final int position) {
-        final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
-        myAlert.setMessage("Delete Mark?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        deleteMark(position);
-                    }
-                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        }).create();
-        myAlert.show();
-    }
-
-    /**
-     * Delete the mark from the current ArrayList of newly added marks
-     * @param position The position of the mark in the ArrayList
-     */
-    private void deleteMark(int position){
-        newMarks.remove(position);
-        Intent intent = new Intent(this, AddBulkMarkPopUpActivity.class);
+        Intent intent = new Intent(this, CustomAlertPopUp.class);
+        intent.putExtra("previousActivity", "AddBulkMarkPopUpActivity");
         intent.putExtra("newSemesterName", newSemesterName);
         intent.putExtra("courses", courses);
         intent.putExtra("newCourseName", newCourseName);
@@ -188,8 +170,11 @@ public class AddBulkMarkPopUpActivity extends AppCompatActivity {
         intent.putExtra("markNameTemplate", markNameTemplateEditText.getText().toString());
         intent.putExtra("newMarks", newMarks);
         intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
-
+        intent.putExtra("fromCourseInfoActivity", fromCourseInfoActivity);
+        intent.putExtra("selectedCourse", selectedCourse);
+        intent.putExtra("position", position);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
         startActivity(intent);
     }
+
 }

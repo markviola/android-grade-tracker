@@ -30,18 +30,11 @@ public class MainMenuActivity extends AppCompatActivity {
     Button settingsButton;
     TextView mainMenuTitleText;
 
-    // TEST CODE BELOW //
-    Course CSCB07 = new Course("CSCB07", null);
-    Course CSCB36 = new Course("CSCB36", null);
-//    Course MATB24 = new Course("MATB24");
-//    Course MATB41 = new Course("MATB41");
-//    Course STAB52 = new Course("STAB52");
 
     ArrayList<Course> courses = new ArrayList<>();
     SemesterManager semesterManager = SemesterManager.getInstance(this);
 
     DBManager dbManager;
-    // TEST CODE ABOVE //
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,31 +49,6 @@ public class MainMenuActivity extends AppCompatActivity {
         //Change the header font to Montserrat-Bold
         Typeface font = Typeface.createFromAsset(getAssets(), "Montserrat-Bold.ttf");
         mainMenuTitleText.setTypeface(font);
-
-        // TEST CODE BELOW //
-        GradeSectionAllMarks cscb07Assignments = new GradeSectionAllMarks("Assignments", 0.4);
-        cscb07Assignments.addMark(new Mark("Assignment1", 90.00));
-        cscb07Assignments.addMark(new Mark("Assignment2", 88.00));
-        GradeSectionAllMarks cscb36Assignments = new GradeSectionAllMarks("Assignments", 0.3);
-        cscb36Assignments.addMark(new Mark("Assignment1", 85.00));
-
-        CSCB07.addGradeSection(cscb07Assignments);
-        CSCB36.addGradeSection(cscb36Assignments);
-
-        courses.add(CSCB07);
-        courses.add(CSCB36);
-
-        Semester testSem = new Semester("Fall 2015", courses);
-
-        dbManager = DBManager.getInstance(this);
-        //dbManager.addSemester(testSem);
-
-
-//        Semester reSem = dbManager.getSemesterStrToObj("Fall 2015");
-//        semesterManager.addSemester(reSem);
-        semesterManager.setSemesters(dbManager.getAllSemesters());
-
-        // TEST CODE ABOVE //
 
     }
 

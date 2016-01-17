@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.mark.gradetracker.R;
 import com.example.mark.gradetracker.navigation.SelectSemesterActivity;
+import com.example.mark.gradetracker.popups.CustomAlertPopUp;
 
 import java.util.ArrayList;
 
@@ -113,33 +114,12 @@ public class AddSemesterActivity extends AppCompatActivity {
      * @param position The position of the course in the ArrayList
      */
     private void deletePopUp(final int position) {
-        final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
-        myAlert.setMessage("Delete Course?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        deleteCourse(position);
-                    }
-                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                 }).create();
-        myAlert.show();
-    }
-
-    /**
-     * Delete the course from the current ArrayList of newly added courses
-     * @param position The position of the course in the ArrayList
-     */
-    private void deleteCourse(int position){
-        courses.remove(position);
-        Intent intent = new Intent(this, AddSemesterActivity.class);
+        Intent intent = new Intent(this, CustomAlertPopUp.class);
+        intent.putExtra("position", position);
+        intent.putExtra("previousActivity", "AddSemesterActivityDeleteCourse");
         intent.putExtra("newSemesterName", semesterNameEditText.getText().toString());
         intent.putExtra("courses", courses);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
-
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
         startActivity(intent);
     }
 
@@ -153,34 +133,13 @@ public class AddSemesterActivity extends AppCompatActivity {
                 Toast.makeText(this, "The semester name is already being used!", Toast.LENGTH_LONG).show();
             }
 
+            Intent intent = new Intent(this, SelectSemesterActivity.class);
+            startActivity(intent);
+
         } else {
-            //Don't add anything
-            //Prompt the user asking if there needs to
+            Toast.makeText(this, "No semester name inputted", Toast.LENGTH_LONG).show();
         }
 
-        Intent intent = new Intent(this, SelectSemesterActivity.class);
-        startActivity(intent);
-    }
-
-    /**
-     * Method that makes a popup to confirm the deletion of a course
-     * @param position The position of the course in the ArrayList
-     */
-    private void noSemesterNamePopUp(final int position) {
-        final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
-        myAlert.setMessage("Delete Course?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        deleteCourse(position);
-                    }
-                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        }).create();
-        myAlert.show();
     }
 
     public void settingsButtonClicked(View view){
@@ -200,27 +159,10 @@ public class AddSemesterActivity extends AppCompatActivity {
      * lose all information from the new semester
      */
     private void returnToSelectSemesterPopUp() {
-        final AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
-        myAlert.setMessage("Go back to the main menu? New semester will not be added")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        goToSelectSemester();
-                    }
-                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                }).create();
-        myAlert.show();
-    }
-
-    /**
-     * Take the user to the SelectSemesterActivity activity
-     */
-    private void goToSelectSemester(){
-        Intent intent = new Intent(this, SelectSemesterActivity.class);
+        Intent intent = new Intent(this, CustomAlertPopUp.class);
+        intent.putExtra("previousActivity", "AddSemesterActivityBack");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
         startActivity(intent);
     }
+
 }

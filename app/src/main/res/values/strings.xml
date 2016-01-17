@@ -78,7 +78,7 @@
 
 
     <!-- AddBulkMarkPopUpActivity strings -->
-    <string name="add_bulk_mark_pop_up_title">Add Marks</string>
+    <string name="add_bulk_mark_pop_up_title">Add Bulk Marks</string>
     <string name="add_bulk_mark_pop_up_name_template_text">Name Template: </string>
     <string name="add_bulk_mark_pop_up_name_template_ending_text">#1</string>
     <string name="add_bulk_mark_pop_up_name_num_marks">Number of Marks: </string>

@@ -87,6 +87,7 @@ public class AddMarkOptionsPopUpActivity extends AppCompatActivity {
 
     public void bulkAddButtonClicked(View view){
         Intent intent = new Intent(this, AddBulkMarkPopUpActivity.class);
+
         intent.putExtra("newSemesterName", newSemesterName);
         intent.putExtra("courses", courses);
         intent.putExtra("newCourseName", newCourseName);
@@ -95,9 +96,11 @@ public class AddMarkOptionsPopUpActivity extends AppCompatActivity {
         intent.putExtra("gradeSectionName", gradeSectionName);
         intent.putExtra("gradeSectionWeight", gradeSectionWeight);
         intent.putExtra("marks", marks);
+        intent.putExtra("previousActivity", "AddMarkOptionsPopUpActivity");
         intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
         intent.putExtra("fromCourseInfoActivity", fromCourseInfoActivity);
         intent.putExtra("selectedCourse", selectedCourse);
+
         startActivity(intent);
     }
 }
