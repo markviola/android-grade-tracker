@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Show Title Screen"
+        android:textSize="15dp"
+        android:id="@+id/usernameText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:layout_toRightOf="@+id/usernameText"
+        android:layout_toEndOf="@+id/usernameText"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="50dp"
+        android:id="@+id/radioGroup">
+
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:id="@+id/yesRadioButton"
+            android:layout_gravity="right" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:id="@+id/noRadioButton"
+            android:layout_marginLeft="15dp"/>
+    </RadioGroup>
+
+
+</RelativeLayout>

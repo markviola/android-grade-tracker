@@ -1,4 +1,4 @@
-package com.example.mark.gradetracker.navigation;
+package com.example.mark.report_card.navigation;
 
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
@@ -13,18 +13,16 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.mark.gradetracker.R;
-import com.example.mark.gradetracker.adding.AddSemesterActivity;
-import com.example.mark.gradetracker.editting.SettingsActivity;
-import com.example.mark.gradetracker.popups.EditMarkOptionsPopUpActivity;
-import com.example.mark.gradetracker.popups.EditSemesterOptionsPopUpActivity;
-
-import org.w3c.dom.Text;
+import com.example.mark.report_card.R;
+import com.example.mark.report_card.adding.AddSemesterActivity;
+import com.example.mark.report_card.settings.SettingsActivity;
+import com.example.mark.report_card.popups.EditSemesterOptionsPopUpActivity;
 
 import adapters.SemesterListAdapter;
-import data.DBManager;
+import managers.DBManager;
 import data.Semester;
 import managers.SemesterManager;
+import managers.SettingsManager;
 
 public class SelectSemesterActivity extends AppCompatActivity {
 
@@ -48,7 +46,6 @@ public class SelectSemesterActivity extends AppCompatActivity {
         //Retrieve all data from the database
         DBManager dbManager = DBManager.getInstance(this);
         SemesterManager semesterManager = SemesterManager.getInstance(this);
-        semesterManager.setSemesters(dbManager.getAllSemesters());
 
         //Check if noSemesterText should be displayed or not
         if(dbManager.getAllSemesters().size() > 0){
@@ -105,16 +102,21 @@ public class SelectSemesterActivity extends AppCompatActivity {
 
     public void settingsClicked(View view){
         Intent intent = new Intent(this, SettingsActivity.class);
+        intent.putExtra("previousActivity", "SelectSemesterActivity");
         startActivity(intent);
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void onBackPressed() {
-        Intent intent = new Intent(this, MainMenuActivity.class);
-        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
-                R.anim.right_to_left_transition, R.anim.right_to_left_transition_2).toBundle();
-        startActivity(intent, bndlanimation);
-        startActivity(intent);
+        SettingsManager settingsManager = SettingsManager.getInstance(this);
+
+        Intent intent = new Intent(this, TitleScreenActivity.class);
+
+        if(settingsManager.getShowTitleScreen()){
+            Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
+                    R.anim.right_to_left_transition, R.anim.right_to_left_transition_2).toBundle();
+            startActivity(intent, bndlanimation);
+        }
     }
 
 }

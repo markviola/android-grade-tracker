@@ -1,4 +1,4 @@
-package com.example.mark.gradetracker.navigation;
+package com.example.mark.report_card.navigation;
 
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
@@ -12,10 +12,11 @@ import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
-import com.example.mark.gradetracker.R;
-import com.example.mark.gradetracker.adding.AddGradeSectionActivity;
-import com.example.mark.gradetracker.popups.EditGradeSectionOptionsPopUpActivity;
-import com.example.mark.gradetracker.popups.EditMarkOptionsPopUpActivity;
+import com.example.mark.report_card.R;
+import com.example.mark.report_card.adding.AddGradeSectionActivity;
+import com.example.mark.report_card.popups.EditGradeSectionOptionsPopUpActivity;
+import com.example.mark.report_card.popups.EditMarkOptionsPopUpActivity;
+import com.example.mark.report_card.settings.SettingsActivity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -118,7 +119,11 @@ public class CourseInfoActivity extends AppCompatActivity {
     }
 
     public void settingsButtonClicked(View view){
-
+        Intent intent = new Intent(this, SettingsActivity.class);
+        intent.putExtra("previousActivity", "CourseInfoActivity");
+        intent.putExtra("semesterName", semesterName);
+        intent.putExtra("selectedCourse", selectedCourse);
+        startActivity(intent);
     }
 
     /**

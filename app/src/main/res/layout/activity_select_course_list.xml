@@ -43,7 +43,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="#ff6666"
-        android:onClick="settingsClicked" />
+        android:onClick="settingsButtonClicked" />
 
     <TextView
         android:layout_width="wrap_content"

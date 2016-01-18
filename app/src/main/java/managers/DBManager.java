@@ -1,4 +1,4 @@
-package data;
+package managers;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -9,19 +9,31 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import data.Course;
+import data.GradeSection;
+import data.GradeSectionAllMarks;
+import data.Mark;
+import data.Semester;
+
 public class DBManager extends SQLiteOpenHelper{
 
     private static DBManager instance;
     private static final String TAG = "customFilter";
 
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 8;
     private static final String DATABASE_NAME = "SemesterDatabase.db";
 
-    //Information for Player table
+    //Information for semester table
     public static final String TABLE_SEMESTERS = "_semesters";
-    public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_SEMESTER_ID = "_id";
     public static final String COLUMN_SEMESTER_NAMES = "_semesterName";
     public static final String COLUMN_COURSES = "_courses";
+
+    //Information for settings table
+    public static final String TABLE_SETTINGS = "_settings";
+    public static final String COLUMN_SETTINGS_ID = "_id";
+    public static final String COLUMN_SETTING_NAMES = "_settingNames";
+    public static final String COLUMN_SETTING_STATES = "_STATES";
 
 
     public DBManager(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -38,26 +50,35 @@ public class DBManager extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        //Create Grades table
+        //Create semester table
         String playerQuery = "CREATE TABLE " + TABLE_SEMESTERS + "(" +
-                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_SEMESTER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_SEMESTER_NAMES + " TEXT, " +
                 COLUMN_COURSES + " TEXT " +
                 ");";
         db.execSQL(playerQuery);
+
+        //Create settings options table
+        String settingsQuery = "CREATE TABLE " + TABLE_SETTINGS + "(" +
+                COLUMN_SETTINGS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_SETTING_NAMES + " TEXT, " +
+                COLUMN_SETTING_STATES + " TEXT " +
+                ");";
+        db.execSQL(settingsQuery);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SEMESTERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SETTINGS);
         onCreate(db);
     }
 
     //Check if database is empty
-    public boolean isEmpty(){
+    public boolean settingsTableIsEmpty(){
         SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_SEMESTERS + " WHERE 1";
+        String query = "SELECT * FROM " + TABLE_SETTINGS + " WHERE 1";
         Cursor c = db.rawQuery(query, null);
 
         return c.getCount() == 0;
@@ -87,6 +108,30 @@ public class DBManager extends SQLiteOpenHelper{
         db.execSQL(query);
     }
 
+    //Add settings to the database
+    public void addSettingsInfo(String settingName, String settingState){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_SETTING_NAMES, settingName);
+        values.put(COLUMN_SETTING_STATES, settingState);
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(TABLE_SETTINGS, null, values);
+        db.close();
+    }
+
+    public void deleteSettingInfo(String settingName){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_SETTINGS + " WHERE " + COLUMN_SETTING_NAMES + "=\"" + settingName + "\";");
+
+    }
+
+    public void updateSettingInfo(String settingName, String newSettingState){
+        String query = "UPDATE " + TABLE_SETTINGS + " SET "+ COLUMN_SETTING_STATES + " = \'" + newSettingState +
+                "\' WHERE "+ COLUMN_SETTING_NAMES +" = \'" + settingName + "\'";
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(query);
+    }
+
     //Get the courses corresponding to a particular semester
     public String dbGetCourses(String semesterName) {
         SQLiteDatabase db = getWritableDatabase();
@@ -101,6 +146,27 @@ public class DBManager extends SQLiteOpenHelper{
                 db.close();
                 cur.close();
                 return courses;
+            }
+            cur.moveToNext();
+        }
+        db.close();
+        cur.close();
+        return "ERROR STATE";
+    }
+
+    public String getSettingState(String settingName){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_SETTINGS + " WHERE 1";
+
+        Cursor cur = db.rawQuery(query, null);
+        cur.moveToFirst();
+
+        while (!cur.isAfterLast()) {
+            if (cur.getString(cur.getColumnIndex(COLUMN_SETTING_NAMES)).equals(settingName)) {
+                String settingState = cur.getString(cur.getColumnIndex(COLUMN_SETTING_STATES));
+                db.close();
+                cur.close();
+                return settingState;
             }
             cur.moveToNext();
         }

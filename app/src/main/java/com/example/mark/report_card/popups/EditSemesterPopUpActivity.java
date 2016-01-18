@@ -1,9 +1,9 @@
-package com.example.mark.gradetracker.popups;
+package com.example.mark.report_card.popups;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.mark.gradetracker.R;
+import com.example.mark.report_card.R;
 
 public class EditSemesterPopUpActivity extends AppCompatActivity {
 

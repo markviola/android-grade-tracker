@@ -1,4 +1,4 @@
-package com.example.mark.gradetracker.popups;
+package com.example.mark.report_card.popups;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 
-import com.example.mark.gradetracker.R;
+import com.example.mark.report_card.R;
 
 import java.util.ArrayList;
 

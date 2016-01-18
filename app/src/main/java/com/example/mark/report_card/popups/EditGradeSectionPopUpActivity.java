@@ -1,4 +1,4 @@
-package com.example.mark.gradetracker.popups;
+package com.example.mark.report_card.popups;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -9,11 +9,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.mark.gradetracker.R;
-import com.example.mark.gradetracker.navigation.CourseInfoActivity;
+import com.example.mark.report_card.R;
+import com.example.mark.report_card.navigation.CourseInfoActivity;
 
 import data.Course;
-import data.DBManager;
+import managers.DBManager;
 import data.GradeSection;
 import data.Semester;
 import managers.SemesterManager;

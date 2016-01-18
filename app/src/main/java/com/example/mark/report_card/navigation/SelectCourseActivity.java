@@ -1,4 +1,4 @@
-package com.example.mark.gradetracker.navigation;
+package com.example.mark.report_card.navigation;
 
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
@@ -13,9 +13,10 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.mark.gradetracker.R;
-import com.example.mark.gradetracker.adding.AddCourseActivity;
-import com.example.mark.gradetracker.popups.EditCourseOptionsPopUpActivity;
+import com.example.mark.report_card.R;
+import com.example.mark.report_card.adding.AddCourseActivity;
+import com.example.mark.report_card.popups.EditCourseOptionsPopUpActivity;
+import com.example.mark.report_card.settings.SettingsActivity;
 
 import adapters.CourseListAdapter;
 import data.Course;
@@ -89,6 +90,13 @@ public class SelectCourseActivity extends AppCompatActivity {
         intent.putExtra("courses", currentSemester.getCourses());
         intent.putExtra("fromSelectCourseActivity", true);
 
+        startActivity(intent);
+    }
+
+    public void settingsButtonClicked(View view){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        intent.putExtra("previousActivity", "SelectCourseActivity");
+        intent.putExtra("semesterName", semesterName);
         startActivity(intent);
     }
 

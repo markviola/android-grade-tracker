@@ -1,17 +1,13 @@
-package com.example.mark.gradetracker.popups;
+package com.example.mark.report_card.popups;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.mark.gradetracker.R;
-import com.example.mark.gradetracker.navigation.SelectSemesterActivity;
-
-import data.DBManager;
+import com.example.mark.report_card.R;
 
 public class EditSemesterOptionsPopUpActivity extends AppCompatActivity {
 

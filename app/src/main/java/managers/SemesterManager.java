@@ -6,7 +6,6 @@ import android.content.Context;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import data.DBManager;
 import data.Semester;
 
 public class SemesterManager implements Serializable{
@@ -83,5 +82,33 @@ public class SemesterManager implements Serializable{
                 }
             }
         }
+    }
+
+    public double getCGPA(){
+        double totalCGPA = 0.0;
+        int validSemesters = 0;
+
+        for(Semester semester: _semesters){
+            if(semester.getSGPA() != -1){
+                totalCGPA += semester.getSGPA();
+                validSemesters++;
+            }
+        }
+
+        if(validSemesters != 0){
+            return totalCGPA/validSemesters;
+        } else {
+            return -1;
+        }
+    }
+
+    public double getCurrentSemesterSGPA(){
+        if(_semesters.size() > 0){
+            Semester currentSemester = _semesters.get(_semesters.size()-1);
+            return currentSemester.getSGPA();
+        } else {
+            return -1;
+        }
+
     }
 }

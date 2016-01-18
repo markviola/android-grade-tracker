@@ -1,25 +1,24 @@
-package com.example.mark.gradetracker.popups;
+package com.example.mark.report_card.popups;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mark.gradetracker.adding.AddGradeSectionActivity;
-import com.example.mark.gradetracker.R;
-import com.example.mark.gradetracker.navigation.CourseInfoActivity;
+import com.example.mark.report_card.adding.AddGradeSectionActivity;
+import com.example.mark.report_card.R;
+import com.example.mark.report_card.navigation.CourseInfoActivity;
 
 import java.util.ArrayList;
 
 import data.Course;
-import data.DBManager;
+import managers.DBManager;
 import data.GradeSection;
 import data.Mark;
 import data.Semester;

@@ -5,11 +5,12 @@
     <!-- Activity titles -->
     <string name="title_activity_courses">CoursesActivity</string>
 
-    <!-- MainMenuActivity strings -->
-    <string name="main_menu_title">Grade Tracker</string>
-    <string name="main_menu_select_semester_button">Select Semester</string>
-    <string name="main_menu_add_semester_button">Add Semester</string>
-    <string name="main_menu_settings_button">Settings</string>
+    <!-- TitleScreenActivity strings -->
+    <string name="title_screen_welcome_text">Welcome,</string>
+    <string name="title_screen_username">User</string>
+    <string name="title_screen_CPGA_text">CGPA: </string>
+    <string name="title_screen_current_semester_GPA">Current Semester: </string>
+    <string name="title_screen_continue_text">Click anywhere to continue</string>
 
     <!-- SelectSemesterActivity strings -->
     <string name="select_semester_title">Select Semester</string>
@@ -102,6 +103,9 @@
     <!-- custom_add_grade_section_list_row strings -->
     <string name="custom_add_grade_section_list_row_info">Grade Section Info</string>
     <string name="custom_add_grade_section_list_row_delete_button">Delete</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

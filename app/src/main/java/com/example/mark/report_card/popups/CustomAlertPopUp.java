@@ -1,4 +1,4 @@
-package com.example.mark.gradetracker.popups;
+package com.example.mark.report_card.popups;
 
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
@@ -8,24 +8,22 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.mark.gradetracker.R;
-import com.example.mark.gradetracker.adding.AddCourseActivity;
-import com.example.mark.gradetracker.adding.AddGradeSectionActivity;
-import com.example.mark.gradetracker.adding.AddSemesterActivity;
-import com.example.mark.gradetracker.navigation.CourseInfoActivity;
-import com.example.mark.gradetracker.navigation.SelectCourseActivity;
-import com.example.mark.gradetracker.navigation.SelectSemesterActivity;
+import com.example.mark.report_card.R;
+import com.example.mark.report_card.adding.AddCourseActivity;
+import com.example.mark.report_card.adding.AddGradeSectionActivity;
+import com.example.mark.report_card.adding.AddSemesterActivity;
+import com.example.mark.report_card.navigation.CourseInfoActivity;
+import com.example.mark.report_card.navigation.SelectCourseActivity;
+import com.example.mark.report_card.navigation.SelectSemesterActivity;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import data.Course;
-import data.DBManager;
+import managers.DBManager;
 import data.GradeSection;
 import data.Mark;
 import data.Semester;
@@ -348,6 +346,9 @@ public class CustomAlertPopUp extends AppCompatActivity {
 
     private void deleteSemester(){
         DBManager dbManager = DBManager.getInstance(this);
+        SemesterManager semesterManager = SemesterManager.getInstance(this);
+
+        semesterManager.removeSemesterByName(semesterName);
         dbManager.deleteSemester(semesterName);
 
         Intent intent = new Intent(this, SelectSemesterActivity.class);

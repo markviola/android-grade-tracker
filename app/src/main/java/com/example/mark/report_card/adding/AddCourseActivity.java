@@ -1,15 +1,13 @@
-package com.example.mark.gradetracker.adding;
+package com.example.mark.report_card.adding;
 
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -18,15 +16,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mark.gradetracker.R;
-import com.example.mark.gradetracker.navigation.SelectCourseActivity;
-import com.example.mark.gradetracker.popups.CustomAlertPopUp;
+import com.example.mark.report_card.R;
+import com.example.mark.report_card.navigation.SelectCourseActivity;
+import com.example.mark.report_card.popups.CustomAlertPopUp;
+import com.example.mark.report_card.settings.SettingsActivity;
 
 import java.util.ArrayList;
 
 import adapters.AddGradeSectionListAdapter;
 import data.Course;
-import data.DBManager;
+import managers.DBManager;
 import data.GradeSection;
 import data.Semester;
 import managers.SemesterManager;
@@ -177,6 +176,18 @@ public class AddCourseActivity extends AppCompatActivity {
         returnToAddSemesterPopUp();
     }
 
+    public void settingsButtonClicked(View view){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        intent.putExtra("previousActivity", "AddCourseActivity");
+        intent.putExtra("newSemesterName", newSemesterName);
+        intent.putExtra("newCourseName", courseNameEditText.getText().toString());
+        intent.putExtra("newCourseCode", courseCodeEditText.getText().toString());
+        intent.putExtra("courses", courses);
+        intent.putExtra("gradeSections", gradeSections);
+        intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
+        startActivity(intent);
+    }
+
     /**
      * Method that makes a popup to confirm that the user wants to go back to the main menu and
      * lose all information from the new semester
@@ -223,5 +234,6 @@ public class AddCourseActivity extends AppCompatActivity {
         intent.putExtra("semesterName", newSemesterName);
         startActivity(intent);
     }
+
 
 }

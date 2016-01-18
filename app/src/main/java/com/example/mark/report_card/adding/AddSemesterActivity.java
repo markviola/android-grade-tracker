@@ -1,9 +1,7 @@
-package com.example.mark.gradetracker.adding;
+package com.example.mark.report_card.adding;
 
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -18,9 +16,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mark.gradetracker.R;
-import com.example.mark.gradetracker.navigation.SelectSemesterActivity;
-import com.example.mark.gradetracker.popups.CustomAlertPopUp;
+import com.example.mark.report_card.R;
+import com.example.mark.report_card.navigation.SelectSemesterActivity;
+import com.example.mark.report_card.popups.CustomAlertPopUp;
+import com.example.mark.report_card.settings.SettingsActivity;
 
 import java.util.ArrayList;
 
@@ -143,7 +142,11 @@ public class AddSemesterActivity extends AppCompatActivity {
     }
 
     public void settingsButtonClicked(View view){
-
+        Intent intent = new Intent(this, SettingsActivity.class);
+        intent.putExtra("previousActivity", "AddSemesterActivity");
+        intent.putExtra("newSemesterName", semesterNameEditText.getText().toString());
+        intent.putExtra("courses", courses);
+        startActivity(intent);
     }
 
     /**

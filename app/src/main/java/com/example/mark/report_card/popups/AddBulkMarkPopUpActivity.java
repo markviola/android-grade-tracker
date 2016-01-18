@@ -1,6 +1,5 @@
-package com.example.mark.gradetracker.popups;
+package com.example.mark.report_card.popups;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -14,8 +13,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.mark.gradetracker.adding.AddGradeSectionActivity;
-import com.example.mark.gradetracker.R;
+import com.example.mark.report_card.adding.AddGradeSectionActivity;
+import com.example.mark.report_card.R;
 
 import java.util.ArrayList;
 

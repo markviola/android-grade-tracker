@@ -2,19 +2,17 @@ package adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-import com.example.mark.gradetracker.R;
+import com.example.mark.report_card.R;
 
 import java.util.HashMap;
 import java.util.List;
 
-import data.Course;
 import data.GradeSection;
 import data.Mark;
 
