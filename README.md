@@ -23,7 +23,7 @@ When in the select semester, course, or course info screens, click holding any e
 Below is the image for when the "Show Title Screen" option is selected:
 
 <p align="center">
-  <img src="https://github.com/markviola/android-grade-tracker/blob/master/images/title_screen.jpg?raw=true" alt="Title Screen" height="328px" width="185px"/>
+  <img src="https://github.com/markviola/android-grade-tracker/blob/master/images/title_screen.png?raw=true" alt="Title Screen" height="328px" width="185px"/>
 </p>
 
 The title screen shows a summary of the user's academic status which includes their CGPA and their current GPA for the ongoing semester. By default the title screen is set off but can be changed in the Settings screen.
