@@ -85,7 +85,10 @@ public class AddEditSingleMarkPopUpActivity extends Activity {
 
             addMarkTitle.setText("Edit Mark");
             markNameEditText.setText(selectedMark.getName());
-            markGradeEditText.setText(String.format("%.2f", selectedMark.getMark()));
+
+            if(selectedMark.getMark() != null){
+                markGradeEditText.setText(String.format("%.2f", selectedMark.getMark()));
+            }
             addMarkButton.setText("Edit Mark");
 
         }else if(previousActivity.equals("AddMarkOptionsPopUpActivity")){

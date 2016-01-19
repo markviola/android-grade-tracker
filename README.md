@@ -2,7 +2,9 @@
 
 Track your grades over your academic career with this app. The app allows the user to separate courses between semesters so that they can get a clearer picture of how they are currently doing in their school work. Additional features include bulk mark adding with similar names (i.e "Quiz #1", "Quiz #2", "Quiz #3", etc) and incorporating an optional grade section marking scheme which only takes the top number of marks to be calculated.
 
-[Google Play](https://play.google.com/store/apps/details?id=com.viola.mark.gradetracker)
+
+[![Play Store](http://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.viola.mark.gradetracker)
+
 
 ###General Screenshots
 

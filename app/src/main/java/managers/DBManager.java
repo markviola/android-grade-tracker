@@ -102,6 +102,13 @@ public class DBManager extends SQLiteOpenHelper{
 
     }
 
+    public void updateSemesterName(String oldSemesterName, String newSemesterName){
+        String query = "UPDATE " + TABLE_SEMESTERS + " SET "+ COLUMN_SEMESTER_NAMES + " = \'" + newSemesterName +
+                "\' WHERE "+ COLUMN_SEMESTER_NAMES +" = \'" + oldSemesterName + "\'";
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(query);
+    }
+
     public void updateSemesterInfo(String semesterName, String newInfo){
         String query = "UPDATE " + TABLE_SEMESTERS + " SET "+ COLUMN_COURSES + " = \'" + newInfo +
                 "\' WHERE "+ COLUMN_SEMESTER_NAMES +" = \'" + semesterName + "\'";
