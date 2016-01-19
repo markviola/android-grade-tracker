@@ -15,7 +15,7 @@
         android:id="@+id/addMarksTitle"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="#ff9933"
+        android:background="#FFC107"
         android:gravity="center"/>
 
     <Button
@@ -50,7 +50,8 @@
         android:layout_toRightOf="@id/markNameTemplateText"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:inputType="textCapSentences"/>
+        android:inputType="textCapWords"
+        android:gravity="center"/>
 
     <TextView
         android:layout_width="30dp"

@@ -15,9 +15,9 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AppTheme.CustomPopUpTheme">
-        <item name="colorPrimary">#ff9933</item>
-        <item name="colorPrimaryDark">#ff9933</item>
-        <item name="colorAccent">#ff9933</item>
+        <item name="colorPrimary">#FFC107</item>
+        <item name="colorPrimaryDark">#FFC107</item>
+        <item name="colorAccent">#FFC107</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowCloseOnTouchOutside">true</item>
         <item name="windowActionBar">false</item>
@@ -26,9 +26,9 @@
 
     <!-- Orange Status Bar Theme -->
     <style name="OrangeTop" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">#ff9933</item>
-        <item name="colorPrimaryDark">#ff9933</item>
-        <item name="colorAccent">#ff9933</item>
+        <item name="colorPrimary">#FFC107</item>
+        <item name="colorPrimaryDark">#FFC107</item>
+        <item name="colorAccent">#FFC107</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

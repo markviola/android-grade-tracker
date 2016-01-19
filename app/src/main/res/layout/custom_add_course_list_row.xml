@@ -21,7 +21,7 @@
         android:layout_height="fill_parent"
         android:text="@string/custom_add_course_list_row_delete_button"
         android:id="@+id/deleteButton"
-        android:background="#ff6666"
+        android:background="#EF9A9A"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"

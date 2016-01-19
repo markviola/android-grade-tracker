@@ -13,7 +13,7 @@
         android:id="@+id/courseNameText"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="#ff9933"
+        android:background="#FFC107"
         android:gravity="center"/>
 
     <TextView
@@ -24,7 +24,7 @@
         android:id="@+id/courseCodeText"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/courseNameText"
-        android:background="#ff9933"
+        android:background="#FFC107"
         android:gravity="center"
         android:layout_marginTop="-5dp"/>
 
@@ -36,7 +36,7 @@
         android:id="@+id/currentGrade"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/courseCodeText"
-        android:background="#ff9933"
+        android:background="#FFC107"
         android:gravity="center"
         android:layout_marginTop="-10dp"/>
 
@@ -46,7 +46,8 @@
         android:id="@+id/gradeSectionList"
         android:layout_below="@+id/currentGrade"
         android:layout_above="@+id/addSectionButton"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"/>
 
     <Button
         android:layout_width="fill_parent"
@@ -56,8 +57,10 @@
         android:textSize="20dp"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/settingsButton"
-        android:background="#c2d6d6"
-        android:onClick="addSectionButtonClicked" />
+        android:background="#BDBDBD"
+        android:onClick="addSectionButtonClicked"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <Button
         android:layout_width="fill_parent"
@@ -66,8 +69,9 @@
         android:id="@+id/settingsButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="#ff6666"
-        android:onClick="settingsButtonClicked" />
+        android:background="#EF9A9A"
+        android:onClick="settingsButtonClicked"
+        android:layout_margin="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"

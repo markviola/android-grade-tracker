@@ -15,7 +15,7 @@
         android:id="@+id/settingsTitleText"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="#ff9933"
+        android:background="#FFC107"
         android:gravity="center"/>
 
     <ScrollView
@@ -55,7 +55,8 @@
         android:id="@+id/saveAndContinueButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="#ff6666"
-        android:onClick="saveAndContinueButtonClicked" />
+        android:background="#EF9A9A"
+        android:onClick="saveAndContinueButtonClicked"
+        android:layout_margin="10dp"/>
 
 </RelativeLayout>

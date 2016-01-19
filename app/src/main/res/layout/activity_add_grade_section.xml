@@ -15,7 +15,7 @@
         android:id="@+id/addGradeSectionTitle"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="#ff9933"
+        android:background="#FFC107"
         android:gravity="center"/>
 
     <TextView
@@ -142,8 +142,9 @@
         android:id="@+id/settingsButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="#ff6666"
-        android:onClick="settingsButtonClicked" />
+        android:background="#EF9A9A"
+        android:onClick="settingsButtonClicked"
+        android:layout_margin="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
