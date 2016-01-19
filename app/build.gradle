@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.example.mark.gradetracker"
+        applicationId "com.viola.mark.gradetracker"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1

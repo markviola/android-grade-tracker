@@ -67,7 +67,7 @@ public abstract class GradeSection implements Serializable{
     }
 
     public String toString(){
-        String retString = getSectionName() + "###" + getWeight();
+        String retString = getSectionName() + "###" + getWeight() + "###" + getNumTopMarks();
 
         for (Mark grade: _marks){
             retString += "###" + grade;
@@ -79,6 +79,7 @@ public abstract class GradeSection implements Serializable{
 
     //public abstract double getWeight();
     public abstract double getSectionGrade();
+    public abstract String getNumTopMarks();
 
 
 }

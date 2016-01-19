@@ -34,17 +34,16 @@ public class SemesterListAdapter extends ArrayAdapter<Semester>{
 
         if (semesterItem.numCourses() == 0){
             numCourses.setText("|  0 Courses  |");
-            SessionalGPA.setText("SGPA: N/A");
         }else if(semesterItem.numCourses() == 1){
             numCourses.setText("|  1 Course  |");
-            if(semesterItem.getSGPA() != -1){
-                SessionalGPA.setText(String.format("SGPA: %.2f", semesterItem.getSGPA()));
-            } else {
-                SessionalGPA.setText("SGPA: N/A");
-            }
         } else {
             numCourses.setText(String.format("|  %d Courses  |", semesterItem.numCourses()));
+        }
+
+        if(semesterItem.getSGPA() >= 0){
             SessionalGPA.setText(String.format("SGPA: %.2f", semesterItem.getSGPA()));
+        } else {
+            SessionalGPA.setText("SGPA: N/A");
         }
 
         return courseView;

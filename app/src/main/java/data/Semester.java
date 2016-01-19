@@ -62,10 +62,10 @@ public class Semester implements Serializable{
         }
 
         //Check for the case when there is one course in a semester without any marks
-        if(numValidCourses == 0){
-            return -1;
-        } else {
+        if(numValidCourses > 0){
             return totalGPAValue/numValidCourses;
+        } else {
+            return -1;
         }
 
     }

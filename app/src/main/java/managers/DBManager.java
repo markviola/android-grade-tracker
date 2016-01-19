@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import data.Course;
 import data.GradeSection;
 import data.GradeSectionAllMarks;
+import data.GradeSectionTopMarks;
 import data.Mark;
 import data.Semester;
 
@@ -20,7 +21,7 @@ public class DBManager extends SQLiteOpenHelper{
     private static DBManager instance;
     private static final String TAG = "customFilter";
 
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 10;
     private static final String DATABASE_NAME = "SemesterDatabase.db";
 
     //Information for semester table
@@ -209,10 +210,18 @@ public class DBManager extends SQLiteOpenHelper{
 
                     for(int k=0; k <gradeSecMarksStr.length; k++){
                         String[] gradeSecMarkStr = gradeSecMarksStr[k].split("###");
-                        GradeSection newGradeSec = new GradeSectionAllMarks(gradeSecMarkStr[0],
-                                Double.parseDouble(gradeSecMarkStr[1]));
 
-                        for (int j=2; j<gradeSecMarkStr.length; j++){
+                        GradeSection newGradeSec;
+                        if(gradeSecMarkStr[2].equals("false")){
+                            newGradeSec = new GradeSectionAllMarks(gradeSecMarkStr[0],
+                                    Double.parseDouble(gradeSecMarkStr[1]));
+                        } else {
+                            newGradeSec = new GradeSectionTopMarks(gradeSecMarkStr[0],
+                                    Double.parseDouble(gradeSecMarkStr[1]),
+                                    Integer.parseInt(gradeSecMarkStr[2]));
+                        }
+
+                        for (int j=3; j<gradeSecMarkStr.length; j++){
                             String[] gradeSecMarkDataStr = gradeSecMarkStr[j].split("##");
                             Mark newGradeSecMark;
                             if(!gradeSecMarkDataStr[1].equals("null")){

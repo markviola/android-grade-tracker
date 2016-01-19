@@ -106,20 +106,24 @@ public class Course implements Serializable{
     }
 
     public double getCurrentGrade(){
-        if(_grades.size() == 0){ //No marks inputted
-            return -1;
-        } else {
-            double totalWeightedGrades = 0.0;
-            double totalWeights = 0.0;
-            for(GradeSection gradeSection: _grades){
-                if(gradeSection.numMarks() > 0){
-                    totalWeightedGrades += gradeSection.getSectionGrade() * gradeSection.getWeight();
-                    totalWeights += gradeSection.getWeight();
-                }
-            }
 
-            return totalWeightedGrades/totalWeights;
+        double totalWeightedGrades = 0.0;
+        double totalWeights = 0.0;
+        int validGrades = 0;
+        for(GradeSection gradeSection: _grades){
+            if(gradeSection.getSectionGrade() >= 0){
+                totalWeightedGrades += gradeSection.getSectionGrade() * gradeSection.getWeight();
+                totalWeights += gradeSection.getWeight();
+                validGrades++;
+            }
         }
+
+        if(validGrades > 0){
+            return totalWeightedGrades/totalWeights;
+        } else {
+            return -1;
+        }
+
     }
 
     public String toString(){

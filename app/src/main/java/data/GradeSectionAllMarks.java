@@ -16,6 +16,10 @@ public class GradeSectionAllMarks extends GradeSection{
 //        this._markWeight = markWeight;
     }
 
+    public String getNumTopMarks(){
+        return "false";
+    }
+
     @Override
     public double getSectionGrade() {
         double marksTotal = 0;
@@ -26,7 +30,13 @@ public class GradeSectionAllMarks extends GradeSection{
                 numApplicableMarks++;
             }
         }
-        return marksTotal/numApplicableMarks;
+
+        if(numApplicableMarks > 0){
+            return marksTotal/numApplicableMarks;
+        } else {
+            return -1;
+        }
+
     }
 
 }
