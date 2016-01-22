@@ -186,6 +186,10 @@ public class AddGradeSectionActivity extends AppCompatActivity {
 
     }
 
+    public void backButtonClicked(View view){
+        onBackPressed();
+    }
+
     /**
      * If the CheckBox is checked then show the corresponding TextView's and EditText. Otherwise
      * hide the widgets from the user.

@@ -56,7 +56,7 @@
         android:layout_marginLeft="15dp"/>
 
     <EditText
-        android:layout_width="250dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:textSize="15dp"
         android:id="@+id/courseCodeEditText"
@@ -64,7 +64,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="0dp"
-        android:layout_marginLeft="120dp"
+        android:layout_marginLeft="180dp"
         android:inputType="textCapCharacters"
         android:gravity="center"/>
 
@@ -97,9 +97,9 @@
         android:layout_height="wrap_content"
         android:text="@string/add_course_confirmation_button"
         android:id="@+id/addCourseButton"
-        android:layout_above="@+id/settingsButton"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="5dp"
+        android:layout_margin="10dp"
         android:onClick="addCourseButtonClicked"/>
 
     <ListView
@@ -114,15 +114,38 @@
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"/>
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/add_course_settings_button"
-        android:id="@+id/settingsButton"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="#EF9A9A"
-        android:onClick="settingsButtonClicked"
-        android:layout_margin="10dp"/>
+    <ImageButton
+        android:layout_width="75dp"
+        android:layout_height="60dp"
+        android:id="@+id/backButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/vector_back_button"
+        android:background="#FFC107"
+        android:onClick="backButtonClicked"/>
+
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/settings"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/vector_settings_button"
+        android:background="#FFC107"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:onClick="settingsButtonClicked"/>
+
+    <!--<ImageButton-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:id="@+id/infoButton"-->
+        <!--android:layout_alignTop="@+id/settings"-->
+        <!--android:layout_toLeftOf="@+id/settings"-->
+        <!--android:layout_toStartOf="@+id/settings"-->
+        <!--android:src="@drawable/vector_info_button"-->
+        <!--android:background="#FFC107"/>-->
 
 </RelativeLayout>

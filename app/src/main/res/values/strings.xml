@@ -13,12 +13,12 @@
     <string name="title_screen_continue_text">Click anywhere to continue</string>
 
     <!-- SelectSemesterActivity strings -->
-    <string name="select_semester_title">Select Semester</string>
+    <string name="select_semester_title">Semesters</string>
     <string name="select_semester_add_semester_button">Add Semester</string>
     <string name="select_semester_settings_button">Settings</string>
 
     <!-- AddSemesterActivity strings -->
-    <string name="add_semester_title">Add a Semester</string>
+    <string name="add_semester_title">+ Semester</string>
     <string name="add_semester_settings_button">Settings</string>
     <string name="add_semester_name_text">Name: </string>
     <string name="add_semester_courses_text">Courses: </string>
@@ -26,12 +26,12 @@
     <string name="add_semester_confirmation_button">Add Semester</string>
 
     <!-- SelectCourseActivity strings -->
-    <string name="select_course_title">Select Course</string>
+    <string name="select_course_title">Courses</string>
     <string name="select_course_add_course_button">Add Course</string>
     <string name="select_course_settings_button">Settings</string>
 
     <!-- AddCourseActivity strings -->
-    <string name="add_course_title">Add a Course</string>
+    <string name="add_course_title">+ Course</string>
     <string name="add_course_settings_button">Settings</string>
     <string name="add_course_name_text">Course Name: </string>
     <string name="add_course_code_text">Course Code: </string>
@@ -40,7 +40,7 @@
     <string name="add_course_confirmation_button">Add Course</string>
 
     <!-- AddGradeSectionActivity strings -->
-    <string name="add_grade_section_title">Add a Grade Section</string>
+    <string name="add_grade_section_title">+ Grade Section</string>
     <string name="add_grade_section_settings_button">Settings</string>
     <string name="add_grade_section_name_text">Grade Section Name: </string>
     <string name="add_grade_section_weight_text">Grade Section Weight: </string>

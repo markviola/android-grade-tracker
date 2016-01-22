@@ -100,7 +100,10 @@ public class TitleScreenActivity extends AppCompatActivity {
         }
     }
 
-
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public void onBackPressed() {
+        //Do nothing
+    }
 
 
 }

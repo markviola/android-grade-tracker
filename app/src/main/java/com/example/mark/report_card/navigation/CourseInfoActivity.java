@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mark.report_card.R;
@@ -17,6 +18,7 @@ import com.example.mark.report_card.adding.AddGradeSectionActivity;
 import com.example.mark.report_card.popups.EditGradeSectionOptionsPopUpActivity;
 import com.example.mark.report_card.popups.EditMarkOptionsPopUpActivity;
 import com.example.mark.report_card.settings.SettingsActivity;
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 
 import java.util.HashMap;
 import java.util.List;
@@ -110,13 +112,18 @@ public class CourseInfoActivity extends AppCompatActivity {
 
     }
 
-    public void addSectionButtonClicked(View view){
+    public void addGradeSectionButtonClicked(View view){
         Intent intent = new Intent(this, AddGradeSectionActivity.class);
         intent.putExtra("newSemesterName", semesterName);
         intent.putExtra("selectedCourse", selectedCourse);
         intent.putExtra("fromCourseInfoActivity", true);
         startActivity(intent);
     }
+
+    public void backButtonClicked(View view){
+        onBackPressed();
+    }
+
 
     public void settingsButtonClicked(View view){
         Intent intent = new Intent(this, SettingsActivity.class);
@@ -162,5 +169,6 @@ public class CourseInfoActivity extends AppCompatActivity {
                 R.anim.right_to_left_transition, R.anim.right_to_left_transition_2).toBundle();
         startActivity(intent, bndlanimation);
     }
+
 
 }

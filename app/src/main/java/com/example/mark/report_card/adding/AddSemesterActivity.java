@@ -5,6 +5,7 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -94,6 +95,10 @@ public class AddSemesterActivity extends AppCompatActivity {
         Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
                 R.anim.left_to_right_transition, R.anim.left_to_right_transition_2).toBundle();
         startActivity(intent, bndlanimation);
+    }
+
+    public void backButtonClicked(View view){
+        onBackPressed();
     }
 
     /**

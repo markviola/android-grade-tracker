@@ -115,6 +115,10 @@ public class AddCourseActivity extends AppCompatActivity {
         startActivity(intent, bndlanimation);
     }
 
+    public void backButtonClicked(View view){
+        onBackPressed();
+    }
+
     /**
      * Deletes the specifically selected grade section from the current list of grade sections
      * @param view The view of the AddCourseActivity activity

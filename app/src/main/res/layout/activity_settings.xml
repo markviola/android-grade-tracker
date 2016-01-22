@@ -55,7 +55,7 @@
         android:id="@+id/saveAndContinueButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="#EF9A9A"
+        android:background="#ABCDEF"
         android:onClick="saveAndContinueButtonClicked"
         android:layout_margin="10dp"/>
 

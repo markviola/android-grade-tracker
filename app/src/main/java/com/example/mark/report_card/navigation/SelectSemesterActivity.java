@@ -3,12 +3,15 @@ package com.example.mark.report_card.navigation;
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,6 +20,7 @@ import com.example.mark.report_card.R;
 import com.example.mark.report_card.adding.AddSemesterActivity;
 import com.example.mark.report_card.settings.SettingsActivity;
 import com.example.mark.report_card.popups.EditSemesterOptionsPopUpActivity;
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 
 import adapters.SemesterListAdapter;
 import managers.DBManager;
@@ -28,16 +32,22 @@ public class SelectSemesterActivity extends AppCompatActivity {
 
     private String TAG = "customFilter";
 
+    SettingsManager settingsManager;
+
     TextView selectSemesterTitle;
     TextView noSemesterText;
+    ImageButton backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_semester_list);
 
+        settingsManager = SettingsManager.getInstance(this);
+
         selectSemesterTitle = (TextView) findViewById(R.id.selectSemesterTitle);
         noSemesterText = (TextView) findViewById(R.id.noSemestersText);
+        backButton = (ImageButton) findViewById(R.id.backButton);
 
         //Change the header font to Montserrat-Bold
         Typeface font = Typeface.createFromAsset(getAssets(), "Montserrat-Bold.ttf");
@@ -50,6 +60,11 @@ public class SelectSemesterActivity extends AppCompatActivity {
         //Check if noSemesterText should be displayed or not
         if(dbManager.getAllSemesters().size() > 0){
             noSemesterText.setVisibility(View.GONE);
+        }
+
+        //Check if back button should be displayed or not
+        if(!settingsManager.getShowTitleScreen()){
+            backButton.setVisibility(View.GONE);
         }
 
         //Set the corresponding list adapter
@@ -78,7 +93,10 @@ public class SelectSemesterActivity extends AppCompatActivity {
                     }
                 }
         );
+
+
     }
+
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void goToCourses(Semester semester){
@@ -100,7 +118,11 @@ public class SelectSemesterActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void settingsClicked(View view){
+    public void backButtonClicked(View view){
+        onBackPressed();
+    }
+
+    public void settingsButtonClicked(View view){
         Intent intent = new Intent(this, SettingsActivity.class);
         intent.putExtra("previousActivity", "SelectSemesterActivity");
         startActivity(intent);
@@ -108,7 +130,7 @@ public class SelectSemesterActivity extends AppCompatActivity {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void onBackPressed() {
-        SettingsManager settingsManager = SettingsManager.getInstance(this);
+        settingsManager = SettingsManager.getInstance(this);
 
         Intent intent = new Intent(this, TitleScreenActivity.class);
 

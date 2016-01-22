@@ -1,7 +1,10 @@
 package com.example.mark.report_card.popups;
 
+import android.annotation.TargetApi;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -15,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.mark.report_card.adding.AddGradeSectionActivity;
 import com.example.mark.report_card.R;
+import com.example.mark.report_card.navigation.TitleScreenActivity;
 
 import java.util.ArrayList;
 
@@ -22,6 +26,7 @@ import adapters.AddBulkMarksListAdapter;
 import data.Course;
 import data.GradeSection;
 import data.Mark;
+import managers.SettingsManager;
 
 public class AddBulkMarkPopUpActivity extends AppCompatActivity {
 
@@ -124,21 +129,7 @@ public class AddBulkMarkPopUpActivity extends AppCompatActivity {
         //marks ArrayList altered in the corresponding list adapter so newMarks will contain
         //updated information on the new grades
         marks.addAll(newMarks);
-
-        Intent intent = new Intent(this, AddGradeSectionActivity.class);
-        intent.putExtra("newSemesterName", newSemesterName);
-        intent.putExtra("courses", courses);
-        intent.putExtra("newCourseName", newCourseName);
-        intent.putExtra("newCourseCode", newCourseCode);
-        intent.putExtra("gradeSections", gradeSections);
-        intent.putExtra("gradeSectionName", gradeSectionName);
-        intent.putExtra("gradeSectionWeight", gradeSectionWeight);
-        intent.putExtra("marks", marks);
-        intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
-        intent.putExtra("fromCourseInfoActivity", fromCourseInfoActivity);
-        intent.putExtra("selectedCourse", selectedCourse);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
-        startActivity(intent);
+        goToAddGradeSection();
 
     }
 
@@ -149,6 +140,11 @@ public class AddBulkMarkPopUpActivity extends AppCompatActivity {
     public void deleteButtonClicked(View view){
         int position = (Integer) view.getTag();
         deletePopUp(position);
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public void onBackPressed() {
+        goToAddGradeSection();
     }
 
     /**
@@ -173,6 +169,23 @@ public class AddBulkMarkPopUpActivity extends AppCompatActivity {
         intent.putExtra("selectedCourse", selectedCourse);
         intent.putExtra("position", position);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition animation
+        startActivity(intent);
+    }
+
+    private void goToAddGradeSection() {
+        Intent intent = new Intent(this, AddGradeSectionActivity.class);
+        intent.putExtra("newSemesterName", newSemesterName);
+        intent.putExtra("courses", courses);
+        intent.putExtra("newCourseName", newCourseName);
+        intent.putExtra("newCourseCode", newCourseCode);
+        intent.putExtra("gradeSections", gradeSections);
+        intent.putExtra("gradeSectionName", gradeSectionName);
+        intent.putExtra("gradeSectionWeight", gradeSectionWeight);
+        intent.putExtra("marks", marks);
+        intent.putExtra("fromSelectCourseActivity", fromSelectCourseActivity);
+        intent.putExtra("fromCourseInfoActivity", fromCourseInfoActivity);
+        intent.putExtra("selectedCourse", selectedCourse);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //Prevent transition left_to_right_transition
         startActivity(intent);
     }
 

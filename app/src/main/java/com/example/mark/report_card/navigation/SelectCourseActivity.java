@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import com.example.mark.report_card.R;
 import com.example.mark.report_card.adding.AddCourseActivity;
 import com.example.mark.report_card.popups.EditCourseOptionsPopUpActivity;
 import com.example.mark.report_card.settings.SettingsActivity;
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 
 import adapters.CourseListAdapter;
 import data.Course;
@@ -81,6 +83,7 @@ public class SelectCourseActivity extends AppCompatActivity {
                     }
                 }
         );
+
     }
 
     public void addCourseButtonClicked(View view){
@@ -98,6 +101,10 @@ public class SelectCourseActivity extends AppCompatActivity {
         intent.putExtra("previousActivity", "SelectCourseActivity");
         intent.putExtra("semesterName", semesterName);
         startActivity(intent);
+    }
+
+    public void backButtonClicked(View view){
+        onBackPressed();
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -124,5 +131,6 @@ public class SelectCourseActivity extends AppCompatActivity {
                 R.anim.right_to_left_transition, R.anim.right_to_left_transition_2).toBundle();
         startActivity(intent, bndlanimation);
     }
+
 
 }

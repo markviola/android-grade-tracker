@@ -24,11 +24,21 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.CustomPopUpThemeNoCloseOnTouch">
+        <item name="colorPrimary">#FFC107</item>
+        <item name="colorPrimaryDark">#FFC107</item>
+        <item name="colorAccent">#FFC107</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <!-- Orange Status Bar Theme -->
     <style name="OrangeTop" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">#FFC107</item>
         <item name="colorPrimaryDark">#FFC107</item>
-        <item name="colorAccent">#FFC107</item>
+        <item name="colorAccent">#90CAF9</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
