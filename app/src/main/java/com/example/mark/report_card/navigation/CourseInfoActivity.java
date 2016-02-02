@@ -18,7 +18,6 @@ import com.example.mark.report_card.adding.AddGradeSectionActivity;
 import com.example.mark.report_card.popups.EditGradeSectionOptionsPopUpActivity;
 import com.example.mark.report_card.popups.EditMarkOptionsPopUpActivity;
 import com.example.mark.report_card.settings.SettingsActivity;
-import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 
 import java.util.HashMap;
 import java.util.List;

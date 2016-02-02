@@ -34,6 +34,7 @@ public class SettingsActivity extends AppCompatActivity{
 
     SettingsUsernameFragment settingsUsernameFragment;
     SettingsShowTitleScreenFragment settingsShowTitleScreenFragment;
+    SettingsCourseDisplayFragment settingsCourseDisplayFragment;
     String previousActivity;
 
     @Override
@@ -45,6 +46,7 @@ public class SettingsActivity extends AppCompatActivity{
 
         settingsUsernameFragment = (SettingsUsernameFragment) getSupportFragmentManager().findFragmentById(id.settingsUsernameFragment);
         settingsShowTitleScreenFragment = (SettingsShowTitleScreenFragment) getSupportFragmentManager().findFragmentById(id.settingsShowTitleScreenFragment);
+        settingsCourseDisplayFragment = (SettingsCourseDisplayFragment) getSupportFragmentManager().findFragmentById(id.settingsCourseDisplayFragment);
         settingsTitleText = (TextView) findViewById(R.id.settingsTitleText);
 
         //Change the header font to Montserrat-Bold
@@ -60,6 +62,7 @@ public class SettingsActivity extends AppCompatActivity{
     public void saveAndContinueButtonClicked(View view) {
         updateUsername();
         updateShowTitleScreen();
+        updateDisplayCourse();
 
         switch (previousActivity) {
             case "SelectSemesterActivity":
@@ -86,6 +89,7 @@ public class SettingsActivity extends AppCompatActivity{
     private void setCurrentSettings(){
         settingsUsernameFragment.setUsername(settingsManager.getUsername());
         settingsShowTitleScreenFragment.setShowTitleScreen(settingsManager.getShowTitleScreen());
+        settingsCourseDisplayFragment.setCourseDisplay(settingsManager.getCourseDisplay());
     }
 
     /*
@@ -165,6 +169,11 @@ public class SettingsActivity extends AppCompatActivity{
         } else {
             settingsManager.setShowTitleScreen("false");
         }
+    }
+
+    public void updateDisplayCourse(){
+        String courseDisplay = settingsCourseDisplayFragment.getCourseDisplay();
+        settingsManager.setCourseDisplay(courseDisplay);
     }
 
 }

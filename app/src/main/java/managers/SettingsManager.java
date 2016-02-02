@@ -14,6 +14,7 @@ public class SettingsManager {
 
     private String _username;
     private boolean _showTitleScreen;
+    private String _courseDisplay;
 
 
     public SettingsManager(Context context){
@@ -21,9 +22,11 @@ public class SettingsManager {
         if(dbManager.settingsTableIsEmpty()){
             dbManager.addSettingsInfo("username", "User");
             dbManager.addSettingsInfo("showTitleScreen", "false");
+            dbManager.addSettingsInfo("courseDisplay", "both");
         } else {
             setUsername(dbManager.getSettingState("username"));
             setShowTitleScreen(dbManager.getSettingState("showTitleScreen"));
+            setCourseDisplay(dbManager.getSettingState("courseDisplay"));
         }
     }
 
@@ -55,5 +58,14 @@ public class SettingsManager {
         }
 
         dbManager.updateSettingInfo("showTitleScreen", String.format("%s", this._showTitleScreen));
+    }
+
+    public String getCourseDisplay(){
+        return this._courseDisplay;
+    }
+
+    public void setCourseDisplay(String courseDisplay){
+        this._courseDisplay = courseDisplay;
+        dbManager.updateSettingInfo("courseDisplay", courseDisplay);
     }
 }

@@ -47,12 +47,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/gradeSectionList"
         android:layout_below="@+id/currentGrade"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/myFAB"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="80dp"/>
+        android:layout_marginBottom="0dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -86,16 +86,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:onClick="settingsButtonClicked"/>
-
-    <!--<ImageButton-->
-        <!--android:layout_width="40dp"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:id="@+id/infoButton"-->
-        <!--android:layout_alignTop="@+id/settings"-->
-        <!--android:layout_toLeftOf="@+id/settings"-->
-        <!--android:layout_toStartOf="@+id/settings"-->
-        <!--android:src="@drawable/vector_info_button"-->
-        <!--android:background="#FFC107"/>-->
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/myFAB"

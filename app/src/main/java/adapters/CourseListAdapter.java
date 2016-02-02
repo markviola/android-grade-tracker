@@ -3,6 +3,7 @@ package adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.audiofx.BassBoost;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,12 @@ import com.example.mark.report_card.R;
 import java.util.ArrayList;
 
 import data.Course;
+import managers.SettingsManager;
 
 public class CourseListAdapter extends ArrayAdapter<Course>{
 
     private String TAG = "customFilter";
+    SettingsManager settingsManager;
 
     public CourseListAdapter(Context context, ArrayList<Course> courses) {
         super(context, R.layout.custom_course_list_row, courses);
@@ -29,6 +32,8 @@ public class CourseListAdapter extends ArrayAdapter<Course>{
         LayoutInflater courseInflater = LayoutInflater.from(getContext()); //Inflater used, to get ready for rending
         View courseView = courseInflater.inflate(R.layout.custom_course_list_row, parent, false);
 
+        settingsManager = SettingsManager.getInstance(getContext());
+
         Course courseItem = getItem(position);
         TextView courseNameAndCode = (TextView) courseView.findViewById(R.id.courseNameAndCode);
         TextView courseCurrentGrade = (TextView) courseView.findViewById(R.id.courseCurrentGrade);
@@ -37,7 +42,17 @@ public class CourseListAdapter extends ArrayAdapter<Course>{
         Double currentGrade = courseItem.getCurrentGrade();
 
         courseNameAndCode.setTypeface(null, Typeface.BOLD);
-        courseNameAndCode.setText(courseItem.getName() + " (" + courseItem.getCode() + ")");
+
+        if(settingsManager.getCourseDisplay().equals("both")){
+            courseNameAndCode.setText(courseItem.getName() + " (" + courseItem.getCode() + ")");
+        } else if (settingsManager.getCourseDisplay().equals("courseName")){
+            courseNameAndCode.setText(courseItem.getName());
+        } else if (settingsManager.getCourseDisplay().equals("courseCode")){
+            courseNameAndCode.setText(courseItem.getCode());
+        } else {
+            courseNameAndCode.setText("ERROR" + settingsManager.getCourseDisplay());
+        }
+
         if(currentGrade == -1){
             courseCurrentGrade.setText("Current Grade: N/A");
         } else{

@@ -21,7 +21,7 @@ public class DBManager extends SQLiteOpenHelper{
     private static DBManager instance;
     private static final String TAG = "customFilter";
 
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 11;
     private static final String DATABASE_NAME = "SemesterDatabase.db";
 
     //Information for semester table
@@ -52,12 +52,12 @@ public class DBManager extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
 
         //Create semester table
-        String playerQuery = "CREATE TABLE " + TABLE_SEMESTERS + "(" +
+        String semesterQuery = "CREATE TABLE " + TABLE_SEMESTERS + "(" +
                 COLUMN_SEMESTER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_SEMESTER_NAMES + " TEXT, " +
                 COLUMN_COURSES + " TEXT " +
                 ");";
-        db.execSQL(playerQuery);
+        db.execSQL(semesterQuery);
 
         //Create settings options table
         String settingsQuery = "CREATE TABLE " + TABLE_SETTINGS + "(" +
@@ -71,9 +71,33 @@ public class DBManager extends SQLiteOpenHelper{
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SEMESTERS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SETTINGS);
-        onCreate(db);
+        //First released database version was version 10
+        switch (oldVersion){
+            case 10: //Upgrade from version 10 to version 11
+                String newSemesterQuery = "CREATE TABLE " + "newSemesterTable" + "(" +
+                        COLUMN_SEMESTER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        COLUMN_SEMESTER_NAMES + " TEXT, " +
+                        COLUMN_COURSES + " TEXT " +
+                        ");";
+                String newSettingsQuery = "CREATE TABLE " + "newSettingsTable" + "(" +
+                        COLUMN_SETTINGS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        COLUMN_SETTING_NAMES + " TEXT, " +
+                        COLUMN_SETTING_STATES + " TEXT " +
+                        ");";
+
+                db.execSQL(newSemesterQuery+
+                        "INSERT INTO newSemesterTable SELECT * FROM " + TABLE_SEMESTERS + ";"+
+                        "DROP TABLE " + TABLE_SEMESTERS + ";"+
+                        "ALTER TABLE newSemesterTable RENAME TO " + TABLE_SEMESTERS + ";");
+
+                db.execSQL(newSettingsQuery+
+                        "INSERT INTO newSettingsTable SELECT * FROM " + TABLE_SETTINGS + ";"+
+                        "DROP TABLE " + TABLE_SETTINGS + ";"+
+                        "ALTER TABLE newSettingsTable RENAME TO " + TABLE_SETTINGS + ";");
+                break;
+            default:
+                Log.i(TAG, "ERROR IN DATABASE UPGRADE");
+        }
     }
 
     //Check if database is empty

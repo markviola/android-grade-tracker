@@ -43,6 +43,13 @@
                 android:id="@+id/settingsShowTitleScreenFragment"
                 tools:layout="@layout/fragment_settings_show_title_screen" />
 
+            <fragment
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:name="com.example.mark.report_card.settings.SettingsCourseDisplayFragment"
+                android:id="@+id/settingsCourseDisplayFragment"
+                tools:layout="@layout/fragment_settings_course_display" />
+
 
         </LinearLayout>
 

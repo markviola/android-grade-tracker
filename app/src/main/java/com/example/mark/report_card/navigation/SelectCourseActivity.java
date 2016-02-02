@@ -18,7 +18,6 @@ import com.example.mark.report_card.R;
 import com.example.mark.report_card.adding.AddCourseActivity;
 import com.example.mark.report_card.popups.EditCourseOptionsPopUpActivity;
 import com.example.mark.report_card.settings.SettingsActivity;
-import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 
 import adapters.CourseListAdapter;
 import data.Course;

@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -78,9 +79,18 @@ public class TitleScreenActivity extends AppCompatActivity {
         if (dbManager.settingsTableIsEmpty()){
             dbManager.addSettingsInfo("username", "User");
             dbManager.addSettingsInfo("showTitleScreen", "false");
+            dbManager.addSettingsInfo("courseDisplay", "both");
         } else {
             settingsManager.setUsername(dbManager.getSettingState("username"));
             settingsManager.setShowTitleScreen(dbManager.getSettingState("showTitleScreen"));
+
+            //Check if database just updated to version 11
+            if(dbManager.getSettingState("courseDisplay").equals("ERROR STATE")){
+                dbManager.deleteSettingInfo("courseDisplay");
+                dbManager.addSettingsInfo("courseDisplay", "both");
+            }
+            
+            settingsManager.setCourseDisplay(dbManager.getSettingState("courseDisplay"));
         }
     }
 
