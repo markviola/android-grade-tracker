@@ -3,7 +3,6 @@ package adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.media.audiofx.BassBoost;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,15 +42,24 @@ public class CourseListAdapter extends ArrayAdapter<Course>{
 
         courseNameAndCode.setTypeface(null, Typeface.BOLD);
 
+        String courseDisplayText = null;
         if(settingsManager.getCourseDisplay().equals("both")){
-            courseNameAndCode.setText(courseItem.getName() + " (" + courseItem.getCode() + ")");
+            courseDisplayText = courseItem.getName() + " (" + courseItem.getCode() + ")";
         } else if (settingsManager.getCourseDisplay().equals("courseName")){
-            courseNameAndCode.setText(courseItem.getName());
+            courseDisplayText = courseItem.getName();
         } else if (settingsManager.getCourseDisplay().equals("courseCode")){
-            courseNameAndCode.setText(courseItem.getCode());
+            courseDisplayText = courseItem.getCode();
         } else {
-            courseNameAndCode.setText("ERROR" + settingsManager.getCourseDisplay());
+            courseDisplayText ="ERROR";
         }
+
+        // Size the text to fit
+        if(courseDisplayText.length() > 32){
+            courseNameAndCode.setTextSize(16);
+        } else if (courseDisplayText.length() > 25){
+            courseNameAndCode.setTextSize(20);
+        }
+        courseNameAndCode.setText(courseDisplayText);
 
         if(currentGrade == -1){
             courseCurrentGrade.setText("Current Grade: N/A");

@@ -2,9 +2,12 @@ package com.example.mark.report_card.navigation;
 
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
+//import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +20,7 @@ import com.example.mark.report_card.R;
 import com.example.mark.report_card.adding.AddGradeSectionActivity;
 import com.example.mark.report_card.popups.EditGradeSectionOptionsPopUpActivity;
 import com.example.mark.report_card.popups.EditMarkOptionsPopUpActivity;
+import com.example.mark.report_card.popups.TargetMarkDialogFragment;
 import com.example.mark.report_card.settings.SettingsActivity;
 
 import java.util.HashMap;
@@ -67,7 +71,12 @@ public class CourseInfoActivity extends AppCompatActivity {
         //Set static text in activity
         courseNameText.setTypeface(null, Typeface.BOLD);
         currentGrade.setTypeface(null, Typeface.BOLD);
+
+        if(selectedCourse.getName().length() > 23){
+            courseNameText.setTextSize(15);
+        }
         courseNameText.setText(selectedCourse.getName());
+
         courseCodeText.setText("Course Code: " + selectedCourse.getCode());
         if(selectedCourse.getCurrentGrade() == -1){//Change -1 into a constant and put in  Constants.java
             currentGrade.setText("Current Grade: N/A");
@@ -117,6 +126,12 @@ public class CourseInfoActivity extends AppCompatActivity {
         intent.putExtra("selectedCourse", selectedCourse);
         intent.putExtra("fromCourseInfoActivity", true);
         startActivity(intent);
+    }
+
+    public void calculateNeededMarkButtonClicked(View view){
+        FragmentTransaction fragmentManager = getFragmentManager().beginTransaction();
+        TargetMarkDialogFragment targetMarkDialogFragment = TargetMarkDialogFragment.newInstance(selectedCourse);
+        targetMarkDialogFragment.show(fragmentManager, "Tag");
     }
 
     public void backButtonClicked(View view){

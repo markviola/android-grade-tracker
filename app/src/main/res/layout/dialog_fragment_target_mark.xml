@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Current mark:"
+        android:textSize="18dp"
+        android:id="@+id/currentMarkText"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Total current weight:"
+        android:textSize="18dp"
+        android:id="@+id/currentWeightText"
+        android:layout_below="@+id/currentMarkText"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Target mark:"
+        android:textSize="18dp"
+        android:id="@+id/targetMarkText"
+        android:layout_below="@+id/currentWeightText"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp" />
+
+    <EditText
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/targetMarkEditText"
+        android:layout_alignTop="@+id/targetMarkText"
+        android:layout_toRightOf="@+id/targetMarkText"
+        android:layout_toEndOf="@+id/targetMarkText"
+        android:layout_marginTop="-10dp"
+        android:gravity="center"
+        android:inputType="numberDecimal"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calculate"
+        android:id="@+id/calculateTargetMarkButton"
+        android:layout_below="@+id/targetMarkEditText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="%"
+        android:textSize="18dp"
+        android:id="@+id/targetMarkPercentText"
+        android:layout_alignTop="@+id/targetMarkText"
+        android:layout_toRightOf="@+id/targetMarkEditText"
+        android:layout_toEndOf="@+id/targetMarkEditText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Target mark result"
+        android:textSize="18dp"
+        android:id="@+id/resultText"
+        android:layout_alignTop="@+id/currentMarkText"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"/>
+
+
+</RelativeLayout>

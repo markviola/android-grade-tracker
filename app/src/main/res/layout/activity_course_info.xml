@@ -88,6 +88,17 @@
         android:onClick="settingsButtonClicked"/>
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/calculateNeededMarkFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/vector_calculator_button"
+        app:elevation="4dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/myFAB"
+        android:onClick="calculateNeededMarkButtonClicked"
+        android:layout_margin="15dp"/>
+
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/myFAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

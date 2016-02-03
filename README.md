@@ -4,7 +4,7 @@ Track your grades over your academic career with this app. The app allows the us
 
 
 <p align="left">
-	<a href="https://play.google.com/store/apps/details?id=com.viola.mark.gradetracker&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height="64px" width="216px"/></a>
+	<a href="https://play.google.com/store/apps/details?id=com.viola.mark.gradetracker&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height="50px" width="168px"/></a>
 </p>
 
 
@@ -34,9 +34,8 @@ The title screen shows a summary of the user's academic status which includes th
 
 
 ###To-do List:
-* Allow user to calculate the mark needed to reach a desired final grade
 * Change GPA Scale
 * Convert a grade section from calculating all marks to top marks and vice versa
-* Visually display grade section weight
 * Expand settings options (color scheme, language)
 * Put all text in strings.xml file
+* info button 

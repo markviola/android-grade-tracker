@@ -75,6 +75,7 @@ public class TitleScreenActivity extends AppCompatActivity {
         goToSelectSemester(true);
     }
 
+
     private void settingsSetup(){
         if (dbManager.settingsTableIsEmpty()){
             dbManager.addSettingsInfo("username", "User");
@@ -89,7 +90,7 @@ public class TitleScreenActivity extends AppCompatActivity {
                 dbManager.deleteSettingInfo("courseDisplay");
                 dbManager.addSettingsInfo("courseDisplay", "both");
             }
-            
+
             settingsManager.setCourseDisplay(dbManager.getSettingState("courseDisplay"));
         }
     }

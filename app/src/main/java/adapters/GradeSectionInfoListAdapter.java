@@ -74,10 +74,16 @@ public class GradeSectionInfoListAdapter extends BaseExpandableListAdapter{
             convertView = layoutInflater.inflate(R.layout.custom_course_info_list_row_heading, null);
         }
         TextView gradeSectionName = (TextView) convertView.findViewById(R.id.gradeSectionName);
+        TextView gradeSectionWeight = (TextView) convertView.findViewById(R.id.gradeSectionWeight);
         TextView currentGradeText = (TextView) convertView.findViewById(R.id.currentGradeText);
 
         gradeSectionName.setTypeface(null, Typeface.BOLD);
+        if(gradeSection.getSectionName().length() >= 10){
+            gradeSectionName.setTextSize(19);
+        }
+
         gradeSectionName.setText(gradeSection.getSectionName());
+        gradeSectionWeight.setText(String.format("(%.2f%%)", gradeSection.getWeight()));
 
         currentGradeText.setTypeface(null, Typeface.BOLD);
         if(gradeSection.getSectionGrade() >= 0){
