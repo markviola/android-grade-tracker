@@ -3,12 +3,14 @@ package com.example.mark.report_card.popups;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mark.report_card.R;
 
@@ -16,6 +18,8 @@ import data.Course;
 
 
 public class TargetMarkDialogFragment extends DialogFragment{
+
+    private String TAG = "customFilter";
 
     Course course;
 
@@ -67,23 +71,26 @@ public class TargetMarkDialogFragment extends DialogFragment{
 
         calculateTargetMarkButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                currentMarkText.setVisibility(View.GONE);
-                currentWeightText.setVisibility(View.GONE);
-                targetMarkEditText.setVisibility(View.GONE);
-                targetMarkText.setVisibility(View.GONE);
-                targetMarkPercentText.setVisibility(View.GONE);
-                calculateTargetMarkButton.setVisibility(View.GONE);
+                if (targetMarkEditText.getText().toString().equals("")) {
+                    Toast.makeText(getActivity(), "A target mark was not entered.", Toast.LENGTH_LONG).show();
+                } else {
+                    currentMarkText.setVisibility(View.GONE);
+                    currentWeightText.setVisibility(View.GONE);
+                    targetMarkEditText.setVisibility(View.GONE);
+                    targetMarkText.setVisibility(View.GONE);
+                    targetMarkPercentText.setVisibility(View.GONE);
+                    calculateTargetMarkButton.setVisibility(View.GONE);
 
-                double targetMark = Double.parseDouble(targetMarkEditText.getText().toString());
-                double neededMark = 100*(targetMark - (course.getCurrentTotalWeight()/100 * course.getCurrentGrade()))/
-                        (100 - course.getCurrentTotalWeight());
+                    double targetMark = Double.parseDouble(targetMarkEditText.getText().toString());
+                    double neededMark = 100 * (targetMark - (course.getCurrentTotalWeight() / 100 * course.getCurrentGrade())) /
+                            (100 - course.getCurrentTotalWeight());
 
-                resultText.setText(String.format("To get a final mark of %.2f%%, you need to get " +
-                        "%.2f%% on the remaining %.2f%% of the course", targetMark, neededMark,
-                        100 - course.getCurrentTotalWeight()));
-                resultText.setVisibility(View.VISIBLE);
+                    resultText.setText(String.format("To get a final mark of %.2f%%, you need to get " +
+                                    "%.2f%% on the remaining %.2f%% of the course", targetMark, neededMark,
+                            100 - course.getCurrentTotalWeight()));
+                    resultText.setVisibility(View.VISIBLE);
+                }
             }
-
         });
 
         return rootView;

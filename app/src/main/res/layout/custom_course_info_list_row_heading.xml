@@ -2,38 +2,40 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#c2d6d6">
+    android:background="@drawable/list_border">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:text="Section Name"
-        android:textSize="22dp"
+        android:textSize="20dp"
         android:id="@+id/gradeSectionName"
         android:gravity="center_vertical"
-        android:paddingLeft="15dp"
+        android:paddingLeft="32dp"
         android:paddingRight="70dp"/>
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:text="Section Weight"
-        android:textColor="#FFFFFF"
+        android:layout_height="wrap_content"
+        android:text="Weight/Grade:"
         android:textSize="18dp"
-        android:id="@+id/gradeSectionWeight"
+        android:id="@+id/gradeSectionWeightAndGrade"
         android:gravity="center_vertical"
-        android:layout_centerHorizontal="true"
-        android:paddingLeft="50dp"/>
+        android:layout_below="@+id/gradeSectionName"
+        android:paddingLeft="32dp"
+        android:paddingRight="70dp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="-10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:text="100%"
-        android:textSize="22dp"
+        android:layout_height="wrap_content"
+        android:text="100%  /  100%"
+        android:textSize="17dp"
         android:id="@+id/currentGradeText"
-        android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
+        android:layout_alignTop="@+id/gradeSectionWeightAndGrade"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:gravity="center_vertical"
-        android:layout_marginRight="10dp"/>
+        android:layout_marginRight="15dp" />
 </RelativeLayout>
