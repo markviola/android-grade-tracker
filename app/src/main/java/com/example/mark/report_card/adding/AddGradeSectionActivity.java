@@ -146,40 +146,42 @@ public class AddGradeSectionActivity extends AppCompatActivity {
         } else if (gradeSectionWeightEditText.getText().toString().equals("")){
             Toast.makeText(this, "No weight for this grade section", Toast.LENGTH_LONG).show();
         } else {
-            if(isTopMarksCheckBox.isChecked()){
-                if(isValidInteger(topMarksEditText.getText().toString())){
-                    GradeSection newGradeSection = new GradeSectionTopMarks(
-                            gradeSectionNameEditText.getText().toString(),
-                            Double.parseDouble(gradeSectionWeightEditText.getText().toString()),
-                            Integer.parseInt(topMarksEditText.getText().toString()));
+            if(validWeight()){
+                if(isTopMarksCheckBox.isChecked()){
+                    if(isValidInteger(topMarksEditText.getText().toString())){
+                        GradeSection newGradeSection = new GradeSectionTopMarks(
+                                gradeSectionNameEditText.getText().toString(),
+                                Double.parseDouble(gradeSectionWeightEditText.getText().toString()),
+                                Integer.parseInt(topMarksEditText.getText().toString()));
 
+                        for(int i =0; i<marks.size(); i++){
+                            newGradeSection.addMark(marks.get(i));
+                        }
+
+                        if (fromCourseInfoActivity){
+                            goToCourseInfo(newGradeSection);
+                        } else {
+                            gradeSections.add(newGradeSection);
+                            goToAddCourse(false);
+                        }
+
+                    } else {
+                        Toast.makeText(this, "Enter a valid number of marks", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    GradeSection newGradeSection = new GradeSectionAllMarks(
+                            gradeSectionNameEditText.getText().toString(),
+                            Double.parseDouble(gradeSectionWeightEditText.getText().toString()));
                     for(int i =0; i<marks.size(); i++){
                         newGradeSection.addMark(marks.get(i));
                     }
 
-                    if (fromCourseInfoActivity){
+                    if(fromCourseInfoActivity){
                         goToCourseInfo(newGradeSection);
                     } else {
                         gradeSections.add(newGradeSection);
                         goToAddCourse(false);
                     }
-
-                } else {
-                    Toast.makeText(this, "Enter a valid number of marks", Toast.LENGTH_LONG).show();
-                }
-            } else {
-                GradeSection newGradeSection = new GradeSectionAllMarks(
-                        gradeSectionNameEditText.getText().toString(),
-                        Double.parseDouble(gradeSectionWeightEditText.getText().toString()));
-                for(int i =0; i<marks.size(); i++){
-                    newGradeSection.addMark(marks.get(i));
-                }
-
-                if(fromCourseInfoActivity){
-                    goToCourseInfo(newGradeSection);
-                } else {
-                    gradeSections.add(newGradeSection);
-                    goToAddCourse(false);
                 }
             }
         }
@@ -226,7 +228,6 @@ public class AddGradeSectionActivity extends AppCompatActivity {
 
     public void deleteButtonClicked(View view){
         int position = (Integer) view.getTag();
-        //Log.i(TAG, "position: " + position);
         deletePopUp(position);
     }
 
@@ -332,5 +333,35 @@ public class AddGradeSectionActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    private boolean validWeight(){
+        if(fromCourseInfoActivity){
+            if(selectedCourse.getAllTotalWeight() +
+                    Double.parseDouble(gradeSectionWeightEditText.getText().toString()) <= 100){
+                return true;
+            } else {
+                Toast.makeText(this,
+                        String.format("Total weight for this course adds up %.2f%%. The weight " +
+                                        "of the new grade section is too high!",
+                                selectedCourse.getAllTotalWeight()), Toast.LENGTH_LONG).show();
+                return false;
+            }
+        } else {
+            double allTotalWeight = 0;
+            for(GradeSection gradeSection: gradeSections){
+                allTotalWeight += gradeSection.getWeight();
+            }
+            if(allTotalWeight +
+                    Double.parseDouble(gradeSectionWeightEditText.getText().toString()) <= 100){
+                return true;
+            } else {
+                Toast.makeText(this,
+                        String.format("Total weight for this course adds up %.2f%%. The weight " +
+                                        "of the new grade section is too high!",
+                                allTotalWeight), Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }
     }
 }

@@ -20,6 +20,7 @@ import com.example.mark.report_card.R;
 import com.example.mark.report_card.adding.AddGradeSectionActivity;
 import com.example.mark.report_card.popups.EditGradeSectionOptionsPopUpActivity;
 import com.example.mark.report_card.popups.EditMarkOptionsPopUpActivity;
+import com.example.mark.report_card.popups.InfoDialogFragment;
 import com.example.mark.report_card.popups.TargetMarkDialogFragment;
 import com.example.mark.report_card.settings.SettingsActivity;
 
@@ -138,6 +139,11 @@ public class CourseInfoActivity extends AppCompatActivity {
         onBackPressed();
     }
 
+    public void infoButtonClicked(View view){
+        FragmentTransaction fragmentManager = getFragmentManager().beginTransaction();
+        InfoDialogFragment infoDialogFragment = InfoDialogFragment.newInstance("CourseInfoActivity");
+        infoDialogFragment.show(fragmentManager, "Tag");
+    }
 
     public void settingsButtonClicked(View view){
         Intent intent = new Intent(this, SettingsActivity.class);

@@ -2,6 +2,7 @@ package com.example.mark.report_card.navigation;
 
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 
 import com.example.mark.report_card.R;
 import com.example.mark.report_card.adding.AddSemesterActivity;
+import com.example.mark.report_card.popups.InfoDialogFragment;
+import com.example.mark.report_card.popups.TargetMarkDialogFragment;
 import com.example.mark.report_card.settings.SettingsActivity;
 import com.example.mark.report_card.popups.EditSemesterOptionsPopUpActivity;
 
@@ -117,6 +120,12 @@ public class SelectSemesterActivity extends AppCompatActivity {
 
     public void backButtonClicked(View view){
         onBackPressed();
+    }
+
+    public void infoButtonClicked(View view){
+        FragmentTransaction fragmentManager = getFragmentManager().beginTransaction();
+        InfoDialogFragment infoDialogFragment = InfoDialogFragment.newInstance("SelectSemesterActivity");
+        infoDialogFragment.show(fragmentManager, "Tag");
     }
 
     public void settingsButtonClicked(View view){

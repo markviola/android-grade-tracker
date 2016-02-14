@@ -64,7 +64,11 @@ public class TargetMarkDialogFragment extends DialogFragment{
 
         resultText.setVisibility(View.GONE);
 
-        currentMarkText.setText(String.format("Current mark: %.2f%%", course.getCurrentGrade()));
+        if(course.getCurrentGrade() != -1){
+            currentMarkText.setText(String.format("Current mark: %.2f%%", course.getCurrentGrade()));
+        } else {
+            currentMarkText.setText("Current mark: N/A");
+        }
         currentWeightText.setText(String.format("Current weight: %.2f%%", course.getCurrentTotalWeight()));
 
         getDialog().setTitle("Target mark");
@@ -85,9 +89,13 @@ public class TargetMarkDialogFragment extends DialogFragment{
                     double neededMark = 100 * (targetMark - (course.getCurrentTotalWeight() / 100 * course.getCurrentGrade())) /
                             (100 - course.getCurrentTotalWeight());
 
-                    resultText.setText(String.format("To get a final mark of %.2f%%, you need to get " +
-                                    "%.2f%% on the remaining %.2f%% of the course", targetMark, neededMark,
-                            100 - course.getCurrentTotalWeight()));
+                    if (neededMark >= 0) {
+                        resultText.setText(String.format("To get a final mark of %.2f%%, you need to get " +
+                                        "%.2f%% on the remaining %.2f%% of the course", targetMark, neededMark,
+                                100 - course.getCurrentTotalWeight()));
+                    } else {
+                        resultText.setText(String.format("It is impossible to get a final mark lower than %.2f%%", targetMark));
+                    }
                     resultText.setVisibility(View.VISIBLE);
                 }
             }

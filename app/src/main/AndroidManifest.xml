@@ -27,8 +27,7 @@
         <activity
             android:name=".navigation.SelectSemesterActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/OrangeTop">
-        </activity>
+            android:theme="@style/OrangeTop"></activity>
         <activity
             android:name=".adding.AddSemesterActivity"
             android:screenOrientation="portrait"
@@ -85,7 +84,8 @@
             android:theme="@style/AppTheme.CustomPopUpTheme" />
         <activity
             android:name=".popups.EditSemesterPopUpActivity"
-            android:theme="@style/AppTheme.CustomPopUpTheme" ></activity>
+            android:theme="@style/AppTheme.CustomPopUpTheme" />
+        <activity android:name=".adding.ADDGPAActivity"></activity>
     </application>
 
 </manifest>

@@ -139,6 +139,15 @@ public class Course implements Serializable{
         return currentTotalWeight;
     }
 
+    public double getAllTotalWeight(){
+        double allTotalWeight = 0;
+        for(GradeSection gradeSection: _grades){
+            allTotalWeight += gradeSection.getWeight();
+        }
+
+        return allTotalWeight;
+    }
+
     public String toString(){
         String retString = getName()+"@@@@" +getCode();
         for(GradeSection grade: _grades){

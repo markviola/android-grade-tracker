@@ -2,6 +2,7 @@ package com.example.mark.report_card.navigation;
 
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.example.mark.report_card.R;
 import com.example.mark.report_card.adding.AddCourseActivity;
 import com.example.mark.report_card.popups.EditCourseOptionsPopUpActivity;
+import com.example.mark.report_card.popups.InfoDialogFragment;
 import com.example.mark.report_card.settings.SettingsActivity;
 
 import adapters.CourseListAdapter;
@@ -94,6 +96,12 @@ public class SelectCourseActivity extends AppCompatActivity {
         intent.putExtra("fromSelectCourseActivity", true);
 
         startActivity(intent);
+    }
+
+    public void infoButtonClicked(View view){
+        FragmentTransaction fragmentManager = getFragmentManager().beginTransaction();
+        InfoDialogFragment infoDialogFragment = InfoDialogFragment.newInstance("SelectCourseActivity");
+        infoDialogFragment.show(fragmentManager, "Tag");
     }
 
     public void settingsButtonClicked(View view){

@@ -67,7 +67,7 @@ public class CourseListAdapter extends ArrayAdapter<Course>{
             courseCurrentGrade.setText(String.format("Current Grade: %.2f%%", currentGrade));
         }
 
-        if(courseItem.getInProgress()){
+        if(courseItem.getCurrentTotalWeight() < 100){
             inProgressIndicator.setTextColor(Color.parseColor("#ffd633"));
             inProgressIndicator.setText("In Progress");
         } else {

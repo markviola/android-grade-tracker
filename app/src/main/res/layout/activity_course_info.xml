@@ -77,6 +77,19 @@
     <ImageButton
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:id="@+id/infoButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/vector_info_button"
+        android:background="#FFC107"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:onClick="infoButtonClicked"/>
+
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/settings"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
