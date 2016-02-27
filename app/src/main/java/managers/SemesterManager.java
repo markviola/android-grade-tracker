@@ -86,17 +86,17 @@ public class SemesterManager implements Serializable{
 
     public double getCGPA(){
         double totalCGPA = 0.0;
-        int validSemesters = 0;
+        int totalValidCourses = 0;
 
         for(Semester semester: _semesters){
             if(semester.getSGPA() != -1){
-                totalCGPA += semester.getSGPA();
-                validSemesters++;
+                totalCGPA += semester.getSGPA() * semester.getNumValidCourses();
+                totalValidCourses += semester.getNumValidCourses();
             }
         }
 
-        if(validSemesters != 0){
-            return totalCGPA/validSemesters;
+        if(totalValidCourses != 0){
+            return totalCGPA/totalValidCourses;
         } else {
             return -1;
         }

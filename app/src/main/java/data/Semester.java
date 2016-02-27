@@ -53,11 +53,10 @@ public class Semester implements Serializable{
 
     public double getSGPA(){
         Double totalGPAValue = 0.0;
-        int numValidCourses = 0;
+        int numValidCourses = getNumValidCourses();
         for(Course course: _courses){
             if(course.getCurrentGrade() != -1){ //There is some valid mark inputted
                 totalGPAValue += _gpaChart.getGPAValue(course.getCurrentGrade());
-                numValidCourses++;
             }
         }
 
@@ -68,6 +67,16 @@ public class Semester implements Serializable{
             return -1;
         }
 
+    }
+
+    public int getNumValidCourses(){
+        int numValidCourses = 0;
+        for(Course course: _courses){
+            if(course.getCurrentGrade() != -1){ //There is some valid mark inputted
+                numValidCourses++;
+            }
+        }
+        return numValidCourses;
     }
 
     public Course getCourseByName(String courseName){
