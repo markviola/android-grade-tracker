@@ -59,15 +59,18 @@ public class TitleScreenActivity extends AppCompatActivity {
         }
 
         if(semesterManager.getCGPA() != -1){
-            CGPAText.setText(String.format("CGPA: %.2f", semesterManager.getCGPA()));
+            CGPAText.setText(String.format("%s %.2f", getString(R.string.title_screen_CPGA_text),
+                    semesterManager.getCGPA()));
         } else {
-            CGPAText.setText("CGPA: N/A");
+            CGPAText.setText(getString(R.string.title_screen_no_cgpa));
         }
 
         if(semesterManager.getCurrentSemesterSGPA() != -1){
-            currentSemesterGrade.setText(String.format("Current Semester: %.2f", semesterManager.getCurrentSemesterSGPA()));
+            currentSemesterGrade.setText(String.format("%s %.2f",
+                    getString(R.string.title_screen_current_semester_GPA),
+                    semesterManager.getCurrentSemesterSGPA()));
         } else {
-            currentSemesterGrade.setText("Current Semester: N/A");
+            currentSemesterGrade.setText(getString(R.string.title_screen_no_sgpa));
         }
     }
 

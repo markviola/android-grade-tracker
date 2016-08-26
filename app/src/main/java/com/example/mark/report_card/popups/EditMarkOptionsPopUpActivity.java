@@ -38,7 +38,8 @@ public class EditMarkOptionsPopUpActivity extends AppCompatActivity {
         selectedGradeSection = (GradeSection) intent.getSerializableExtra("selectedGradeSection");
         selectedMark = (Mark) intent.getSerializableExtra("selectedMark");
 
-        markTitleText.setText(String.format("\"%s\"\nMark", selectedMark.getName()));
+        markTitleText.setText(String.format("\"%s\"\n%s", selectedMark.getName(),
+                getString(R.string.edit_mark_title_mark_msg)));
 
         changeActivitySize();
     }

@@ -11,6 +11,8 @@
     <string name="title_screen_CPGA_text">CGPA: </string>
     <string name="title_screen_current_semester_GPA">Current Semester: </string>
     <string name="title_screen_continue_text">Click anywhere to continue</string>
+    <string name="title_screen_no_cgpa">CGPA: N/A</string>
+    <string name="title_screen_no_sgpa">Current Semester: N/A</string>
 
     <!-- SelectSemesterActivity strings -->
     <string name="select_semester_title">Semesters</string>
@@ -24,6 +26,8 @@
     <string name="add_semester_courses_text">Courses: </string>
     <string name="add_semester_add_course_button">+</string>
     <string name="add_semester_confirmation_button">Add Semester</string>
+    <string name="add_semester_name_used_already_msg">The semester name is already being used!</string>
+    <string name="add_semester_no_name_inputted">No semester name inputted!</string>
 
     <!-- SelectCourseActivity strings -->
     <string name="select_course_title">Courses</string>
@@ -38,6 +42,7 @@
     <string name="add_course_grade_sections_text">Grade Sections: </string>
     <string name="add_course_add_grade_section_button">+</string>
     <string name="add_course_confirmation_button">Add Course</string>
+    <string name="add_course_no_name_inputted">No name for this course!</string>
 
     <!-- AddGradeSectionActivity strings -->
     <string name="add_grade_section_title">+ Grade Section</string>
@@ -51,14 +56,21 @@
     <string name="add_grade_section_high_marks_text_1">Top</string>
     <string name="add_grade_section_high_marks_text_2">Marks</string>
     <string name="add_grade_section_confirmation_button">Add Grade Section</string>
+    <string name="add_grade_section_no_name_inputted">No name for this grade section</string>
+    <string name="add_grade_section_no_weight_inputted">No weight for this grade section</string>
+    <string name="add_grade_section_not_valid_mark_num">Enter a valid number of marks</string>
+    <string name="add_grade_section_weight_total_too_high_1">Total weight for this course adds up</string>
+    <string name="add_grade_section_weight_total_too_high_2">The weight of the new grade section is too high!</string>
 
     <!-- AddEditSingleMarkPopUpActivity strings -->
     <string name="add_mark_pop_up_title">Add a Mark</string>
+    <string name="add_mark_pop_up_title_alt">Edit Mark</string>
     <string name="add_mark_pop_up_name_text">Name: </string>
     <string name="add_mark_pop_up_grade_text">Grade: </string>
     <string name="add_mark_pop_up_grade_percent_sign_text">%</string>
     <string name="add_mark_pop_up_weight_text">Weight: </string>
     <string name="add_mark_pop_up_confirmation_button">Add Mark</string>
+    <string name="add_mark_grade_is_incorrect_format">Grade is in incorrect format</string>
 
     <!-- EditSemesterPopUpActivity strings -->
     <string name="edit_semester_section_pop_up_title">Edit Semester</string>
@@ -90,11 +102,42 @@
     <string name="add_mark_options_pop_up_single_add">Single Add</string>
     <string name="add_mark_options_pop_up_bulk_add">Bulk Add</string>
 
+    <!-- EditCourseOptionsPopUpActivity -->
+    <string name="edit_course_title_course_msg">Course</string>
+
+    <!-- EditGradeSectionOptionsPopUpActivity -->
+    <string name="edit_grade_section_title_grade_section_msg">Grade Section</string>
+
+    <!-- EditMarkOptionsPopUpActivity -->
+    <string name="edit_mark_title_mark_msg">Mark</string>
+
+    <!-- EditSemesterOptionsPopUpActivity -->
+    <string name="edit_semester_title_semester_msg">Semester</string>
+
     <!-- CourseInfoActivity strings -->
     <string name="course_info_course_name">Course Name</string>
-    <string name="course_info_course_code">Course Code</string>
+    <string name="course_info_course_code">Course Code: </string>
     <string name="course_info_course_current_grade">Current Grade: </string>
     <string name="course_info_settings_button">Settings</string>
+    <string name="course_info_no_current_grade">Current Grade: N/A</string>
+
+    <!-- InfoDialogFragment -->
+    <string name="info_dialog_title">Info</string>
+    <string name="info_dialog_semesters"> Semesters can be added by clicking the action button on the bottom corner.\n\nIf you want to edit a particular semester, perform a long click and editing options will appear</string>
+    <string name="info_dialog_courses"> Courses can be added by clicking the action button on the bottom corner.\n\nIf you want to edit a particular course, perform a long click and editing options will appear</string>
+    <string name="info_dialog_course_info"> You can determine the mark needed in the remaining portion of the course to reach a certain target mark, by pressing the first action button on the bottom corner. Grade sections can be added by clicking the second action button.\n\nIf you want to edit a particular grade section, perform a long click and editing options will appear</string>
+
+    <!-- TargetMarkDialogFragment -->
+    <string name="target_mark_current_mark">Current mark: </string>
+    <string name="target_mark_no_current_mark">Current mark: N/A</string>
+    <string name="target_mark_current_weight">Current weight: </string>
+    <string name="target_mark_title">Target mark</string>
+    <string name="target_mark_target_mark_not_entered">A target mark was not entered!</string>
+    <string name="target_mark_result_msg_1">To get a final mark of</string>
+    <string name="target_mark_result_msg_2">, you need to get </string>
+    <string name="target_mark_result_msg_3">on the remaining </string>
+    <string name="target_mark_result_msg_4">of the course</string>
+    <string name="target_mark_result_err_msg">It is impossible to get a final mark lower than</string>
 
     <!-- custom_add_course_list_row strings -->
     <string name="custom_add_course_list_row_course_name">Course Name</string>
@@ -103,6 +146,8 @@
     <!-- custom_add_grade_section_list_row strings -->
     <string name="custom_add_grade_section_list_row_info">Grade Section Info</string>
     <string name="custom_add_grade_section_list_row_delete_button">Delete</string>
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -83,13 +83,13 @@ public class AddEditSingleMarkPopUpActivity extends Activity {
             selectedGradeSection = (GradeSection) intent.getSerializableExtra("selectedGradeSection");
             selectedMark = (Mark) intent.getSerializableExtra("selectedMark");
 
-            addMarkTitle.setText("Edit Mark");
+            addMarkTitle.setText(getString(R.string.add_mark_pop_up_title_alt));
             markNameEditText.setText(selectedMark.getName());
 
             if(selectedMark.getMark() != null){
                 markGradeEditText.setText(String.format("%.2f", selectedMark.getMark()));
             }
-            addMarkButton.setText("Edit Mark");
+            addMarkButton.setText(getString(R.string.add_mark_pop_up_title_alt));
 
         }else if(previousActivity.equals("AddMarkOptionsPopUpActivity")){
             newSemesterName = (String) intent.getSerializableExtra("newSemesterName");
@@ -127,6 +127,7 @@ public class AddEditSingleMarkPopUpActivity extends Activity {
                     Double.parseDouble(markGradeEditText.getText().toString())
                     //,Double.parseDouble(markWeightEditText.getText().toString())
             );
+
 
             if(previousActivity.equals("EditMarkOptionsPopUpActivity")){
 
@@ -185,7 +186,7 @@ public class AddEditSingleMarkPopUpActivity extends Activity {
             }
 
         } else {
-            Toast.makeText(this, "Grade is in incorrect format", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.add_mark_grade_is_incorrect_format), Toast.LENGTH_LONG).show();
         }
 
     }

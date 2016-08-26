@@ -168,7 +168,7 @@ public class AddCourseActivity extends AppCompatActivity {
             }
 
         } else {
-            Toast.makeText(this, "No name for this course!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.add_course_no_name_inputted), Toast.LENGTH_LONG).show();
         }
     }
 

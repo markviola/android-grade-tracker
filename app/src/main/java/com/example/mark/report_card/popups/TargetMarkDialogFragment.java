@@ -67,16 +67,17 @@ public class TargetMarkDialogFragment extends DialogFragment{
         if(course.getCurrentGrade() != -1){
             currentMarkText.setText(String.format("Current mark: %.2f%%", course.getCurrentGrade()));
         } else {
-            currentMarkText.setText("Current mark: N/A");
+            currentMarkText.setText(getString(R.string.target_mark_no_current_mark));
         }
         currentWeightText.setText(String.format("Current weight: %.2f%%", course.getCurrentTotalWeight()));
 
-        getDialog().setTitle("Target mark");
+        getDialog().setTitle(getString(R.string.target_mark_title));
 
         calculateTargetMarkButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (targetMarkEditText.getText().toString().equals("")) {
-                    Toast.makeText(getActivity(), "A target mark was not entered.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), getString(R.string.target_mark_target_mark_not_entered),
+                            Toast.LENGTH_LONG).show();
                 } else {
                     currentMarkText.setVisibility(View.GONE);
                     currentWeightText.setVisibility(View.GONE);
@@ -90,11 +91,14 @@ public class TargetMarkDialogFragment extends DialogFragment{
                             (100 - course.getCurrentTotalWeight());
 
                     if (neededMark >= 0) {
-                        resultText.setText(String.format("To get a final mark of %.2f%%, you need to get " +
-                                        "%.2f%% on the remaining %.2f%% of the course", targetMark, neededMark,
-                                100 - course.getCurrentTotalWeight()));
+                        resultText.setText(String.format("%s %.2f%%%s %.2f%% %s %.2f%% %s",
+                                getString(R.string.target_mark_result_msg_1),
+                                targetMark, getString(R.string.target_mark_result_msg_2),
+                                neededMark, getString(R.string.target_mark_result_msg_3),
+                                100 - course.getCurrentTotalWeight(),
+                                getString(R.string.target_mark_result_msg_4)));
                     } else {
-                        resultText.setText(String.format("It is impossible to get a final mark lower than %.2f%%", targetMark));
+                        resultText.setText(String.format("%s %.2f%%", getString(R.string.target_mark_result_err_msg), targetMark));
                     }
                     resultText.setVisibility(View.VISIBLE);
                 }

@@ -27,7 +27,8 @@ public class EditSemesterOptionsPopUpActivity extends AppCompatActivity {
         Intent intent = getIntent();
         semesterName = (String) intent.getSerializableExtra("semesterName");
 
-        semesterTitleText.setText(String.format("\"%s\"\nSemester", semesterName));
+        semesterTitleText.setText(String.format("\"%s\"\n%s", semesterName,
+                getString(R.string.edit_semester_title_semester_msg)));
 
         changeActivitySize();
     }

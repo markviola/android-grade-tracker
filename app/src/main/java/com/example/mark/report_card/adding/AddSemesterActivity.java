@@ -134,14 +134,14 @@ public class AddSemesterActivity extends AppCompatActivity {
             SemesterManager semesterManager = SemesterManager.getInstance(this);
 
             if(!semesterManager.addSemester(newSemester)){
-                Toast.makeText(this, "The semester name is already being used!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.add_semester_name_used_already_msg), Toast.LENGTH_LONG).show();
             }
 
             Intent intent = new Intent(this, SelectSemesterActivity.class);
             startActivity(intent);
 
         } else {
-            Toast.makeText(this, "No semester name inputted", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.add_semester_no_name_inputted), Toast.LENGTH_LONG).show();
         }
 
     }

@@ -32,7 +32,8 @@ public class EditCourseOptionsPopUpActivity extends AppCompatActivity {
         semesterName = (String) intent.getSerializableExtra("semesterName");
         selectedCourse = (Course) intent.getSerializableExtra("selectedCourse");
 
-        courseTitleText.setText(String.format("\"%s\"\nCourse", selectedCourse.getName()));
+        courseTitleText.setText(String.format("\"%s\"\n%s", selectedCourse.getName(),
+                getString(R.string.edit_course_title_course_msg)));
 
         changeActivitySize();
     }

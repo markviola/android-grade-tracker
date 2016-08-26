@@ -40,24 +40,16 @@ public class InfoDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.dialog_fragment_info, container, false);
-        getDialog().setTitle("Info");
+        getDialog().setTitle(getString(R.string.info_dialog_title));
 
         infoText = (TextView) rootView.findViewById(R.id.infoText);
 
         if(activity.equals("SelectSemesterActivity")){
-            infoText.setText("Semesters can be added by clicking the action button on the bottom corner.\n" +
-                    "If you want to edit a particular semester, perform a long click and editing " +
-                    "options will appear");
+            infoText.setText(getString(R.string.info_dialog_semesters));
         } else if (activity.equals("SelectCourseActivity")){
-            infoText.setText("Courses can be added by clicking the action button on the bottom corner.\n" +
-                    "If you want to edit a particular course, perform a long click and editing " +
-                    "options will appear");
+            infoText.setText(getString(R.string.info_dialog_courses));
         } else if (activity.equals("CourseInfoActivity")){
-            infoText.setText("You can determine the mark needed in the remaining portion of the course" +
-                    " to reach a certain target mark, by pressing the first action button on the bottom" +
-                    " corner. Grade sections can be added by clicking the second action button .\n" +
-                    "If you want to edit a particular grade section, perform a long click and editing " +
-                    "options will appear");
+            infoText.setText(getString(R.string.info_dialog_course_info));
         }
 
         return rootView;

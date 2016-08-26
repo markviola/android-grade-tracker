@@ -78,11 +78,13 @@ public class CourseInfoActivity extends AppCompatActivity {
         }
         courseNameText.setText(selectedCourse.getName());
 
-        courseCodeText.setText("Course Code: " + selectedCourse.getCode());
+        courseCodeText.setText(getString(R.string.course_info_course_code)+ " " + selectedCourse.getCode());
         if(selectedCourse.getCurrentGrade() == -1){//Change -1 into a constant and put in  Constants.java
-            currentGrade.setText("Current Grade: N/A");
+            currentGrade.setText(getString(R.string.course_info_no_current_grade));
         } else{
-            currentGrade.setText(String.format("Current Grade: %.2f%%", selectedCourse.getCurrentGrade()));
+            currentGrade.setText(String.format("%s %.2f%%",
+                    getString(R.string.course_info_course_current_grade),
+                    selectedCourse.getCurrentGrade()));
         }
 
         //Generate a HashMap for the ExpandableListView

@@ -37,4 +37,3 @@ The title screen shows a summary of the user's academic status which includes th
 * Change GPA Scale
 * Convert a grade section from calculating all marks to top marks and vice versa
 * Expand settings options (color scheme, language)
-* Put all text in strings.xml file

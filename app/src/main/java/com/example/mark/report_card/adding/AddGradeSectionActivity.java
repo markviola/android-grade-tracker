@@ -142,9 +142,9 @@ public class AddGradeSectionActivity extends AppCompatActivity {
 
     public void addGradeSectionButtonClicked(View view){
         if(gradeSectionNameEditText.getText().toString().equals("")){
-            Toast.makeText(this, "No name for this grade section", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.add_grade_section_no_name_inputted), Toast.LENGTH_LONG).show();
         } else if (gradeSectionWeightEditText.getText().toString().equals("")){
-            Toast.makeText(this, "No weight for this grade section", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.add_grade_section_no_weight_inputted), Toast.LENGTH_LONG).show();
         } else {
             if(validWeight()){
                 if(isTopMarksCheckBox.isChecked()){
@@ -166,7 +166,7 @@ public class AddGradeSectionActivity extends AppCompatActivity {
                         }
 
                     } else {
-                        Toast.makeText(this, "Enter a valid number of marks", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, getString(R.string.add_grade_section_not_valid_mark_num), Toast.LENGTH_LONG).show();
                     }
                 } else {
                     GradeSection newGradeSection = new GradeSectionAllMarks(
@@ -342,9 +342,11 @@ public class AddGradeSectionActivity extends AppCompatActivity {
                 return true;
             } else {
                 Toast.makeText(this,
-                        String.format("Total weight for this course adds up %.2f%%. The weight " +
-                                        "of the new grade section is too high!",
-                                selectedCourse.getAllTotalWeight()), Toast.LENGTH_LONG).show();
+                        String.format("%s %.2f%%. %s",
+                                getString(R.string.add_grade_section_high_marks_text_1),
+                                    selectedCourse.getAllTotalWeight(),
+                                    getString(R.string.add_grade_section_high_marks_text_2)),
+                                Toast.LENGTH_LONG).show();
                 return false;
             }
         } else {
@@ -357,9 +359,11 @@ public class AddGradeSectionActivity extends AppCompatActivity {
                 return true;
             } else {
                 Toast.makeText(this,
-                        String.format("Total weight for this course adds up %.2f%%. The weight " +
-                                        "of the new grade section is too high!",
-                                allTotalWeight), Toast.LENGTH_LONG).show();
+                        String.format("%s %.2f%%. %s",
+                                getString(R.string.add_grade_section_high_marks_text_1),
+                                    selectedCourse.getAllTotalWeight(),
+                                    getString(R.string.add_grade_section_high_marks_text_2)),
+                                Toast.LENGTH_LONG).show();
                 return false;
             }
         }

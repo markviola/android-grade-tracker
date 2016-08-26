@@ -35,7 +35,9 @@ public class EditGradeSectionOptionsPopUpActivity extends AppCompatActivity {
         currentCourse = (Course) intent.getSerializableExtra("currentCourse");
         selectedGradeSection = (GradeSection) intent.getSerializableExtra("selectedGradeSection");
 
-        gradeSectionTitleText.setText(String.format("\"%s\"\nGrade Section", selectedGradeSection.getSectionName()));
+        gradeSectionTitleText.setText(String.format("\"%s\"\n%s",
+                selectedGradeSection.getSectionName(),
+                getString(R.string.edit_grade_section_title_grade_section_msg)));
 
         changeActivitySize();
 
