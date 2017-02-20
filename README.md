@@ -3,11 +3,6 @@
 Track your grades over your academic career with this app. The app allows the user to separate courses between semesters so that they can get a clearer picture of how they are currently doing in their school work. Additional features include bulk mark adding with similar names (i.e "Quiz #1", "Quiz #2", "Quiz #3", etc) and incorporating an optional grade section marking scheme which only takes the top number of marks to be calculated.
 
 
-<p align="left">
-	<a href="https://play.google.com/store/apps/details?id=com.viola.mark.gradetracker&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height="50px" width="168px"/></a>
-</p>
-
-
 ###General Screenshots
 
 Select semester, select course, and settings screen (respectively):
@@ -37,3 +32,6 @@ The title screen shows a summary of the user's academic status which includes th
 * Change GPA Scale
 * Convert a grade section from calculating all marks to top marks and vice versa
 * Expand settings options (color scheme, language)
+* Change database schema
+* Resize text when the string is long
+* Add tutorial on how to use app

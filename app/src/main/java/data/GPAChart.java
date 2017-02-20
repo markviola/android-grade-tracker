@@ -28,6 +28,11 @@ public class GPAChart {
     }
 
     public Double getGPAValue(Double mark){
+        // Return 4.0 if the user has a mark higher than the maximum
+        if(mark > 100){
+            return 4.0;
+        }
+
         for(String rangeStr: _gpaConversions.keySet()){
             String[] rangeStrArray = rangeStr.split("-");
             if((mark>=Double.parseDouble(rangeStrArray[0])-0.5)&&(mark<=Double.parseDouble(rangeStrArray[1])+0.5)){
